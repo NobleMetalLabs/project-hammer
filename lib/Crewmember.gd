@@ -1,0 +1,2 @@
+class_name Crewmember
+extends RefCounted
