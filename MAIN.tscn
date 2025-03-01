@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwnvldhi31wkt"]
+[gd_scene load_steps=5 format=3 uid="uid://cwnvldhi31wkt"]
 
 [ext_resource type="Script" path="res://ship-panel.gd" id="1_uuocy"]
+[ext_resource type="Resource" uid="uid://durdjoqmudue5" path="res://tst/little-ship.tres" id="2_6lt7u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ksojr"]
 
 [node name="Control" type="Panel"]
 anchors_preset = 15
@@ -40,3 +43,23 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_uuocy")
+ship = ExtResource("2_6lt7u")
+current_z_layer = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/SHIP-PANEL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GRID-HOLDER" type="Control" parent="HBoxContainer/SHIP-PANEL/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SHIP-PANEL/CenterContainer/GRID-HOLDER"]
+layout_mode = 2
+offset_right = 1.0
+offset_bottom = 1.0
+texture = SubResource("PlaceholderTexture2D_ksojr")
