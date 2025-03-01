@@ -1,5 +1,5 @@
 class_name Ship
-extends RefCounted
+extends Resource
 
 var name : StringName
 var hull_structure : HullStructure

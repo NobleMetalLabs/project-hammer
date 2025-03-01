@@ -1,2 +1,2 @@
 class_name Crewmember
-extends RefCounted
+extends Resource

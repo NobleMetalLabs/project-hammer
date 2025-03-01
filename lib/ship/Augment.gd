@@ -1,2 +1,2 @@
 class_name Augment
-extends RefCounted
+extends Resource

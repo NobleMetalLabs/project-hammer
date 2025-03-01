@@ -1,2 +1,2 @@
 class_name Passenger
-extends RefCounted
+extends Resource
