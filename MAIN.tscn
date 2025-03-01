@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwnvldhi31wkt"]
+[gd_scene load_steps=3 format=3 uid="uid://cwnvldhi31wkt"]
+
+[ext_resource type="Script" path="res://ship-panel.gd" id="1_uuocy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
@@ -37,3 +39,4 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_uuocy")

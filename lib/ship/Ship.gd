@@ -1,11 +1,11 @@
 class_name Ship
 extends Resource
 
-var name : StringName
-var hull_structure : HullStructure
-var installed_systems : Array[InstalledSystem]
-var installed_augments : Array[InstalledAugment]
+@export var name : StringName
+@export var hull_structure : HullStructure
+@export var installed_systems : Array[InstalledSystem]
+@export var installed_augments : Array[InstalledAugment]
 
-var onboard_crew : Array[Crewmember]
-var onboard_cargo : Array[Cargo]
-var onboard_passengers : Array[Passenger]
+@export var onboard_crew : Array[Crewmember]
+@export var onboard_cargo : Array[Cargo]
+@export var onboard_passengers : Array[Passenger]

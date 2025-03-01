@@ -1,13 +1,26 @@
-[gd_resource type="Resource" script_class="HullStructure" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="Ship" load_steps=9 format=3 uid="uid://durdjoqmudue5"]
 
-[ext_resource type="Script" path="res://lib/ship/InstalledAugment.gd" id="1_gf2c3"]
-[ext_resource type="Script" path="res://lib/ship/Crewmember.gd" id="2_y1d55"]
-[ext_resource type="Script" path="res://lib/ship/InstalledSystem.gd" id="3_pj5yi"]
-[ext_resource type="Script" path="res://lib/ship/HullStructure.gd" id="4_ns6f2"]
+[ext_resource type="Script" path="res://lib/ship/Ship.gd" id="1_5t836"]
+[ext_resource type="Script" path="res://lib/ship/InstalledAugment.gd" id="2_palnc"]
+[ext_resource type="Script" path="res://lib/ship/InstalledSystem.gd" id="3_hnyen"]
+[ext_resource type="Script" path="res://lib/ship/HullStructure.gd" id="4_2nw4p"]
+[ext_resource type="Script" path="res://lib/good/Cargo.gd" id="4_ilf7m"]
+[ext_resource type="Script" path="res://lib/ship/Crewmember.gd" id="5_8injc"]
+[ext_resource type="Script" path="res://lib/good/Passenger.gd" id="6_o3hlw"]
+
+[sub_resource type="Resource" id="Resource_br1sv"]
+script = ExtResource("4_2nw4p")
+hull_voxels = Array[Vector3i]([Vector3i(4, 0, 1), Vector3i(5, 0, 1), Vector3i(4, 1, 1), Vector3i(5, 1, 1), Vector3i(4, 2, 1), Vector3i(5, 2, 1), Vector3i(3, 3, 1), Vector3i(4, 3, 1), Vector3i(4, 3, 2), Vector3i(5, 3, 1), Vector3i(5, 3, 2), Vector3i(6, 3, 1), Vector3i(3, 4, 1), Vector3i(4, 4, 1), Vector3i(4, 4, 2), Vector3i(5, 4, 1), Vector3i(5, 4, 2), Vector3i(6, 4, 1), Vector3i(2, 5, 1), Vector3i(3, 5, 1), Vector3i(4, 5, 0), Vector3i(4, 5, 1), Vector3i(4, 5, 2), Vector3i(5, 5, 0), Vector3i(5, 5, 1), Vector3i(5, 5, 2), Vector3i(6, 5, 1), Vector3i(7, 5, 1), Vector3i(2, 6, 1), Vector3i(3, 6, 1), Vector3i(3, 6, 2), Vector3i(4, 6, 0), Vector3i(4, 6, 1), Vector3i(4, 6, 2), Vector3i(5, 6, 0), Vector3i(5, 6, 1), Vector3i(5, 6, 2), Vector3i(6, 6, 1), Vector3i(6, 6, 2), Vector3i(7, 6, 1), Vector3i(2, 7, 1), Vector3i(3, 7, 1), Vector3i(3, 7, 2), Vector3i(4, 7, 0), Vector3i(4, 7, 1), Vector3i(4, 7, 2), Vector3i(5, 7, 0), Vector3i(5, 7, 1), Vector3i(5, 7, 2), Vector3i(6, 7, 1), Vector3i(6, 7, 2), Vector3i(7, 7, 1), Vector3i(1, 8, 1), Vector3i(2, 8, 1), Vector3i(3, 8, 0), Vector3i(3, 8, 1), Vector3i(3, 8, 2), Vector3i(4, 8, 0), Vector3i(4, 8, 1), Vector3i(4, 8, 2), Vector3i(5, 8, 0), Vector3i(5, 8, 1), Vector3i(5, 8, 2), Vector3i(6, 8, 0), Vector3i(6, 8, 1), Vector3i(6, 8, 2), Vector3i(7, 8, 1), Vector3i(8, 8, 1), Vector3i(0, 9, 1), Vector3i(1, 9, 1), Vector3i(2, 9, 1), Vector3i(2, 9, 2), Vector3i(3, 9, 0), Vector3i(3, 9, 1), Vector3i(3, 9, 2), Vector3i(4, 9, 0), Vector3i(4, 9, 1), Vector3i(4, 9, 2), Vector3i(5, 9, 0), Vector3i(5, 9, 1), Vector3i(5, 9, 2), Vector3i(6, 9, 0), Vector3i(6, 9, 1), Vector3i(6, 9, 2), Vector3i(7, 9, 1), Vector3i(7, 9, 2), Vector3i(8, 9, 1), Vector3i(9, 9, 1), Vector3i(0, 10, 1), Vector3i(1, 10, 1), Vector3i(2, 10, 1), Vector3i(2, 10, 2), Vector3i(3, 10, 0), Vector3i(3, 10, 1), Vector3i(3, 10, 2), Vector3i(4, 10, 0), Vector3i(4, 10, 1), Vector3i(4, 10, 2), Vector3i(5, 10, 0), Vector3i(5, 10, 1), Vector3i(5, 10, 2), Vector3i(6, 10, 0), Vector3i(6, 10, 1), Vector3i(6, 10, 2), Vector3i(7, 10, 1), Vector3i(7, 10, 2), Vector3i(8, 10, 1), Vector3i(9, 10, 1), Vector3i(1, 11, 1), Vector3i(2, 11, 1), Vector3i(3, 11, 1), Vector3i(4, 11, 0), Vector3i(4, 11, 1), Vector3i(5, 11, 0), Vector3i(5, 11, 1), Vector3i(6, 11, 1), Vector3i(7, 11, 1), Vector3i(8, 11, 1)])
+embedded_systems = Array[ExtResource("3_hnyen")]([])
+embedded_augments = Array[ExtResource("2_palnc")]([])
+embedded_crew = Array[ExtResource("5_8injc")]([])
 
 [resource]
-script = ExtResource("4_ns6f2")
-hull_voxels = Array[Vector3i]([Vector3i(4, 0, 1), Vector3i(5, 0, 1), Vector3i(4, 1, 1), Vector3i(5, 1, 1), Vector3i(4, 2, 1), Vector3i(5, 2, 1), Vector3i(3, 3, 1), Vector3i(4, 3, 1), Vector3i(4, 3, 2), Vector3i(5, 3, 1), Vector3i(5, 3, 2), Vector3i(6, 3, 1), Vector3i(3, 4, 1), Vector3i(4, 4, 1), Vector3i(4, 4, 2), Vector3i(5, 4, 1), Vector3i(5, 4, 2), Vector3i(6, 4, 1), Vector3i(2, 5, 1), Vector3i(3, 5, 1), Vector3i(4, 5, 0), Vector3i(4, 5, 1), Vector3i(4, 5, 2), Vector3i(5, 5, 0), Vector3i(5, 5, 1), Vector3i(5, 5, 2), Vector3i(6, 5, 1), Vector3i(7, 5, 1), Vector3i(2, 6, 1), Vector3i(3, 6, 1), Vector3i(3, 6, 2), Vector3i(4, 6, 0), Vector3i(4, 6, 1), Vector3i(4, 6, 2), Vector3i(5, 6, 0), Vector3i(5, 6, 1), Vector3i(5, 6, 2), Vector3i(6, 6, 1), Vector3i(6, 6, 2), Vector3i(7, 6, 1), Vector3i(2, 7, 1), Vector3i(3, 7, 1), Vector3i(3, 7, 2), Vector3i(4, 7, 0), Vector3i(4, 7, 1), Vector3i(4, 7, 2), Vector3i(5, 7, 0), Vector3i(5, 7, 1), Vector3i(5, 7, 2), Vector3i(6, 7, 1), Vector3i(6, 7, 2), Vector3i(7, 7, 1), Vector3i(1, 8, 1), Vector3i(2, 8, 1), Vector3i(3, 8, 0), Vector3i(3, 8, 1), Vector3i(3, 8, 2), Vector3i(4, 8, 0), Vector3i(4, 8, 1), Vector3i(4, 8, 2), Vector3i(5, 8, 0), Vector3i(5, 8, 1), Vector3i(5, 8, 2), Vector3i(6, 8, 0), Vector3i(6, 8, 1), Vector3i(6, 8, 2), Vector3i(7, 8, 1), Vector3i(8, 8, 1), Vector3i(0, 9, 1), Vector3i(1, 9, 1), Vector3i(2, 9, 1), Vector3i(2, 9, 2), Vector3i(3, 9, 0), Vector3i(3, 9, 1), Vector3i(3, 9, 2), Vector3i(4, 9, 0), Vector3i(4, 9, 1), Vector3i(4, 9, 2), Vector3i(5, 9, 0), Vector3i(5, 9, 1), Vector3i(5, 9, 2), Vector3i(6, 9, 0), Vector3i(6, 9, 1), Vector3i(6, 9, 2), Vector3i(7, 9, 1), Vector3i(7, 9, 2), Vector3i(8, 9, 1), Vector3i(9, 9, 1), Vector3i(0, 10, 1), Vector3i(1, 10, 1), Vector3i(2, 10, 1), Vector3i(2, 10, 2), Vector3i(3, 10, 0), Vector3i(3, 10, 1), Vector3i(3, 10, 2), Vector3i(4, 10, 0), Vector3i(4, 10, 1), Vector3i(4, 10, 2), Vector3i(5, 10, 0), Vector3i(5, 10, 1), Vector3i(5, 10, 2), Vector3i(6, 10, 0), Vector3i(6, 10, 1), Vector3i(6, 10, 2), Vector3i(7, 10, 1), Vector3i(7, 10, 2), Vector3i(8, 10, 1), Vector3i(9, 10, 1), Vector3i(1, 11, 1), Vector3i(2, 11, 1), Vector3i(3, 11, 1), Vector3i(4, 11, 0), Vector3i(4, 11, 1), Vector3i(5, 11, 0), Vector3i(5, 11, 1), Vector3i(6, 11, 1), Vector3i(7, 11, 1), Vector3i(8, 11, 1)])
-embedded_systems = Array[ExtResource("3_pj5yi")]([])
-embedded_augments = Array[ExtResource("1_gf2c3")]([])
-embedded_crew = Array[ExtResource("2_y1d55")]([])
+script = ExtResource("1_5t836")
+name = &"Little Ship"
+hull_structure = SubResource("Resource_br1sv")
+installed_systems = Array[ExtResource("3_hnyen")]([])
+installed_augments = Array[ExtResource("2_palnc")]([])
+onboard_crew = Array[ExtResource("5_8injc")]([])
+onboard_cargo = Array[ExtResource("4_ilf7m")]([])
+onboard_passengers = Array[ExtResource("6_o3hlw")]([])
