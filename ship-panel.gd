@@ -33,11 +33,15 @@ func _process(_delta):
 
 	for voxel_position : Vector3i in ship.hull_structure.hull_voxels:
 		hull_size = hull_size.max(Vector2i(voxel_position.x, voxel_position.y))
-		if voxel_position.z != current_z_layer: continue
+		if voxel_position.z < current_z_layer: continue
+		if voxel_position.z > current_z_layer + 1: continue
+		
 		var grid_square_instance = grid_square.duplicate()
 		grid_square_instance.custom_minimum_size = Vector2i.ONE * grid_size
 		grid_square_instance.size = Vector2i.ONE * grid_size
 		grid_square_instance.position = Vector2(voxel_position.x, voxel_position.y) * grid_size
+		if voxel_position.z > current_z_layer: 
+			grid_square_instance.self_modulate = Color(1, 1, 1, 0.5)
 		grid_holder.add_child(grid_square_instance)
 
 	grid_holder.custom_minimum_size = hull_size * grid_size
