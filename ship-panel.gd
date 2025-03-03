@@ -7,10 +7,18 @@ extends Panel
 @onready var grid_holder : Control = $"%GRID-HOLDER"
 @onready var grid_square : TextureRect = grid_holder.get_child(0)
 
+@onready var system_selection_holder : VBoxContainer = $"SYSTEM-SELECTION-HOLDER"
+var selected_system_script : Script
+
 var prev_clicked_coord : Vector3i = Vector3i.MAX
+
 
 func _ready():
 	grid_holder.remove_child(grid_square)
+	
+	system_selection_holder.selected_system.connect(func(s):
+		selected_system_script = s
+	)
 
 const grid_size : int = 32
 
@@ -30,7 +38,7 @@ func _input(event):
 				print("First coord: %s" % prev_clicked_coord)
 			else:
 				print("Second coord: %s" % clicked_coord)
-				try_place_system(GeneratorSystem.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
+				try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
 				prev_clicked_coord = Vector3i.MAX
 		
 	elif event is InputEventKey:

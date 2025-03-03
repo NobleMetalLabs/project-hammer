@@ -1,7 +1,7 @@
 class_name BatterySystem
 extends System
 
-func  _init():
+func _init():
 	name = "Battery"
 	modifies_stats = [
 		ProjectHammer.CraftStatistic.MAX_BATTERY_CHARGE,

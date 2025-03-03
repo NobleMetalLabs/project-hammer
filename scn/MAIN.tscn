@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwnvldhi31wkt"]
+[gd_scene load_steps=9 format=3 uid="uid://cwnvldhi31wkt"]
 
 [ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="1_4gtl3"]
 [ext_resource type="Script" path="res://ship-panel.gd" id="1_uuocy"]
 [ext_resource type="Resource" uid="uid://durdjoqmudue5" path="res://tst/little-ship.tres" id="2_6lt7u"]
+[ext_resource type="Script" path="res://system_selection_holder.gd" id="4_6j6op"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
@@ -184,3 +185,14 @@ layout_mode = 2
 offset_right = 1.0
 offset_bottom = 1.0
 texture = SubResource("PlaceholderTexture2D_ksojr")
+
+[node name="SYSTEM-SELECTION-HOLDER" type="VBoxContainer" parent="HBoxContainer/SHIP-PANEL"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("4_6j6op")
