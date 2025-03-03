@@ -166,7 +166,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_uuocy")
 ship = ExtResource("2_6lt7u")
-current_z_layer = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/SHIP-PANEL"]
 layout_mode = 1
