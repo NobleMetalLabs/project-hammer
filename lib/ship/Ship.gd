@@ -45,7 +45,7 @@ func do_simulation_tick() -> void:
 	var energy_differential : float = energy_production - energy_demand
 	var battery_charge : float = get_statistic(ProjectHammer.CraftStatistic.BATTERY_CHARGE)
 	var battery_production : float = min(battery_charge, -energy_differential)
-	battery_charge -= battery_production
+	battery_charge = min(battery_charge - battery_production, get_statistic(ProjectHammer.CraftStatistic.MAX_BATTERY_CHARGE))
 	set_statistic(ProjectHammer.CraftStatistic.BATTERY_CHARGE, battery_charge)
 	var energy_satisfaction : float = 1 + ((energy_differential  + battery_production) / energy_demand)
 	set_statistic(ProjectHammer.CraftStatistic.ENERGY_SATISFACTION, energy_satisfaction)

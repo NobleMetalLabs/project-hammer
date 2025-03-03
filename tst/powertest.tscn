@@ -1,0 +1,93 @@
+[gd_scene load_steps=20 format=3 uid="uid://oykqofy8xlug"]
+
+[ext_resource type="Script" path="res://tst/power-test.gd" id="1_06gfl"]
+[ext_resource type="Script" path="res://lib/ship/InstalledAugment.gd" id="2_fgb5r"]
+[ext_resource type="Script" path="res://lib/ship/InstalledSystem.gd" id="3_oh30v"]
+[ext_resource type="Script" path="res://lib/ship/systems/GeneratorSystem.gd" id="4_nxxg1"]
+[ext_resource type="Script" path="res://lib/ship/systems/TestEnergyLoadSystem.gd" id="5_enhxb"]
+[ext_resource type="Script" path="res://lib/ship/systems/BatterySystem.gd" id="6_0k2hw"]
+[ext_resource type="Script" path="res://lib/good/Cargo.gd" id="6_pg8ch"]
+[ext_resource type="Script" path="res://lib/ship/Crewmember.gd" id="7_2yw2p"]
+[ext_resource type="Script" path="res://lib/good/Passenger.gd" id="8_5luii"]
+[ext_resource type="Script" path="res://lib/ship/Ship.gd" id="9_qk6jx"]
+[ext_resource type="FontFile" uid="uid://dwsgd0rvooxt0" path="res://ast/ui/font/Tunda.ttf" id="10_la82w"]
+
+[sub_resource type="Resource" id="Resource_7sbbp"]
+script = ExtResource("4_nxxg1")
+
+[sub_resource type="Resource" id="Resource_pxqxw"]
+script = ExtResource("3_oh30v")
+system = SubResource("Resource_7sbbp")
+
+[sub_resource type="Resource" id="Resource_mptr2"]
+script = ExtResource("5_enhxb")
+
+[sub_resource type="Resource" id="Resource_4sdhq"]
+script = ExtResource("3_oh30v")
+system = SubResource("Resource_mptr2")
+
+[sub_resource type="Resource" id="Resource_eubrn"]
+script = ExtResource("6_0k2hw")
+
+[sub_resource type="Resource" id="Resource_vl5f3"]
+script = ExtResource("3_oh30v")
+system = SubResource("Resource_eubrn")
+
+[sub_resource type="Resource" id="Resource_ns5go"]
+script = ExtResource("9_qk6jx")
+name = &""
+installed_systems = Array[ExtResource("3_oh30v")]([SubResource("Resource_pxqxw"), SubResource("Resource_4sdhq"), SubResource("Resource_vl5f3")])
+installed_augments = Array[ExtResource("2_fgb5r")]([])
+onboard_crew = Array[ExtResource("7_2yw2p")]([])
+onboard_cargo = Array[ExtResource("6_pg8ch")]([])
+onboard_passengers = Array[ExtResource("8_5luii")]([])
+
+[sub_resource type="LabelSettings" id="LabelSettings_1n7kn"]
+font = ExtResource("10_la82w")
+font_size = 64
+
+[node name="Node" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_06gfl")
+ship = SubResource("Resource_ns5go")
+
+[node name="GENLB" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 155.0
+offset_top = 270.0
+offset_right = 1155.0
+offset_bottom = 334.0
+text = "GENERATED POWER:"
+label_settings = SubResource("LabelSettings_1n7kn")
+
+[node name="DEMLB" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 155.0
+offset_top = 361.0
+offset_right = 1155.0
+offset_bottom = 425.0
+text = "GENERATED POWER:"
+label_settings = SubResource("LabelSettings_1n7kn")
+
+[node name="CHRLB" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 150.0
+offset_top = 452.0
+offset_right = 1150.0
+offset_bottom = 516.0
+text = "GENERATED POWER:"
+label_settings = SubResource("LabelSettings_1n7kn")
+
+[node name="SATLB" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 147.0
+offset_top = 553.0
+offset_right = 1147.0
+offset_bottom = 617.0
+text = "GENERATED POWER:"
+label_settings = SubResource("LabelSettings_1n7kn")
