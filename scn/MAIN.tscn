@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwnvldhi31wkt"]
+[gd_scene load_steps=10 format=3 uid="uid://cwnvldhi31wkt"]
 
 [ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="1_4gtl3"]
 [ext_resource type="Script" path="res://ship-panel.gd" id="1_uuocy"]
 [ext_resource type="Resource" uid="uid://durdjoqmudue5" path="res://tst/little-ship.tres" id="2_6lt7u"]
 [ext_resource type="Script" path="res://system_selection_holder.gd" id="4_6j6op"]
+[ext_resource type="Script" path="res://scn/UIShipDisplay.gd" id="4_scq21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
@@ -176,11 +177,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GRID-HOLDER" type="Control" parent="HBoxContainer/SHIP-PANEL/CenterContainer"]
+[node name="SHIP-DISPLAY" type="Control" parent="HBoxContainer/SHIP-PANEL/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("4_scq21")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SHIP-PANEL/CenterContainer/GRID-HOLDER"]
+[node name="GRID-HOLDER" type="Control" parent="HBoxContainer/SHIP-PANEL/CenterContainer/SHIP-DISPLAY"]
+unique_name_in_owner = true
+layout_mode = 2
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SHIP-PANEL/CenterContainer/SHIP-DISPLAY/GRID-HOLDER"]
 layout_mode = 2
 offset_right = 1.0
 offset_bottom = 1.0

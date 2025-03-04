@@ -1,56 +1,35 @@
 extends Panel
 
 @export var ship: Ship
-
-@export var current_z_layer : int = 0
-
-@onready var grid_holder : Control = $"%GRID-HOLDER"
-@onready var grid_square : TextureRect = grid_holder.get_child(0)
-
+@onready var ship_display : UIShipDisplay = $"%SHIP-DISPLAY"
 @onready var system_selection_holder : VBoxContainer = $"SYSTEM-SELECTION-HOLDER"
 var selected_system_script : Script
 
 var prev_clicked_coord : Vector3i = Vector3i.MAX
 
-
 func _ready():
-	grid_holder.remove_child(grid_square)
-	
 	system_selection_holder.selected_system.connect(func(s):
 		selected_system_script = s
 	)
 
-const grid_size : int = 32
+	ship_display.input_event_on_ship_grid.connect(handle_input_event_on_ship_grid)
 
-func _input(event):
-	if event is InputEventMouse:
-		var ev_pos : Vector2 = event.position
-		var grid_space_pos : Vector2 = ev_pos - grid_holder.global_position
-		var grid_pos : Vector2i = grid_space_pos / grid_size
-		#print("%s | %s | %s" % [ev_pos, grid_space_pos, grid_pos])
-		
-		if event is InputEventMouseButton and event.pressed:
-			if selected_system_script != null:
-				var clicked_coord := Vector3i(grid_pos.x, grid_pos.y, current_z_layer)
-				if not ship.hull_structure.hull_voxels.has(clicked_coord): 
-					selected_system_script = null
-					prev_clicked_coord = Vector3i.MAX
-					return
-				
-				if prev_clicked_coord == Vector3i.MAX:
-					prev_clicked_coord = clicked_coord
-					print("First coord: %s" % prev_clicked_coord)
-				else:
-					print("Second coord: %s" % clicked_coord)
-					try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
-					prev_clicked_coord = Vector3i.MAX
-		
-	elif event is InputEventKey:
-		if event.pressed and Input.is_key_pressed(KEY_SHIFT):
-			if event.keycode == KEY_W:
-				current_z_layer += 1
-			elif event.keycode == KEY_S:
-				current_z_layer -= 1
+func handle_input_event_on_ship_grid(event : InputEvent, coord : Vector3i):
+	if event is InputEventMouseButton and event.pressed:
+		if selected_system_script != null:
+			var clicked_coord := coord
+			if not ship.hull_structure.hull_voxels.has(clicked_coord): 
+				selected_system_script = null
+				prev_clicked_coord = Vector3i.MAX
+				return
+			
+			if prev_clicked_coord == Vector3i.MAX:
+				prev_clicked_coord = clicked_coord
+				print("First coord: %s" % prev_clicked_coord)
+			else:
+				print("Second coord: %s" % clicked_coord)
+				try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
+				prev_clicked_coord = Vector3i.MAX
 
 func try_place_system(system : System, region : Box3i):
 	# check if region outside of ship
@@ -71,25 +50,3 @@ func try_place_system(system : System, region : Box3i):
 	ship.installed_systems.append(new_system)
 	
 	print("Installed system: %s" % new_system)
-
-func _process(_delta):
-	for child in grid_holder.get_children():
-		child.queue_free()
-
-	var hull_size : Vector2i = Vector2i.ZERO
-
-	for voxel_position : Vector3i in ship.hull_structure.hull_voxels:
-		hull_size = hull_size.max(Vector2i(voxel_position.x, voxel_position.y))
-		if voxel_position.z < current_z_layer: continue
-		if voxel_position.z > current_z_layer + 1: continue
-		
-		var grid_square_instance = grid_square.duplicate()
-		grid_square_instance.custom_minimum_size = Vector2i.ONE * grid_size
-		grid_square_instance.size = Vector2i.ONE * grid_size
-		grid_square_instance.position = Vector2(voxel_position.x, voxel_position.y) * grid_size
-		if voxel_position.z > current_z_layer: 
-			grid_square_instance.self_modulate = Color(1, 1, 1, 0.5)
-		grid_holder.add_child(grid_square_instance)
-
-	grid_holder.custom_minimum_size = hull_size * grid_size
-	
