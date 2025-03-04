@@ -1,7 +1,6 @@
 class_name UIShipPanel
 extends Control
 
-@export var ship: Ship
 @onready var ship_display : UIShipDisplay = $"%SHIP-DISPLAY"
 
 func _ready():

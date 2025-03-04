@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Ship" load_steps=9 format=3 uid="uid://durdjoqmudue5"]
+[gd_resource type="Resource" script_class="Ship" load_steps=17 format=3 uid="uid://durdjoqmudue5"]
 
 [ext_resource type="Script" path="res://lib/ship/Ship.gd" id="1_5t836"]
 [ext_resource type="Script" path="res://lib/ship/InstalledAugment.gd" id="2_palnc"]
 [ext_resource type="Script" path="res://lib/ship/InstalledSystem.gd" id="3_hnyen"]
 [ext_resource type="Script" path="res://lib/ship/HullStructure.gd" id="4_2nw4p"]
-[ext_resource type="Script" path="res://lib/good/Cargo.gd" id="4_ilf7m"]
 [ext_resource type="Script" path="res://lib/ship/Crewmember.gd" id="5_8injc"]
+[ext_resource type="Script" path="res://lib/ship/systems/GeneratorSystem.gd" id="5_v2gs8"]
+[ext_resource type="Script" path="res://lib/ship/systems/BatterySystem.gd" id="6_0kwey"]
 [ext_resource type="Script" path="res://lib/good/Passenger.gd" id="6_o3hlw"]
+[ext_resource type="Script" path="res://lib/ship/systems/TestEnergyLoadSystem.gd" id="7_qdogi"]
 
 [sub_resource type="Resource" id="Resource_br1sv"]
 script = ExtResource("4_2nw4p")
@@ -15,12 +17,35 @@ embedded_systems = Array[ExtResource("3_hnyen")]([])
 embedded_augments = Array[ExtResource("2_palnc")]([])
 embedded_crew = Array[ExtResource("5_8injc")]([])
 
+[sub_resource type="Resource" id="Resource_ydvod"]
+script = ExtResource("5_v2gs8")
+
+[sub_resource type="Resource" id="Resource_vc06j"]
+script = ExtResource("3_hnyen")
+system = SubResource("Resource_ydvod")
+manual_efficiency_percent = 100.0
+
+[sub_resource type="Resource" id="Resource_xp2ru"]
+script = ExtResource("6_0kwey")
+
+[sub_resource type="Resource" id="Resource_6y0dc"]
+script = ExtResource("3_hnyen")
+system = SubResource("Resource_xp2ru")
+manual_efficiency_percent = 100.0
+
+[sub_resource type="Resource" id="Resource_uj82q"]
+script = ExtResource("7_qdogi")
+
+[sub_resource type="Resource" id="Resource_rqhhl"]
+script = ExtResource("3_hnyen")
+system = SubResource("Resource_uj82q")
+manual_efficiency_percent = 100.0
+
 [resource]
 script = ExtResource("1_5t836")
 name = &"Little Ship"
 hull_structure = SubResource("Resource_br1sv")
-installed_systems = Array[ExtResource("3_hnyen")]([])
+installed_systems = Array[ExtResource("3_hnyen")]([SubResource("Resource_vc06j"), SubResource("Resource_6y0dc"), SubResource("Resource_rqhhl")])
 installed_augments = Array[ExtResource("2_palnc")]([])
 onboard_crew = Array[ExtResource("5_8injc")]([])
-onboard_cargo = Array[ExtResource("4_ilf7m")]([])
 onboard_passengers = Array[ExtResource("6_o3hlw")]([])

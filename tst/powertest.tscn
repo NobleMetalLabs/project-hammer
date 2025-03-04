@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://oykqofy8xlug"]
+[gd_scene load_steps=19 format=3 uid="uid://oykqofy8xlug"]
 
 [ext_resource type="Script" path="res://tst/power-test.gd" id="1_06gfl"]
 [ext_resource type="Script" path="res://lib/ship/InstalledAugment.gd" id="2_fgb5r"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://lib/ship/systems/GeneratorSystem.gd" id="4_nxxg1"]
 [ext_resource type="Script" path="res://lib/ship/systems/TestEnergyLoadSystem.gd" id="5_enhxb"]
 [ext_resource type="Script" path="res://lib/ship/systems/BatterySystem.gd" id="6_0k2hw"]
-[ext_resource type="Script" path="res://lib/good/Cargo.gd" id="6_pg8ch"]
 [ext_resource type="Script" path="res://lib/ship/Crewmember.gd" id="7_2yw2p"]
 [ext_resource type="Script" path="res://lib/good/Passenger.gd" id="8_5luii"]
 [ext_resource type="Script" path="res://lib/ship/Ship.gd" id="9_qk6jx"]
@@ -18,6 +17,7 @@ script = ExtResource("4_nxxg1")
 [sub_resource type="Resource" id="Resource_pxqxw"]
 script = ExtResource("3_oh30v")
 system = SubResource("Resource_7sbbp")
+manual_efficiency_percent = 100.0
 
 [sub_resource type="Resource" id="Resource_mptr2"]
 script = ExtResource("5_enhxb")
@@ -25,6 +25,7 @@ script = ExtResource("5_enhxb")
 [sub_resource type="Resource" id="Resource_4sdhq"]
 script = ExtResource("3_oh30v")
 system = SubResource("Resource_mptr2")
+manual_efficiency_percent = 100.0
 
 [sub_resource type="Resource" id="Resource_eubrn"]
 script = ExtResource("6_0k2hw")
@@ -32,6 +33,7 @@ script = ExtResource("6_0k2hw")
 [sub_resource type="Resource" id="Resource_vl5f3"]
 script = ExtResource("3_oh30v")
 system = SubResource("Resource_eubrn")
+manual_efficiency_percent = 100.0
 
 [sub_resource type="Resource" id="Resource_ns5go"]
 script = ExtResource("9_qk6jx")
@@ -39,7 +41,6 @@ name = &""
 installed_systems = Array[ExtResource("3_oh30v")]([SubResource("Resource_pxqxw"), SubResource("Resource_4sdhq"), SubResource("Resource_vl5f3")])
 installed_augments = Array[ExtResource("2_fgb5r")]([])
 onboard_crew = Array[ExtResource("7_2yw2p")]([])
-onboard_cargo = Array[ExtResource("6_pg8ch")]([])
 onboard_passengers = Array[ExtResource("8_5luii")]([])
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n7kn"]

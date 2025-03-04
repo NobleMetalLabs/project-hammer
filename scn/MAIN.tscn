@@ -1,13 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwnvldhi31wkt"]
+[gd_scene load_steps=12 format=3 uid="uid://cwnvldhi31wkt"]
 
 [ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="1_4gtl3"]
+[ext_resource type="Script" path="res://src/ui/UISystemsTree.gd" id="1_dimql"]
 [ext_resource type="Script" path="res://src/ui/UIShipPanel.gd" id="1_uuocy"]
-[ext_resource type="Resource" uid="uid://durdjoqmudue5" path="res://tst/little-ship.tres" id="2_6lt7u"]
+[ext_resource type="Script" path="res://src/ui/UISystemsTreeItem.gd" id="2_swcwl"]
 [ext_resource type="Script" path="res://src/ui/UISystemPlacement.gd" id="4_6j6op"]
 [ext_resource type="Script" path="res://src/ui/UIShipDisplay.gd" id="4_scq21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yf70w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ewix"]
 font = ExtResource("1_4gtl3")
@@ -37,10 +40,116 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer"]
+[node name="SYSTEMS-TREE-PANEL" type="Panel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_dimql")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer"]
+layout_mode = 2
+
+[node name="SYSTEM-TREE-ITEM" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("2_swcwl")
+
+[node name="HEADER" type="PanelContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HEADER-LABEL" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "EXAMPLE"
+
+[node name="HEADER-BUTTON" type="Button" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yf70w")
+flat = true
+
+[node name="INFO-ITEMS-SECTION" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="tab" type="Control" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="__" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="LABELS" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MANUAL-EFF-LABEL" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/LABELS"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "MANUAL EFFICIENCY"
+horizontal_alignment = 2
+
+[node name="INFO-ITEM-LABEL" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/LABELS"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "EXAMPLE"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
+layout_mode = 2
+
+[node name="VALUES" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="MANUAL-EFF-SLIDER" type="HSlider" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/VALUES"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 200.0
+step = 10.0
+rounded = true
+tick_count = 21
+
+[node name="INFO-ITEM-VALUE" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/VALUES"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "0.000"
 
 [node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -167,7 +276,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_uuocy")
-ship = ExtResource("2_6lt7u")
 
 [node name="SHIP-DISPLAY" type="Control" parent="HBoxContainer/SHIP-PANEL"]
 unique_name_in_owner = true

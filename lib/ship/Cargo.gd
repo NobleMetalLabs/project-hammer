@@ -3,10 +3,14 @@ extends RefCounted
 
 var items : Array[CargoItem] = []
 var _cargoitem_by_item : Dictionary = {} #[Item, CargoItem]
+var capacity : int = 1000
 
 func add_item(item : CargoItem) -> void:
 	var existing_cargoitem : CargoItem = _cargoitem_by_item.get(item.item)
 	if existing_cargoitem != null:
+		if existing_cargoitem.quantity + item.quantity > capacity:
+			print("Error: Trying to add more items than capacity")
+			return
 		existing_cargoitem.quantity += item.quantity
 	else:
 		items.append(item)

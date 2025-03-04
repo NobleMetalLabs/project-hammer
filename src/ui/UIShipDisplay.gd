@@ -4,15 +4,8 @@ extends Control
 @onready var grid_holder : Control = $"%GRID-HOLDER"
 @onready var grid_square : TextureRect = grid_holder.get_child(0)
 
-var ship : Ship
-
 func _ready():
 	grid_holder.remove_child(grid_square)
-
-	var node : Node = self
-	while (node.get("ship") == null):
-		node = node.get_parent()
-	ship = node.ship
 
 const grid_size : int = 32
 var current_z_layer : int = 0
@@ -44,7 +37,7 @@ func _process(_delta):
 
 	var hull_size : Vector2i = Vector2i.ZERO
 
-	for voxel_position : Vector3i in ship.hull_structure.hull_voxels:
+	for voxel_position : Vector3i in ShipManager.ship.hull_structure.hull_voxels:
 		hull_size = hull_size.max(Vector2i(voxel_position.x, voxel_position.y))
 		if voxel_position.z < current_z_layer: continue
 		if voxel_position.z > current_z_layer + 1: continue
