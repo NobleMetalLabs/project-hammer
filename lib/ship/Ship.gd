@@ -7,8 +7,8 @@ extends Resource
 @export var installed_augments : Array[InstalledAugment]
 
 @export var onboard_crew : Array[Crewmember]
-@export var onboard_cargo : Array[Cargo]
 @export var onboard_passengers : Array[Passenger]
+var cargo := Cargo.new()
 
 var _dependant_stats : Dictionary = {} #[ProjectHammer.CraftStatistic, float]
 
