@@ -30,16 +30,20 @@ func _input(event):
 		#print("%s | %s | %s" % [ev_pos, grid_space_pos, grid_pos])
 		
 		if event is InputEventMouseButton and event.pressed:
-			var clicked_coord := Vector3i(grid_pos.x, grid_pos.y, current_z_layer)
-			if not ship.hull_structure.hull_voxels.has(clicked_coord): return
-			
-			if prev_clicked_coord == Vector3i.MAX:
-				prev_clicked_coord = clicked_coord
-				print("First coord: %s" % prev_clicked_coord)
-			else:
-				print("Second coord: %s" % clicked_coord)
-				try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
-				prev_clicked_coord = Vector3i.MAX
+			if selected_system_script != null:
+				var clicked_coord := Vector3i(grid_pos.x, grid_pos.y, current_z_layer)
+				if not ship.hull_structure.hull_voxels.has(clicked_coord): 
+					selected_system_script = null
+					prev_clicked_coord = Vector3i.MAX
+					return
+				
+				if prev_clicked_coord == Vector3i.MAX:
+					prev_clicked_coord = clicked_coord
+					print("First coord: %s" % prev_clicked_coord)
+				else:
+					print("Second coord: %s" % clicked_coord)
+					try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
+					prev_clicked_coord = Vector3i.MAX
 		
 	elif event is InputEventKey:
 		if event.pressed and Input.is_key_pressed(KEY_SHIFT):
