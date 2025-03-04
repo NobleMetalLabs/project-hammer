@@ -13,7 +13,6 @@ func _ready():
 	ship = node.ship
 
 	_create_system_buttons()
-	get_parent().current_input_handler = self
 
 @onready var button_holder : VBoxContainer = $"SYSTEM-SELECTION-HOLDER"
 func _create_system_buttons():
@@ -27,26 +26,26 @@ func _create_system_buttons():
 		
 		button.pressed.connect(func():
 			selected_system_script = script
+			get_parent().push_input_handler(self)
 		)
 		
 		button_holder.add_child(button, true)
 
 func handle_input_event_on_ship_grid(event : InputEvent, coord : Vector3i):
 	if event is InputEventMouseButton and event.pressed:
-		if selected_system_script != null:
-			var clicked_coord := coord
-			if not ship.hull_structure.hull_voxels.has(clicked_coord): 
-				selected_system_script = null
-				prev_clicked_coord = Vector3i.MAX
-				return
-			
-			if prev_clicked_coord == Vector3i.MAX:
-				prev_clicked_coord = clicked_coord
-				print("First coord: %s" % prev_clicked_coord)
-			else:
-				print("Second coord: %s" % clicked_coord)
-				try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
-				prev_clicked_coord = Vector3i.MAX
+		var clicked_coord := coord
+		if not ship.hull_structure.hull_voxels.has(clicked_coord): 
+			get_parent().pop_input_handler()
+			prev_clicked_coord = Vector3i.MAX
+			return
+		
+		if prev_clicked_coord == Vector3i.MAX:
+			prev_clicked_coord = clicked_coord
+			print("First coord: %s" % prev_clicked_coord)
+		else:
+			print("Second coord: %s" % clicked_coord)
+			try_place_system(selected_system_script.new(), Box3i.from_corners(prev_clicked_coord, clicked_coord))
+			prev_clicked_coord = Vector3i.MAX
 
 #func handle_back_request():
 
@@ -69,3 +68,4 @@ func try_place_system(system : System, region : Box3i):
 	ship.installed_systems.append(new_system)
 	
 	print("Installed system: %s" % new_system)
+	get_parent().pop_input_handler()

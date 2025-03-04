@@ -169,28 +169,35 @@ size_flags_vertical = 3
 script = ExtResource("1_uuocy")
 ship = ExtResource("2_6lt7u")
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/SHIP-PANEL"]
+[node name="SHIP-DISPLAY" type="Control" parent="HBoxContainer/SHIP-PANEL"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SHIP-DISPLAY" type="Control" parent="HBoxContainer/SHIP-PANEL/CenterContainer"]
-unique_name_in_owner = true
-layout_mode = 2
 script = ExtResource("4_scq21")
 
-[node name="GRID-HOLDER" type="Control" parent="HBoxContainer/SHIP-PANEL/CenterContainer/SHIP-DISPLAY"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/SHIP-PANEL/SHIP-DISPLAY"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GRID-HOLDER" type="Control" parent="HBoxContainer/SHIP-PANEL/SHIP-DISPLAY/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-anchors_preset = 0
+mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SHIP-PANEL/CenterContainer/SHIP-DISPLAY/GRID-HOLDER"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SHIP-PANEL/SHIP-DISPLAY/CenterContainer/GRID-HOLDER"]
 layout_mode = 2
 offset_right = 1.0
 offset_bottom = 1.0
+mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_ksojr")
 
 [node name="SYSTEM-PLACEMENT" type="Control" parent="HBoxContainer/SHIP-PANEL"]
@@ -200,6 +207,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("4_6j6op")
 
 [node name="SYSTEM-SELECTION-HOLDER" type="VBoxContainer" parent="HBoxContainer/SHIP-PANEL/SYSTEM-PLACEMENT"]

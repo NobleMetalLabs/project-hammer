@@ -19,26 +19,24 @@ var current_z_layer : int = 0
 
 signal input_event_on_ship_grid(event : InputEvent, coord : Vector3i)
 
-func _input(event):
+func _gui_input(event):
 	var coord := Vector3i.MAX
 	if event.get("position") != null:
-		var ev_pos : Vector2 = event.position
-		var grid_space_pos : Vector2 = ev_pos - grid_holder.global_position
+		var grid_space_pos : Vector2 = event.position - grid_holder.position
 		var grid_pos : Vector2i = grid_space_pos / grid_size
 		coord = Vector3i(grid_pos.x, grid_pos.y, current_z_layer)
-
-	if event is InputEventKey:
-		if event.pressed and Input.is_key_pressed(KEY_SHIFT):
-			if event.keycode == KEY_W:
-				current_z_layer += 1
-				get_tree().get_root().set_input_as_handled()
-				return
-			elif event.keycode == KEY_S:
-				current_z_layer -= 1
-				get_tree().get_root().set_input_as_handled()
-				return
-	
 	input_event_on_ship_grid.emit(event, coord)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.pressed and Input.is_key_pressed(KEY_SHIFT):
+		if event.keycode == KEY_W:
+			current_z_layer += 1
+			get_tree().get_root().set_input_as_handled()
+			return
+		elif event.keycode == KEY_S:
+			current_z_layer -= 1
+			get_tree().get_root().set_input_as_handled()
+			return
 
 func _process(_delta):
 	for child in grid_holder.get_children():
