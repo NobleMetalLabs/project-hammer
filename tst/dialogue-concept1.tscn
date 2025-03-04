@@ -1,0 +1,185 @@
+[gd_scene load_steps=6 format=3 uid="uid://cls31qbgmhrfq"]
+
+[ext_resource type="Texture2D" uid="uid://dtjig50hm7qe6" path="res://ast/bg/bg172.png" id="1_ngmed"]
+[ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="2_ppjul"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5cyd"]
+bg_color = Color(0, 0, 0, 0.95)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_ily2u"]
+font = ExtResource("2_ppjul")
+font_size = 42
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_su7nd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ngmed")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="__" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="__" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DIALOGUE-PANEL" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c5cyd")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer"]
+layout_mode = 2
+
+[node name="TEXT-LABEL" type="Label" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 3
+text = "You see a civilian space station with heavy damage. You recieve a message, \"We've been hit hard by the war. We need more drone parts to speed up our repairs. We'll buy some from you if you have extra.\""
+label_settings = SubResource("LabelSettings_ily2u")
+horizontal_alignment = 3
+autowrap_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 15
+
+[node name="BUTTON-ONE" type="Button" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_hover_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ppjul")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_su7nd")
+text = "1. Sell 3 drone parts for 12 scrap"
+alignment = 0
+
+[node name="BUTTON-TWO" type="Button" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_hover_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ppjul")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_su7nd")
+text = "2. Sell 6 drone parts for 24 scrap"
+alignment = 0
+
+[node name="BUTTON-THREE" type="Button" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_hover_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ppjul")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_su7nd")
+text = "3. Sell 12 drone parts for 48 scrap"
+alignment = 0
+
+[node name="BUTTON-FOUR" type="Button" parent="VBoxContainer/MarginContainer/DIALOGUE-PANEL/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_hover_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_pressed_color = Color(0.839216, 0.815686, 0.317647, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_ppjul")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_su7nd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_su7nd")
+text = "4. Ignore the station"
+alignment = 0
+
+[node name="___" type="Control" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
