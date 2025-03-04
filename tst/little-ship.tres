@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="Ship" load_steps=17 format=3 uid="uid://durdjoqmudue5"]
+[gd_resource type="Resource" script_class="Ship" load_steps=21 format=3 uid="uid://durdjoqmudue5"]
 
 [ext_resource type="Script" path="res://lib/ship/Ship.gd" id="1_5t836"]
 [ext_resource type="Script" path="res://lib/ship/InstalledAugment.gd" id="2_palnc"]
 [ext_resource type="Script" path="res://lib/ship/InstalledSystem.gd" id="3_hnyen"]
 [ext_resource type="Script" path="res://lib/ship/HullStructure.gd" id="4_2nw4p"]
 [ext_resource type="Script" path="res://lib/ship/Crewmember.gd" id="5_8injc"]
+[ext_resource type="Script" path="res://lib/coord/Box3i.gd" id="5_stw16"]
 [ext_resource type="Script" path="res://lib/ship/systems/GeneratorSystem.gd" id="5_v2gs8"]
 [ext_resource type="Script" path="res://lib/ship/systems/BatterySystem.gd" id="6_0kwey"]
 [ext_resource type="Script" path="res://lib/good/Passenger.gd" id="6_o3hlw"]
@@ -17,13 +18,24 @@ embedded_systems = Array[ExtResource("3_hnyen")]([])
 embedded_augments = Array[ExtResource("2_palnc")]([])
 embedded_crew = Array[ExtResource("5_8injc")]([])
 
+[sub_resource type="Resource" id="Resource_exqli"]
+script = ExtResource("5_stw16")
+position = Vector3i(0, 0, 0)
+size = Vector3i(0, 0, 0)
+
 [sub_resource type="Resource" id="Resource_ydvod"]
 script = ExtResource("5_v2gs8")
 
 [sub_resource type="Resource" id="Resource_vc06j"]
 script = ExtResource("3_hnyen")
 system = SubResource("Resource_ydvod")
+region = SubResource("Resource_exqli")
 manual_efficiency_percent = 100.0
+
+[sub_resource type="Resource" id="Resource_sfpuv"]
+script = ExtResource("5_stw16")
+position = Vector3i(0, 0, 0)
+size = Vector3i(0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_xp2ru"]
 script = ExtResource("6_0kwey")
@@ -31,7 +43,13 @@ script = ExtResource("6_0kwey")
 [sub_resource type="Resource" id="Resource_6y0dc"]
 script = ExtResource("3_hnyen")
 system = SubResource("Resource_xp2ru")
+region = SubResource("Resource_sfpuv")
 manual_efficiency_percent = 100.0
+
+[sub_resource type="Resource" id="Resource_8gmg2"]
+script = ExtResource("5_stw16")
+position = Vector3i(0, 0, 0)
+size = Vector3i(0, 0, 0)
 
 [sub_resource type="Resource" id="Resource_uj82q"]
 script = ExtResource("7_qdogi")
@@ -39,6 +57,7 @@ script = ExtResource("7_qdogi")
 [sub_resource type="Resource" id="Resource_rqhhl"]
 script = ExtResource("3_hnyen")
 system = SubResource("Resource_uj82q")
+region = SubResource("Resource_8gmg2")
 manual_efficiency_percent = 100.0
 
 [resource]
