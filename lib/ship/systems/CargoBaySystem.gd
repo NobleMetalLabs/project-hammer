@@ -9,5 +9,5 @@ func  _init():
 
 func get_stat_modifications(stat : ProjectHammer.CraftStatistic, installed : InstalledSystem, ship : Ship) -> Array[StatMod]:
 	var mods : Array[StatMod] = []
-	mods.append(StatMod.new(StatMod.Type.FLAT, installed.region.get_AABB().get_volume() / 3))
+	mods.append(StatMod.new(StatMod.Type.FLAT, installed.region.get_AABB().get_volume() / 3 * installed.manual_efficiency))
 	return mods

@@ -31,7 +31,8 @@ func set_header_text(text : String) -> void:
 	header_label.text = text
 
 func set_system_info(inst_system : InstalledSystem) -> void:
-	manual_eff_slider.value = inst_system.manual_efficiency_percent
+	manual_eff_slider.value = inst_system.manual_efficiency * 100
+	
 
 	for modified_stat : ProjectHammer.CraftStatistic in inst_system.system.modifies_stats:
 		var mods : Array[StatMod] = inst_system.system.get_stat_modifications(modified_stat, inst_system, ShipManager.ship)

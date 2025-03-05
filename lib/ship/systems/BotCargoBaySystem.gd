@@ -24,6 +24,6 @@ func get_stat_modifications(stat : ProjectHammer.CraftStatistic, installed : Ins
 		# ProjectHammer.CraftStatistic.CREW_RISK:
 		# 	mods.append(StatMod.new(StatMod.Type.MULT, 0))
 		ProjectHammer.CraftStatistic.ENERGY_DEMAND:
-			mods.append(StatMod.new(StatMod.Type.FLAT, -100.0))
+			mods.append(StatMod.new(StatMod.Type.FLAT, -100.0 * installed.manual_efficiency))
 
 	return mods

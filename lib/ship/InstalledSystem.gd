@@ -5,7 +5,7 @@ extends Resource
 @export var region : Box3i
 
 @export_range(0, 200, 1, "suffix:%") \
-var manual_efficiency_percent : float = 100.0
+var manual_efficiency : float = 1.0
 
 static func _new(_system: System, _region: Box3i) -> InstalledSystem:
 	var inst_system := InstalledSystem.new()

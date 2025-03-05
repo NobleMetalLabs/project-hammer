@@ -20,3 +20,9 @@ func update_tree(_data : Dictionary = {}):
 			sys_item.set_header_text("%s @ <%s>" %[inst_system.system.name, str(sys_pos).left(-1).right(-1)])
 			_inst_system_to_tree_item[inst_system] = sys_item
 			sys_item.set_system_info(inst_system)
+			
+			sys_item.manual_eff_slider.value_changed.connect(
+				func(value : float):
+					inst_system.manual_efficiency = value / 100.0
+					sys_item.set_system_info(inst_system)
+			)
