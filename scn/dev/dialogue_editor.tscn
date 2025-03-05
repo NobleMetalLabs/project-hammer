@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://beagceap7k6kw"]
+[gd_scene load_steps=8 format=3 uid="uid://beagceap7k6kw"]
+
+[ext_resource type="Script" path="res://addons/command-terminal/src/CommandTerminal.gd" id="1_15b8y"]
+[ext_resource type="Script" path="res://src/dev/dialogue_editor.gd" id="1_iiw6s"]
+[ext_resource type="FontFile" uid="uid://cmmltma2gsu3a" path="res://addons/command-terminal/ast/windows_command_prompt.ttf" id="2_6kef4"]
+[ext_resource type="PackedScene" uid="uid://b5b8i4p40f5ua" path="res://addons/command-terminal/scn/command_terminal_guts.tscn" id="3_00k8a"]
+[ext_resource type="Script" path="res://addons/command-terminal/src/CommandTerminalGuts.gd" id="4_ef4cs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i2015"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nmgc"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="DIALOGUE-EDITOR" type="Panel"]
@@ -10,6 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i2015")
+script = ExtResource("1_iiw6s")
 
 [node name="title" type="Label" parent="."]
 layout_mode = 0
@@ -17,3 +27,26 @@ offset_right = 433.0
 offset_bottom = 136.0
 theme_override_font_sizes/font_size = 50
 text = "dialogue editor"
+
+[node name="CommandTerminal" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_15b8y")
+font = ExtResource("2_6kef4")
+font_size = 36
+
+[node name="__guts__" type="PanelContainer" parent="CommandTerminal" instance=ExtResource("3_00k8a")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3nmgc")
+script = ExtResource("4_ef4cs")
+metadata/_edit_lock_ = true

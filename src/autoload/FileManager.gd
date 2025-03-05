@@ -29,16 +29,16 @@ func save_file(contents : Serializeable, filepath : String) -> void:
 func load_file(filepath : String, extensions : Array[String]) -> Serializeable:
 	var path_ext : String = filepath.get_extension()
 	if path_ext not in extensions:
-		#ParasiteLogger.error(
-		#	"Failed to load file. File extension \"%s\" not one of the permitted (%s)." % 
-		#	[path_ext, ", ".join(extensions.map(func(s : String) -> String: return ".%s" % s))]
-		#)
+		print(
+			"Failed to load file. File extension \"%s\" not one of the permitted (%s)." % 
+			[path_ext, ", ".join(extensions.map(func(s : String) -> String: return ".%s" % s))]
+		)
 		return
 	var fa : FileAccess = FileAccess.open(filepath, FileAccess.READ)
 	var fa_err : int = FileAccess.get_open_error()
 	_last_action_result = fa_err
 	if fa_err != OK:
-		#ParasiteLogger.error("Failed to load file. \"%s\" error." % [error_string(fa_err)])
+		print("Failed to load file. \"%s\" error." % [error_string(fa_err)])
 		return
 	var data_json : String = fa.get_line()
 	var data_dict : Dictionary = JSON.parse_string(data_json)

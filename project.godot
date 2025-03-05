@@ -21,7 +21,7 @@ ProjectHammer="*res://src/autoload/ProjectHammer.gd"
 ProjectHammerEventBus="*res://src/autoload/ProjectHammerEventBus.gd"
 ShipManager="*res://src/autoload/ShipManager.gd"
 FileManager="*res://src/autoload/FileManager.gd"
-CommandServer="*res://addons/command_terminal/src/CommandServer.gd"
+CommandServer="*res://addons/command-terminal/src/CommandServer.gd"
 
 [display]
 
@@ -32,7 +32,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/command_terminal/plugin.cfg")
+enabled=PackedStringArray("res://addons/command-terminal/plugin.cfg", "res://addons/command_terminal/plugin.cfg")
 
 [plugins]
 
