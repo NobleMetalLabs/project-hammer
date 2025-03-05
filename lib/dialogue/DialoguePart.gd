@@ -1,5 +1,6 @@
 class_name DialoguePart
-extends Resource
+extends Serializeable
 
-var next : DialoguePart = null
-
+var text : String = ""
+var command : String = ""
+var choices : Dictionary = {} # [String : DialoguePart]
