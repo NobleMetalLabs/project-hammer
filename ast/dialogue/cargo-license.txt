@@ -1,0 +1,26 @@
+You enter the cargo hub through the front door, and are flagged down by an employee.
+"Licensing?" they ask.
+
+1. "License?"
+2. Present your license
+
+# 1
+	"You need a license to operate a cargo ship in this starsystem. Do you not have one?"
+
+	1. "No."
+
+	# 1
+	"Then you need to get one. It's paperwork, but it won't kill you."
+	"You can get one from the licensing office, inside the city commerce center."
+
+	1. Leave
+
+	# 1
+
+	(Enter city commerce center)
+	You get the license.
+
+# 2
+	"Thank you."
+
+	<open menu trading>
