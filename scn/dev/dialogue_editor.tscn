@@ -58,14 +58,14 @@ metadata/_edit_group_ = true
 
 [node name="HEADER-LABEL" type="Label" parent="ScrollContainer/DIALOGUE-HOLDER/DIALOGUE-PANEL"]
 layout_mode = 0
-offset_right = 61.0
-offset_bottom = 45.0
-theme_override_font_sizes/font_size = 32
+offset_right = 85.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
 text = "Header"
 
 [node name="TEXT-EDIT" type="TextEdit" parent="ScrollContainer/DIALOGUE-HOLDER/DIALOGUE-PANEL"]
 layout_mode = 0
-offset_top = 40.0
+offset_top = 33.0
 offset_right = 1913.0
 offset_bottom = 458.0
 theme_override_font_sizes/font_size = 32
@@ -112,10 +112,10 @@ text = "1. Continue"
 layout_mode = 0
 offset_left = 860.0
 offset_top = 618.0
-offset_right = 1111.0
+offset_right = 1032.0
 offset_bottom = 664.0
 theme_override_font_sizes/font_size = 32
-text = "new choice text"
+text = "new choice"
 
 [node name="CHOICE-EDIT" type="LineEdit" parent="ScrollContainer/DIALOGUE-HOLDER/DIALOGUE-PANEL"]
 layout_mode = 0
