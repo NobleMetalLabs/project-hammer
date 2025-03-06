@@ -14,11 +14,6 @@ var _info_item_labels : Dictionary = {} #[StringName, Label]
 var _info_item_values : Dictionary = {} #[StringName, Label]
 
 func _ready():
-	header_button.owner = self
-	header_label.owner = self
-	info_item_label.owner = self
-	info_item_value.owner = self
-
 	info_items_section.visible = false
 	header_button.pressed.connect(func():
 		info_items_section.visible = not info_items_section.visible

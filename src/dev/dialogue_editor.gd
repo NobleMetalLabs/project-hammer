@@ -4,6 +4,8 @@ var editing_dialogue : DialoguePart
 
 func _ready() -> void:
 	register_commands()
+	
+	CommandServer.run_command("file load res://tst/bonar.ser")
 
 func register_commands() -> void:
 	CommandServer.register_command(
