@@ -4,7 +4,6 @@ var editing_dialogue : DialoguePart
 
 func _ready() -> void:
 	register_commands()
-	ProjectHammerEventBus.subscribe("dialogue_editor_update", update_ui)
 
 func register_commands() -> void:
 	CommandServer.register_command(
@@ -13,7 +12,7 @@ func register_commands() -> void:
 			.Literal("new")
 			.Callback(func() -> void: 
 				editing_dialogue = DialoguePart.new()
-				ProjectHammerEventBus.push_event("dialogue_editor_update", {"dialogue": editing_dialogue})
+				ProjectHammerEventBus.push_event("dialogue_parts_changed", {"start_dialogue": editing_dialogue})
 				)
 		.Build()
 	)
@@ -26,6 +25,7 @@ func register_commands() -> void:
 				.Validated("path", GlobalCommandValidators.is_valid_filepath).Tag_gnst()
 				.Callback(func(path) -> void:
 					editing_dialogue = FileManager.load_file(path, ["ser"])
+					ProjectHammerEventBus.push_event("dialogue_parts_changed", {"start_dialogue": editing_dialogue})
 					, ["path"])
 		.Build()
 	)
@@ -41,6 +41,3 @@ func register_commands() -> void:
 					, ["path"])
 		.Build()
 	)
-
-func update_ui(data : Dictionary) -> void:
-	pass
