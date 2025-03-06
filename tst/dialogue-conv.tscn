@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://co3sn6m7eam28"]
-
-[ext_resource type="Script" path="res://tst/txt_to_dialogue.gd" id="1_wag2u"]
-
-[node name="Node" type="Node"]
-script = ExtResource("1_wag2u")
-text_file = "res://ast/dialogue/cargo-license.txt"
