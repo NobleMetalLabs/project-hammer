@@ -57,8 +57,8 @@ func add_panel_from_part(dialogue_part : DialoguePart, origin : DialoguePart = n
 	)
 	
 	new_panel.remove_choice_button.pressed.connect(func():
-		if dialogue_part.choices.size() > 0:
-			var removed_choice : String = dialogue_part.choices.keys().back()
+		if dialogue_part.choices.has(new_panel.choice_edit.text):
+			var removed_choice := new_panel.choice_edit.text
 			var removed_part : DialoguePart = dialogue_part.choices[removed_choice]
 			
 			remove_panel_from_part(removed_part)
@@ -67,7 +67,7 @@ func add_panel_from_part(dialogue_part : DialoguePart, origin : DialoguePart = n
 			
 			dialogue_part.choices.erase(removed_choice)
 			
-		new_panel.set_choices_container(dialogue_part.choices)
+			new_panel.set_choices_container(dialogue_part.choices)
 	)
 	
 	part_to_panel[dialogue_part] = new_panel
