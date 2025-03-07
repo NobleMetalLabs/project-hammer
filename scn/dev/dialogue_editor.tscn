@@ -124,7 +124,7 @@ offset_top = 666.0
 offset_right = 1914.0
 offset_bottom = 719.0
 theme_override_font_sizes/font_size = 32
-text = "1. Continue"
+text = "Continue"
 
 [node name="ADD-CHOICE-BUTTON" type="Button" parent="ScrollContainer/DIALOGUE-HOLDER/DIALOGUE-PANEL"]
 layout_mode = 0
@@ -150,7 +150,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -33.0
+offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_15b8y")

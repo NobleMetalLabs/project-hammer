@@ -26,9 +26,11 @@ func set_choices_container(choices : Dictionary) -> void:
 	for choice_label : Label in choices_container.get_children(): 
 		if choice_label != choice_template: choice_label.queue_free()
 	
+	var choice_index = 1
 	for selection_text : String in choices.keys():
 		var new_label : Label = choice_template.duplicate()
 		choices_container.add_child(new_label)
 		new_label.visible = true
 		
-		new_label.text = selection_text
+		new_label.text = "%d. %s" % [choice_index, selection_text]
+		choice_index += 1

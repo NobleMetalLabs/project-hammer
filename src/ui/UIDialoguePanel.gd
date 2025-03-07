@@ -42,7 +42,7 @@ func update_ui() -> void:
 	else:
 		for choice_idx in range(len(_current_dialogue_part.choices.keys())):
 			var button = buttons[choice_idx]
-			button.text = _current_dialogue_part.choices.keys()[choice_idx]
+			button.text = "%d. %s" % [choice_idx + 1, _current_dialogue_part.choices.keys()[choice_idx]]
 			button.visible = true
 			button.disabled = false
 
