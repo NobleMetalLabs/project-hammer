@@ -54,9 +54,11 @@ func _ready():
 	)
 
 func set_currency(possessed_money : int, possessed_goodwill : int) -> void:
+	current_trade_money_modification = 0
 	money_count_spinbox.value = 0
 	money_count_spinbox.max_value = possessed_money
 	money_max_label.text = "/ %s" % [possessed_money]
+	current_trade_goodwill_modification = 0
 	goodwill_count_spinbox.value = 0
 	goodwill_count_spinbox.max_value = possessed_goodwill
 	goodwill_max_label.text = "/ %s" % [possessed_goodwill]
