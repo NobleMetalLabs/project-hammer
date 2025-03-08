@@ -26,3 +26,6 @@ func remove_item(item : CargoItem) -> void:
 		if existing_cargoitem.quantity == 0:
 			items.erase(existing_cargoitem)
 			_cargoitem_by_item.erase(item.item)
+
+func _to_string() -> String:
+	return "Cargo(%s)" % [", ".join(items.map(func(cargoitem : CargoItem) -> String: return str(cargoitem)))]

@@ -7,3 +7,6 @@ extends Resource
 func _init(item : ItemDB.Item, quantity : int) -> void:
 	self.item = item
 	self.quantity = quantity
+
+func _to_string() -> String:
+	return "CargoItem(%s, %s)" % [ItemDB.item_string(item), quantity]

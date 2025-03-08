@@ -1,0 +1,562 @@
+[gd_scene load_steps=10 format=3 uid="uid://djy2i5fmavwkx"]
+
+[ext_resource type="Script" path="res://UITradingCargoMenu.gd" id="1_3c0il"]
+[ext_resource type="Script" path="res://UITradingCargoListDisplay.gd" id="1_buvv3"]
+[ext_resource type="FontFile" uid="uid://ctfacr4mpo55p" path="res://ast/ui/font/Classica.ttf" id="2_n1ton"]
+[ext_resource type="Script" path="res://UITradingCargoListItemRow.gd" id="3_vspr6"]
+[ext_resource type="Script" path="res://UITradingCurrencyListDisplay.gd" id="5_c8n7l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pamyj"]
+font = ExtResource("2_n1ton")
+font_size = 36
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0gsul"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ox0a3"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+vertical = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5b4k"]
+font = ExtResource("2_n1ton")
+font_size = 24
+
+[node name="Control" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3c0il")
+
+[node name="_" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="_" type="HBoxContainer" parent="_"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="PLAYER-LIST-DISPLAY" type="PanelContainer" parent="_/_"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_buvv3")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/_/PLAYER-LIST-DISPLAY"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SS BRUH"
+label_settings = SubResource("LabelSettings_pamyj")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ITEM-ROW" type="PanelContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+script = ExtResource("3_vspr6")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer"]
+layout_mode = 2
+
+[node name="ITEM-NAME-LABEL" type="Label" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ITEM NAME"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ITEM-COUNT-SPINBOX" type="SpinBox" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+select_all_on_focus = true
+
+[node name="ITEM-MAX-LABEL" type="Label" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/ 200"
+
+[node name="VSeparator" type="VSeparator" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0gsul")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ITEM-NONE-BUTTON" type="Button" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NONE"
+
+[node name="ITEM-HALF-BUTTON" type="Button" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "HALF"
+
+[node name="ITEM-ALL-BUTTON" type="Button" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ALL"
+
+[node name="VSeparator2" type="VSeparator" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0gsul")
+
+[node name="ITEM-PRICE-LABEL" type="Label" parent="_/_/PLAYER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.33
+text = "300₿"
+horizontal_alignment = 2
+
+[node name="__" type="Control" parent="_/_"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TRADER-LIST-DISPLAY" type="PanelContainer" parent="_/_"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_buvv3")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/_/TRADER-LIST-DISPLAY"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SS BRUH"
+label_settings = SubResource("LabelSettings_pamyj")
+horizontal_alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ITEM-ROW" type="PanelContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+script = ExtResource("3_vspr6")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer"]
+layout_mode = 2
+
+[node name="ITEM-NAME-LABEL" type="Label" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ITEM NAME"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ITEM-COUNT-SPINBOX" type="SpinBox" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+select_all_on_focus = true
+
+[node name="ITEM-MAX-LABEL" type="Label" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/ 200"
+
+[node name="VSeparator" type="VSeparator" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ox0a3")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ITEM-NONE-BUTTON" type="Button" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NONE"
+
+[node name="ITEM-HALF-BUTTON" type="Button" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "HALF"
+
+[node name="ITEM-ALL-BUTTON" type="Button" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ALL"
+
+[node name="VSeparator2" type="VSeparator" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ox0a3")
+
+[node name="ITEM-PRICE-LABEL" type="Label" parent="_/_/TRADER-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.33
+text = "300₿"
+horizontal_alignment = 2
+
+[node name="__" type="HBoxContainer" parent="_"]
+layout_mode = 2
+
+[node name="PLAYER-CURRENCY-DISPLAY" type="PanelContainer" parent="_/__"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_c8n7l")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="__" type="VBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CURRENT VALUE:"
+label_settings = SubResource("LabelSettings_p5b4k")
+justification_flags = 162
+
+[node name="CURRENT-TRADE-VALUE-LABEL" type="Label" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "300₿"
+label_settings = SubResource("LabelSettings_p5b4k")
+justification_flags = 162
+
+[node name="VBoxContainer" type="VBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__"]
+layout_mode = 2
+
+[node name="GOODWILL-ROW" type="PanelContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GOODWILL"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="GOODWILL-COUNT-SPINBOX" type="SpinBox" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+select_all_on_focus = true
+
+[node name="GOODWILL-MAX-LABEL" type="Label" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/ 200"
+
+[node name="VSeparator" type="VSeparator" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0gsul")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GOODWILL-NONE-BUTTON" type="Button" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NONE"
+
+[node name="GOODWILL-ENOUGH-BUTTON" type="Button" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ENOUGH"
+
+[node name="MONEY-ROW" type="PanelContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MONEY"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="MONEY-COUNT-SPINBOX" type="SpinBox" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+select_all_on_focus = true
+
+[node name="MONEY-MAX-LABEL" type="Label" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/ 200"
+
+[node name="VSeparator" type="VSeparator" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0gsul")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MONEY-NONE-BUTTON" type="Button" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NONE"
+
+[node name="MONEY-ENOUGH-BUTTON" type="Button" parent="_/__/PLAYER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ENOUGH"
+
+[node name="BUTTON-PANEL" type="PanelContainer" parent="_/__"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/BUTTON-PANEL"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/BUTTON-PANEL/MarginContainer"]
+layout_mode = 2
+
+[node name="__" type="Control" parent="_/__/BUTTON-PANEL/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="HBoxContainer" parent="_/__/BUTTON-PANEL/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="TRADE-BUTTON" type="Button" parent="_/__/BUTTON-PANEL/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "TRADE"
+
+[node name="CLOSE-BUTTON" type="Button" parent="_/__/BUTTON-PANEL/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "CLOSE"
+
+[node name="___" type="Control" parent="_/__/BUTTON-PANEL/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TRADER-CURRENCY-DISPLAY" type="PanelContainer" parent="_/__"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_c8n7l")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/TRADER-CURRENCY-DISPLAY"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="__" type="VBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CURRENT VALUE:"
+label_settings = SubResource("LabelSettings_p5b4k")
+justification_flags = 162
+
+[node name="CURRENT-TRADE-VALUE-LABEL" type="Label" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "300₿"
+label_settings = SubResource("LabelSettings_p5b4k")
+justification_flags = 162
+
+[node name="VBoxContainer" type="VBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__"]
+layout_mode = 2
+
+[node name="GOODWILL-ROW" type="PanelContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GOODWILL"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="GOODWILL-COUNT-SPINBOX" type="SpinBox" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+select_all_on_focus = true
+
+[node name="GOODWILL-MAX-LABEL" type="Label" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/ 200"
+
+[node name="VSeparator" type="VSeparator" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0gsul")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GOODWILL-NONE-BUTTON" type="Button" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NONE"
+
+[node name="GOODWILL-ENOUGH-BUTTON" type="Button" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/GOODWILL-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ENOUGH"
+
+[node name="MONEY-ROW" type="PanelContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MONEY"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="MONEY-COUNT-SPINBOX" type="SpinBox" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+select_all_on_focus = true
+
+[node name="MONEY-MAX-LABEL" type="Label" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "/ 200"
+
+[node name="VSeparator" type="VSeparator" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_0gsul")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MONEY-NONE-BUTTON" type="Button" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NONE"
+
+[node name="MONEY-ENOUGH-BUTTON" type="Button" parent="_/__/TRADER-CURRENCY-DISPLAY/MarginContainer/__/VBoxContainer/MONEY-ROW/MarginContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ENOUGH"
