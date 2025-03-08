@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cls31qbgmhrfq"]
 
 [ext_resource type="Texture2D" uid="uid://dtjig50hm7qe6" path="res://ast/bg/bg172.png" id="1_ngmed"]
-[ext_resource type="Script" path="res://src/ui/UIDialoguePanel.gd" id="2_ackj7"]
+[ext_resource type="Script" path="res://scn/ui/main/UIDialoguePanel.gd" id="2_ackj7"]
 [ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="2_ppjul"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5cyd"]

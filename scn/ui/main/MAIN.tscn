@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://cwnvldhi31wkt"]
 
-[ext_resource type="Script" path="res://src/ui/UISystemsTree.gd" id="1_dimql"]
-[ext_resource type="Script" path="res://src/ui/UIShipPanel.gd" id="1_uuocy"]
-[ext_resource type="Script" path="res://src/ui/UISystemsTreeItem.gd" id="2_swcwl"]
-[ext_resource type="Script" path="res://src/ui/UISystemPlacement.gd" id="4_6j6op"]
-[ext_resource type="Script" path="res://src/ui/UIShipDisplay.gd" id="4_scq21"]
+[ext_resource type="Script" path="res://scn/ui/main/UISystemsTree.gd" id="1_dimql"]
+[ext_resource type="Script" path="res://scn/ui/main/UIShipPanel.gd" id="1_uuocy"]
+[ext_resource type="Script" path="res://scn/ui/main/UISystemsTreeItem.gd" id="2_swcwl"]
+[ext_resource type="Script" path="res://scn/ui/main/UISystemPlacement.gd" id="4_6j6op"]
+[ext_resource type="Script" path="res://scn/ui/main/UIShipDisplay.gd" id="4_scq21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
