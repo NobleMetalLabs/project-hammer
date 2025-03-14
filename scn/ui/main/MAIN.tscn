@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cwnvldhi31wkt"]
+[gd_scene load_steps=23 format=3 uid="uid://cwnvldhi31wkt"]
 
 [ext_resource type="Script" path="res://scn/ui/main/UISystemsTree.gd" id="1_dimql"]
 [ext_resource type="Script" path="res://scn/ui/main/UIShipPanel.gd" id="1_uuocy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scn/ui/main/UIShipDisplay.gd" id="4_scq21"]
 [ext_resource type="Script" path="res://scn/ui/main/UIDialoguePanel.gd" id="6_i4ln3"]
 [ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="7_1j0i2"]
+[ext_resource type="PackedScene" uid="uid://dgcgo1si1cx4q" path="res://scn/ui/UITravelMenu.tscn" id="8_lrdet"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8kj6b"]
 bg_color = Color(0, 0, 0, 1)
@@ -399,3 +400,12 @@ alignment = 0
 [node name="___" type="Control" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="UI-TRAVEL-MENU" parent="." instance=ExtResource("8_lrdet")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1

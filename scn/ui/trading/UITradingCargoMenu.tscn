@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scn/ui/trading/UITradingCargoListDisplay.gd" id="2_w3e74"]
 [ext_resource type="FontFile" uid="uid://ctfacr4mpo55p" path="res://ast/ui/font/Classica.ttf" id="3_74auu"]
 [ext_resource type="Script" path="res://scn/ui/trading/UITradingCargoListItemRow.gd" id="4_8qy7y"]
-[ext_resource type="Script" path="res://scn/ui/UITradingCurrencyListDisplay.gd" id="5_1qrdx"]
+[ext_resource type="Script" path="res://scn/ui/trading/UITradingCurrencyListDisplay.gd" id="5_1qrdx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pamyj"]
 font = ExtResource("3_74auu")
