@@ -3,6 +3,8 @@ extends Resource
 
 var name : String = ""
 var faction : FactionDB.Faction
+var ethics : Ethics = Ethics.new()
+var skills : Skills = Skills.new()
 var wallet : Wallet = Wallet.new()
 
 enum Race {
