@@ -8,6 +8,8 @@ extends Control
 @onready var button_four : Button = $"%BUTTON-FOUR"
 @onready var buttons : Array[Button] = [button_one, button_two, button_three, button_four]
 
+@onready var fullscreen_parent_container : VBoxContainer = get_parent().get_parent()
+
 var _current_story_event : StoryEvent = null
 func _ready():
 	for button_idx in range(4):
@@ -22,8 +24,10 @@ func set_current_story_event(story_event : StoryEvent) -> void:
 
 func update_ui() -> void:
 	self.hide()
+	fullscreen_parent_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if _current_story_event == null: return
 	self.show()
+	fullscreen_parent_container.mouse_filter = Control.MOUSE_FILTER_STOP
 	text_label.text = _current_story_event.description
 	for button in buttons:
 		button.visible = false

@@ -67,25 +67,30 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8kj6b")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Ship" type="HBoxContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Ship"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SYSTEMS-TREE-PANEL" type="Panel" parent="HBoxContainer/VBoxContainer"]
+[node name="SYSTEMS-TREE-PANEL" type="Panel" parent="TabContainer/Ship/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_dimql")
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,84 +102,84 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer"]
 layout_mode = 2
 
-[node name="SYSTEM-TREE-ITEM" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer"]
+[node name="SYSTEM-TREE-ITEM" type="VBoxContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("2_swcwl")
 
-[node name="HEADER" type="PanelContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM"]
+[node name="HEADER" type="PanelContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="HEADER-LABEL" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER/MarginContainer"]
+[node name="HEADER-LABEL" type="Label" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "EXAMPLE"
 
-[node name="HEADER-BUTTON" type="Button" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER"]
+[node name="HEADER-BUTTON" type="Button" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/HEADER"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_yf70w")
 flat = true
 
-[node name="INFO-ITEMS-SECTION" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM"]
+[node name="INFO-ITEMS-SECTION" type="HBoxContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="tab" type="Control" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION"]
+[node name="tab" type="Control" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION"]
+[node name="PanelContainer2" type="PanelContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="__" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer"]
+[node name="__" type="HBoxContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer"]
 layout_mode = 2
 
-[node name="LABELS" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
+[node name="LABELS" type="VBoxContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MANUAL-EFF-LABEL" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/LABELS"]
+[node name="MANUAL-EFF-LABEL" type="Label" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/LABELS"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "MANUAL EFFICIENCY"
 horizontal_alignment = 2
 
-[node name="INFO-ITEM-LABEL" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/LABELS"]
+[node name="INFO-ITEM-LABEL" type="Label" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/LABELS"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "EXAMPLE"
 horizontal_alignment = 2
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
 layout_mode = 2
 
-[node name="VALUES" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
+[node name="VALUES" type="VBoxContainer" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
 
-[node name="MANUAL-EFF-SLIDER" type="HSlider" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/VALUES"]
+[node name="MANUAL-EFF-SLIDER" type="HSlider" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/VALUES"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -184,19 +189,19 @@ step = 10.0
 rounded = true
 tick_count = 21
 
-[node name="INFO-ITEM-VALUE" type="Label" parent="HBoxContainer/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/VALUES"]
+[node name="INFO-ITEM-VALUE" type="Label" parent="TabContainer/Ship/VBoxContainer/SYSTEMS-TREE-PANEL/MarginContainer/VBoxContainer/SYSTEM-TREE-ITEM/INFO-ITEMS-SECTION/PanelContainer2/MarginContainer/__/VALUES"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "0.000"
 
-[node name="SHIP-PANEL" type="Panel" parent="HBoxContainer"]
+[node name="SHIP-PANEL" type="Panel" parent="TabContainer/Ship"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_uuocy")
 
-[node name="SHIP-DISPLAY" type="Control" parent="HBoxContainer/SHIP-PANEL"]
+[node name="SHIP-DISPLAY" type="Control" parent="TabContainer/Ship/SHIP-PANEL"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -206,7 +211,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_scq21")
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/SHIP-PANEL/SHIP-DISPLAY"]
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Ship/SHIP-PANEL/SHIP-DISPLAY"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -215,19 +220,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="GRID-HOLDER" type="Control" parent="HBoxContainer/SHIP-PANEL/SHIP-DISPLAY/CenterContainer"]
+[node name="GRID-HOLDER" type="Control" parent="TabContainer/Ship/SHIP-PANEL/SHIP-DISPLAY/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SHIP-PANEL/SHIP-DISPLAY/CenterContainer/GRID-HOLDER"]
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Ship/SHIP-PANEL/SHIP-DISPLAY/CenterContainer/GRID-HOLDER"]
 layout_mode = 2
 offset_right = 1.0
 offset_bottom = 1.0
 mouse_filter = 2
 texture = SubResource("PlaceholderTexture2D_ksojr")
 
-[node name="SYSTEM-PLACEMENT" type="Control" parent="HBoxContainer/SHIP-PANEL"]
+[node name="SYSTEM-PLACEMENT" type="Control" parent="TabContainer/Ship/SHIP-PANEL"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -237,7 +242,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("4_6j6op")
 
-[node name="SYSTEM-SELECTION-HOLDER" type="VBoxContainer" parent="HBoxContainer/SHIP-PANEL/SYSTEM-PLACEMENT"]
+[node name="SYSTEM-SELECTION-HOLDER" type="VBoxContainer" parent="TabContainer/Ship/SHIP-PANEL/SYSTEM-PLACEMENT"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -246,8 +251,10 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="UI-TRAVEL-MENU" parent="." instance=ExtResource("8_lrdet")]
-layout_mode = 1
+[node name="Travel" parent="TabContainer" instance=ExtResource("8_lrdet")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -274,6 +281,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="DIALOGUE-PANEL" type="PanelContainer" parent="VBoxContainer/MarginContainer"]
+visible = false
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
