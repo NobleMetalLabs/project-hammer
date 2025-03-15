@@ -19,6 +19,7 @@ func display_travel_menu(location : TravelLocation) -> void:
 	_current_location = location
 	location_label.text = location.name
 	spot_list_display.display_spots(location.spots)
+	self.show()
 	
 func _handle_travel(spot : TravelSpot) -> void:
 	print("Traveling to %s." % spot.name)

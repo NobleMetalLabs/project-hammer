@@ -246,6 +246,9 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[node name="UI-TRAVEL-MENU" parent="." instance=ExtResource("8_lrdet")]
+layout_mode = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -400,12 +403,3 @@ alignment = 0
 [node name="___" type="Control" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="UI-TRAVEL-MENU" parent="." instance=ExtResource("8_lrdet")]
-visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1

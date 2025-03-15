@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StoryEvent" load_steps=2 format=3 uid="uid://dlraj20i7tm1u"]
+
+[ext_resource type="Script" path="res://lib/story/StoryEvent.gd" id="1_mhj8s"]
+
+[resource]
+script = ExtResource("1_mhj8s")
+description = "You get washed"
+result_description = ""
+result_commands = Array[String]([])

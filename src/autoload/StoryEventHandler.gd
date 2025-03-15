@@ -25,24 +25,11 @@ func handle_story_event_advance(next_event : StoryEvent) -> void:
 	_display_storyevent(next_event)
 
 func _ready():
-	var e := StoryEvent.new()
-	e.description = "This is a test event"
-	var e2 := StoryChoiceEvent.new()
-	e.next_event = e2
-	e2.description = "This is a test event 2"
-	var e3 := StoryEvent.new()
-	e3.description = "Option 1"
-	var e4 := StoryEvent.new()
-	e4.description = "Option 2"
-	var ec1 := StoryChoiceEventChoice.new()
-	ec1.text = "Choice 1"
-	ec1.resulting_event = e3
-	var ec2 := StoryChoiceEventChoice.new()
-	ec2.text = "Choice 2"
-	ec2.resulting_event = e4
-	e2.choices = [ec1, ec2]
-	
-	print("disp")
-	_display_storyevent.call_deferred(e)
+	pass	
+
+	#var wash_event : StoryEvent = load("res://tst/story/WashEvent.tres")
+	#register_storyevent_occurance(func(), wash_event)
+
+
 
 	
