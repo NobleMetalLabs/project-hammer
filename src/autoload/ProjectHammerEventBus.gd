@@ -47,6 +47,15 @@ func push_event(event_name : StringName, data : Dictionary = {}) -> void:
 				event_subscriber.call(mediator.call(data))
 			else:
 				event_subscriber.call(data)
+
+	if subscriptions.has("*"):
+		event_subscribers = subscriptions["*"]
+		for event_subscriber : Callable in event_subscribers:
+			if mediators.has(event_name):
+				var mediator : Callable = mediators[event_name]
+				event_subscriber.call(event_name, mediator.call(data))
+			else:
+				event_subscriber.call(event_name, data)
 	#if not event_name.contains("log_message") and not event_name.contains("error_message"):
 		##ProjectHammerLogger.log(["EVENT"], "Event '%s' pushed to %s subscribers" % [event_name, len(event_subscribers)])
 	return

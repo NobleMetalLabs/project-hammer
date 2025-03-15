@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_mhj8s")
-description = "You get washed"
+description = "You get washed and feel great"
 result_description = ""
-result_commands = Array[String]([])
+result_commands = Array[String](["washed-up-test"])

@@ -6,7 +6,7 @@ extends PanelContainer
 @onready var leave_button : Button = $"%LEAVE-BUTTON"
 
 func _ready():
-	var l : TravelLocation = load("res://tst/BruhcagoLoc.tres")
+	var l : TravelLocation = load("res://tst/story/BruhcagoLoc.tres")
 	print(l)
 	display_travel_menu(l)
 	
