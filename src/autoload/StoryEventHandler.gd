@@ -26,9 +26,9 @@ signal display_storyevent(event : StoryEvent) #TODO: better word than "display"
 func _display_storyevent(event : StoryEvent) -> void:
 	ProjectHammerLogger.log(["STORY", "STORYEVENT"], "Triggering %s" % event)
 	display_storyevent.emit(event)
+	QuestlineManager.handle_story_event_advance.call(event)
 	if event == null: return # TODO: dont tell ui to display null just check for null and tell it to hide
 	
-	QuestlineManager.handle_story_event_advance.call(event)
 	for command in event.result_commands:
 		CommandServer.run_command(command)
 
