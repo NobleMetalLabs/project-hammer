@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StoryEvent" load_steps=2 format=3 uid="uid://5w2ej7jttapv"]
+
+[ext_resource type="Script" path="res://lib/story/StoryEvent.gd" id="1_262yq"]
+
+[resource]
+script = ExtResource("1_262yq")
+description = "Gasp! Upon arriving in Quahog you notice a large hunk of ore displayed upon the floor.  Makes sense since \"quahog\" means \"ore\" in olde english.. Anyway YOU RUSH over and grab it"
+result_description = ""
+result_commands = Array[String](["give-item ore"])

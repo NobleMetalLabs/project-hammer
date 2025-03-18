@@ -11,5 +11,5 @@ func _init(_location : TravelLocation = null, _spot : TravelSpot = null):
 func _equals(other : StoryRelatedEventTravelToPlace) -> bool:
 	return location == other.location and spot == other.spot
 
-func _to_string() -> String:
-	return "StReEv-TravelToPlace<%s, %s>" % [location, spot]
+#func _to_string() -> String:
+	#return "StReEv-TravelToPlace<%s, %s>" % [location, spot]
