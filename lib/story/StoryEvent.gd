@@ -7,3 +7,5 @@ extends Resource
 @export var next_event : StoryEvent = null
 
 
+func _to_string() -> String:
+	return "StoryEvent<%s>" % resource_path.get_file().get_basename()

@@ -1,60 +1,36 @@
 #class_name StoryEventHandler
 extends Node
 
-var _story_event_occurrences : Dictionary = {} #[Callable, StoryEvent]
+var _story_event_occurrences : Dictionary = {} #[StoryRelatedEvent, StoryEvent]
 
-func register_storyevent_occurence(evaluator : Callable, event : StoryEvent) -> void:
-	_story_event_occurrences[evaluator] = event
+func register_storyevent_occurence(related_event : StoryRelatedEvent, event : StoryEvent) -> void:
+	_story_event_occurrences[related_event] = event
 
-func deregister_storyevent_occurence(evaluator : Callable) -> void:
-	_story_event_occurrences.erase(evaluator)
+func deregister_storyevent_occurence(related_event : StoryRelatedEvent) -> void:
+	_story_event_occurrences.erase(related_event)
 
-func proc_storyevents(event_name : StringName, data : Dictionary = {}) -> void:
-	for evaluator : Callable in _story_event_occurrences.keys():
-		var does_event_occur : bool = evaluator.call(event_name, data)
-		if does_event_occur:
-			_display_storyevent(_story_event_occurrences[evaluator])
+func process_storyrelatedevent(related_event : StoryRelatedEvent) -> void:
 
-signal display_storyevent(event : StoryEvent)
+	ProjectHammerLogger.log(["STORY", "EVENT"], "Processing %s" % related_event)
+	ProjectHammerLogger.log(["STORY", "EVENT", "EMERGENT"], "Does event trigger any emergent StoryEvents?")
+	if _story_event_occurrences.has(related_event):
+		var emergent_event : StoryEvent = _story_event_occurrences[related_event]
+		ProjectHammerLogger.log(["STORY", "EVENT", "EMERGENT"], "Triggering event %s" % emergent_event)
+		_display_storyevent(emergent_event)
+
+	ProjectHammerLogger.log(["STORY", "EVENT", "QUEST"], "Does event trigger any questline advancements?")
+	QuestlineManager.handle_story_related_event(related_event)
+
+signal display_storyevent(event : StoryEvent) #TODO: better word than "display"
 
 func _display_storyevent(event : StoryEvent) -> void:
+	ProjectHammerLogger.log(["STORY", "STORYEVENT"], "Triggering %s" % event)
 	display_storyevent.emit(event)
 	if event == null: return # TODO: dont tell ui to display null just check for null and tell it to hide
-
+	
+	QuestlineManager.handle_story_event_advance.call(event)
 	for command in event.result_commands:
 		CommandServer.run_command(command)
 
 func handle_story_event_advance(next_event : StoryEvent) -> void:
 	_display_storyevent(next_event)
-
-func _ready():
-	ProjectHammerEventBus.subscribe("*", proc_storyevents)
-	
-	var trashland_event : StoryEvent = load("res://tst/story/TrashlandDirtyEvent.tres")
-	register_storyevent_occurence(evaluate_trashland, trashland_event)
-	var wash_event : StoryEvent = load("res://tst/story/WashedEvent.tres")
-	var wash_fail_event : StoryEvent = load("res://tst/story/WashFailEvent.tres")
-	register_storyevent_occurence(evaluate_wash, wash_fail_event)
-	
-	CommandServer.register_command(
-		CommandBuilder.new()
-		.Literal("trashland-command-test")
-		.Callback(func(): register_storyevent_occurence(evaluate_wash, wash_event)
-		)
-		.Build()
-	)
-	CommandServer.register_command(
-		CommandBuilder.new()
-		.Literal("washed-up-test")
-		.Callback(func(): register_storyevent_occurence(evaluate_wash, wash_fail_event)
-		)
-		.Build()
-	)
-
-func evaluate_trashland(event_name : StringName, data : Dictionary):
-	if event_name != "travel/traveled_to_spot": return false
-	return data["spot"].name == "Trashland"
-
-func evaluate_wash(event_name : StringName, data : Dictionary):
-	if event_name != "travel/traveled_to_spot": return false
-	return data["spot"].name == "Wash"

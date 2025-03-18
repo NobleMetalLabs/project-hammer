@@ -20,6 +20,7 @@ func _ready():
 
 func set_current_story_event(story_event : StoryEvent) -> void:
 	_current_story_event = story_event
+	ProjectHammerLogger.log(["UI", "STORYEVENT"], "Displaying %s" % story_event)
 	update_ui()
 
 func update_ui() -> void:

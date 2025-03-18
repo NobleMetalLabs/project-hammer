@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://lib/travel/TravelLocation.gd" id="1_chro3"]
 [ext_resource type="Script" path="res://lib/travel/TravelSpot.gd" id="2_gxmsi"]
+[ext_resource type="Resource" uid="uid://cgqjssatnxl71" path="res://tst/story/wash-spot.tres" id="3_mdi2j"]
 [ext_resource type="Script" path="res://lib/travel/TravelSpotGroup.gd" id="3_v84fp"]
 
 [sub_resource type="Resource" id="Resource_wsb4m"]
@@ -14,14 +15,9 @@ script = ExtResource("2_gxmsi")
 name = &"Wingstop"
 description = ""
 
-[sub_resource type="Resource" id="Resource_ixf86"]
+[sub_resource type="Resource" id="Resource_dt86l"]
 script = ExtResource("2_gxmsi")
 name = &"Trashland"
-description = ""
-
-[sub_resource type="Resource" id="Resource_oqbyl"]
-script = ExtResource("2_gxmsi")
-name = &"Wash"
 description = ""
 
 [sub_resource type="Resource" id="Resource_7qusm"]
@@ -36,7 +32,7 @@ description = ""
 
 [sub_resource type="Resource" id="Resource_3da4i"]
 script = ExtResource("3_v84fp")
-group_spots = Array[ExtResource("2_gxmsi")]([SubResource("Resource_oqbyl"), SubResource("Resource_7qusm"), SubResource("Resource_lmtiq")])
+group_spots = Array[ExtResource("2_gxmsi")]([ExtResource("3_mdi2j"), SubResource("Resource_7qusm"), SubResource("Resource_lmtiq")])
 name = &"Lol Detail"
 description = ""
 
@@ -44,4 +40,4 @@ description = ""
 script = ExtResource("1_chro3")
 name = &"Bruhcago"
 description = ""
-spots = Array[ExtResource("2_gxmsi")]([SubResource("Resource_wsb4m"), SubResource("Resource_enm8o"), SubResource("Resource_ixf86"), SubResource("Resource_3da4i")])
+spots = Array[ExtResource("2_gxmsi")]([SubResource("Resource_wsb4m"), SubResource("Resource_enm8o"), SubResource("Resource_dt86l"), SubResource("Resource_3da4i")])

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TravelSpot" load_steps=2 format=3 uid="uid://cgqjssatnxl71"]
+
+[ext_resource type="Script" path="res://lib/travel/TravelSpot.gd" id="1_3jgnj"]
+
+[resource]
+script = ExtResource("1_3jgnj")
+name = &"Wash"
+description = ""

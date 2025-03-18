@@ -14,6 +14,7 @@ func _ready():
 	leave_button.pressed.connect(_handle_leave)
 
 var _current_location : TravelLocation = null
+var _current_spot : TravelSpot = null
 
 func display_travel_menu(location : TravelLocation) -> void:
 	_current_location = location
@@ -23,12 +24,8 @@ func display_travel_menu(location : TravelLocation) -> void:
 	
 func _handle_travel(spot : TravelSpot) -> void:
 	print("Traveling to %s." % spot.name)
-	ProjectHammerEventBus.push_event(
-		"travel/traveled_to_spot",
-		{
-			"spot" : spot
-		}
-	)
+	_current_spot = spot
+	StoryEventHandler.process_storyrelatedevent(StoryRelatedEventTravelToPlace.new(_current_location, _current_spot))
 
 func _handle_leave() -> void:
 	print("Leaving location %s." % _current_location.name)

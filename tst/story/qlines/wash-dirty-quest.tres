@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Questline" load_steps=5 format=3 uid="uid://dafeu3c13jrpk"]
+
+[ext_resource type="Resource" uid="uid://bcbjr1rby43l2" path="res://tst/story/TrashlandDirtyEvent.tres" id="1_7ycu5"]
+[ext_resource type="Script" path="res://lib/story/quests/Questline.gd" id="1_r1fr5"]
+[ext_resource type="Resource" uid="uid://c2mp1fdqtsosi" path="res://tst/story/travel-to-wash-obj.tres" id="2_i5cyk"]
+[ext_resource type="Resource" uid="uid://dlraj20i7tm1u" path="res://tst/story/WashedEvent.tres" id="3_bpwdg"]
+
+[resource]
+script = ExtResource("1_r1fr5")
+name = "Get Washed"
+beginning_event = ExtResource("1_7ycu5")
+objectives = {
+ExtResource("2_i5cyk"): ExtResource("3_bpwdg")
+}
+next_objectives = {
+ExtResource("1_7ycu5"): ExtResource("2_i5cyk")
+}

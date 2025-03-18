@@ -18,10 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 ProjectHammer="*res://src/autoload/ProjectHammer.gd"
+ProjectHammerLogger="*res://src/autoload/ProjectHammerLogger.gd"
 ProjectHammerEventBus="*res://src/autoload/ProjectHammerEventBus.gd"
 CommandServer="*res://addons/command-terminal/src/CommandServer.gd"
 ShipManager="*res://src/autoload/ShipManager.gd"
 FileManager="*res://src/autoload/FileManager.gd"
+QuestlineManager="*res://src/autoload/QuestlineManager.gd"
 StoryEventHandler="*res://src/autoload/StoryEventHandler.gd"
 
 [display]
