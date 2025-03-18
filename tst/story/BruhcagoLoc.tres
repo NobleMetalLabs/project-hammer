@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="TravelLocation" load_steps=11 format=3 uid="uid://bs21n2n7e5o4h"]
+[gd_resource type="Resource" script_class="SectorLocation" load_steps=11 format=3 uid="uid://bs21n2n7e5o4h"]
 
-[ext_resource type="Script" path="res://lib/travel/TravelLocation.gd" id="1_chro3"]
-[ext_resource type="Script" path="res://lib/travel/TravelSpot.gd" id="2_gxmsi"]
+[ext_resource type="Script" path="res://lib/world/SectorLocation.gd" id="1_chro3"]
+[ext_resource type="Script" path="res://lib/world/LocationSpot.gd" id="2_gxmsi"]
 [ext_resource type="Resource" uid="uid://cgqjssatnxl71" path="res://tst/story/wash-spot.tres" id="3_mdi2j"]
-[ext_resource type="Script" path="res://lib/travel/TravelSpotGroup.gd" id="3_v84fp"]
+[ext_resource type="Script" path="res://lib/world/LocationSpotGroup.gd" id="3_v84fp"]
 [ext_resource type="Resource" uid="uid://ddvi0o1uuj3bh" path="res://tst/story/quahog-spot.tres" id="4_qtwxn"]
 
 [sub_resource type="Resource" id="Resource_wsb4m"]

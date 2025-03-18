@@ -4,13 +4,13 @@
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="StoryChoiceEvent" style="swimlane;fontStyle=5;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="2" value="NarrativeChoiceChunk" style="swimlane;fontStyle=5;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="435" y="481" width="230" height="56" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="choices : Array[StoryChoiceEventChoice]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="2" vertex="1">
+                <mxCell id="6" value="choices : Array[NarrativeChoice]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="2" vertex="1">
                     <mxGeometry y="26" width="230" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="StoryEventChoice" style="swimlane;fontStyle=5;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="9" value="NarrativeChunkChoice" style="swimlane;fontStyle=5;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="400" y="601" width="300" height="116" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="text : String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9" vertex="1">
@@ -19,7 +19,7 @@
                 <mxCell id="14" value="ethical_partialities : Dictionary[Ethics.Principle, float]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9" vertex="1">
                     <mxGeometry y="56" width="300" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="resulting_event : StoryEvent" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9" vertex="1">
+                <mxCell id="16" value="resulting_narrative : NarrativeChunk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="9" vertex="1">
                     <mxGeometry y="86" width="300" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="1" source="9" target="6" edge="1">
@@ -46,7 +46,7 @@
                         <mxPoint x="570" y="373" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="r-k2IQQcktP8UsuVngvY-32" value="StoryEvent" style="swimlane;fontStyle=5;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="r-k2IQQcktP8UsuVngvY-32" value="NarrativeChunk" style="swimlane;fontStyle=5;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="435" y="261" width="230" height="146" as="geometry"/>
                 </mxCell>
                 <mxCell id="r-k2IQQcktP8UsuVngvY-33" value="description : String" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
@@ -58,7 +58,7 @@
                 <mxCell id="r-k2IQQcktP8UsuVngvY-35" value="result_commands : Array[String]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
                     <mxGeometry y="86" width="230" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="KljNtrRuVCwtTmo7OKSc-30" value="next_event : StoryEvent" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
+                <mxCell id="KljNtrRuVCwtTmo7OKSc-30" value="next_event : NarrativeChunk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
                     <mxGeometry y="116" width="230" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="KljNtrRuVCwtTmo7OKSc-31" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;elbow=vertical;" parent="r-k2IQQcktP8UsuVngvY-32" source="r-k2IQQcktP8UsuVngvY-32" target="KljNtrRuVCwtTmo7OKSc-30" edge="1">
@@ -89,7 +89,7 @@
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="iq0Jkui4Xhdb2TkyUSVj-8" value="UIStoryEventPanel" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+                <mxCell id="iq0Jkui4Xhdb2TkyUSVj-8" value="UINarrativeChunkPanel" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
                     <mxGeometry x="80" y="40" width="120" height="600" as="geometry"/>
                 </mxCell>
                 <mxCell id="4MZaJ6rPSjcV9gOx1s7u-23" value="Story Event Series (aka Quest Line)" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=120;height=50;" parent="1" vertex="1">
@@ -101,7 +101,7 @@
                 <mxCell id="iq0Jkui4Xhdb2TkyUSVj-9" value="EventBus" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
                     <mxGeometry x="760" y="40" width="100" height="600" as="geometry"/>
                 </mxCell>
-                <mxCell id="iq0Jkui4Xhdb2TkyUSVj-11" value="StoryEventHandler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+                <mxCell id="iq0Jkui4Xhdb2TkyUSVj-11" value="NarrativeChunkHandler" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
                     <mxGeometry x="400" y="40" width="120" height="600" as="geometry"/>
                 </mxCell>
                 <mxCell id="4MZaJ6rPSjcV9gOx1s7u-1" value="push_event()" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
@@ -113,13 +113,13 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-2" value="display_story_event(event : StoryEvent)" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
+                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-2" value="display_story_event(event : NarrativeChunk)" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="60" relative="1" as="geometry">
                         <mxPoint x="459.5000000000002" y="380" as="sourcePoint"/>
                         <mxPoint x="140" y="380" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-3" value="signal story_event_advance(event : StoryEvent)" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
+                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-3" value="signal story_event_advance(event : NarrativeChunk)" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
                     <mxGeometry width="60" relative="1" as="geometry">
                         <mxPoint x="139.66666666666674" y="420" as="sourcePoint"/>
                         <mxPoint x="459.5000000000002" y="420" as="targetPoint"/>
@@ -138,7 +138,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-7" value="proc_storyevents()" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;rounded=0;" parent="1" edge="1">
+                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-7" value="proc_narrative_chunks()" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;rounded=0;" parent="1" edge="1">
                     <mxGeometry x="-0.7871" y="10" relative="1" as="geometry">
                         <mxPoint x="459.66666666666674" y="270" as="sourcePoint"/>
                         <Array as="points">
@@ -152,7 +152,7 @@
                 <mxCell id="4MZaJ6rPSjcV9gOx1s7u-9" value="CommandServer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
                     <mxGeometry x="880" y="40" width="120" height="600" as="geometry"/>
                 </mxCell>
-                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-16" value="register_storyevent_occurance(evaluator : Callable, event : StoryEvent)" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
+                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-16" value="register_narrative_chunk_occurance(evaluator : Callable, event : NarrativeChunk)" style="html=1;verticalAlign=bottom;startArrow=oval;startFill=1;endArrow=block;startSize=8;rounded=0;" parent="1" edge="1">
                     <mxGeometry x="0.1229" width="60" relative="1" as="geometry">
                         <mxPoint x="939.5" y="170" as="sourcePoint"/>
                         <mxPoint x="459.5" y="170" as="targetPoint"/>
@@ -160,7 +160,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-20" value="display_next_storyevent(event : StoryEvent)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;rounded=0;" parent="1" edge="1">
+                <mxCell id="4MZaJ6rPSjcV9gOx1s7u-20" value="display_next_narrative_chunk(event : NarrativeChunk)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;rounded=0;" parent="1" edge="1">
                     <mxGeometry x="-0.952" y="10" relative="1" as="geometry">
                         <mxPoint x="459.66666666666674" y="470" as="sourcePoint"/>
                         <Array as="points">

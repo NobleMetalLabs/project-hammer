@@ -61,5 +61,5 @@ func try_place_system(system : System, region : Box3i):
 	ShipManager.ship.installed_systems.append(new_system)
 	
 	print("Installed system: %s" % new_system)
-	ProjectHammerEventBus.push_event("ship/installed_systems_changed")
+	ProjectHammerFallbackEventBus.push_event("ship/installed_systems_changed")
 	get_parent().pop_input_handler()

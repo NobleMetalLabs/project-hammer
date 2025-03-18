@@ -8,7 +8,7 @@ var root : DialoguePart
 func _ready() -> void:
 	panel_template.visible = false
 	
-	ProjectHammerEventBus.subscribe("dialogue_editor_initialize", update)
+	ProjectHammerFallbackEventBus.subscribe("dialogue_editor_initialize", update)
 
 func update(data : Dictionary) -> void:
 	for dialogue_panel : UIDevDialoguePanel in get_children(): 

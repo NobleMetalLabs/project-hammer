@@ -1,10 +1,10 @@
-class_name StoryRelatedEvent
+class_name GameEvent
 extends Resource
 
-class SpeakToPerson extends StoryRelatedEvent:
+class SpeakToPerson extends GameEvent:
 	var person : Character = null
 
-class CrewUpdate extends StoryRelatedEvent:
+class CrewUpdate extends GameEvent:
 	var crew_member : Crewmember
 
 #types:
@@ -20,7 +20,7 @@ class CrewUpdate extends StoryRelatedEvent:
 # 		- Gather <resources>
 # 	- Something happen to <crew>
 # 		- Recruit <person>
-# 	- Complete <StoryEvent> with <outcome>
+# 	- Complete <NarrativeChunk> with <outcome>
 # 		- Hack/disable <device>
 # 		- Defend <place/person>
 # 		- Investigate <mystery/event>

@@ -1,9 +1,9 @@
-class_name TravelLocation
+class_name SectorLocation
 extends Resource
 
 @export var name : StringName
 @export var description : String
-@export var spots : Array[TravelSpot]
+@export var spots : Array[LocationSpot]
 
 func _to_string() -> String:
-	return "TravelLocation<%s>" % name
+	return "SectorLocation<%s>" % name

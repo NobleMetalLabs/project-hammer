@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="StoryEvent" load_steps=2 format=3 uid="uid://5w2ej7jttapv"]
+[gd_resource type="Resource" script_class="NarrativeChunk" load_steps=2 format=3 uid="uid://5w2ej7jttapv"]
 
-[ext_resource type="Script" path="res://lib/story/StoryEvent.gd" id="1_262yq"]
+[ext_resource type="Script" path="res://lib/story/NarrativeChunk.gd" id="1_262yq"]
 
 [resource]
 script = ExtResource("1_262yq")

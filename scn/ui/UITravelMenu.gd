@@ -6,31 +6,30 @@ extends PanelContainer
 @onready var leave_button : Button = $"%LEAVE-BUTTON"
 
 func _ready():
-	var l : TravelLocation = load("res://tst/story/BruhcagoLoc.tres")
-	print(l)
+	var l : SectorLocation = load("res://tst/story/BruhcagoLoc.tres")
 	display_travel_menu(l)
 	
 	spot_list_display.spot_selected.connect(_handle_travel)
 	leave_button.pressed.connect(_handle_leave)
 
-var _current_location : TravelLocation = null
-var _current_spot : TravelSpot = null
+var _current_location : SectorLocation = null
+var _current_spot : LocationSpot = null
 
-func display_travel_menu(location : TravelLocation) -> void:
+func display_travel_menu(location : SectorLocation) -> void:
 	_current_location = location
 	location_label.text = location.name
 	spot_list_display.display_spots(location.spots)
 	self.show()
 	
-func _handle_travel(spot : TravelSpot) -> void:
+func _handle_travel(spot : LocationSpot) -> void:
 	print("Traveling to %s." % spot.name)
 	_current_spot = spot
-	StoryEventHandler.process_storyrelatedevent(StoryRelatedEventTravelToPlace.new(_current_location, _current_spot))
+	NarrativeChunkHandler.process_game_event(GameEventTravelToPlace.new(_current_location, _current_spot))
 
 func _handle_leave() -> void:
 	print("Leaving location %s." % _current_location.name)
 	self.hide()
-	ProjectHammerEventBus.push_event(
+	ProjectHammerFallbackEventBus.push_event(
 		"travel/left_location",
 		{
 			"location" : _current_location

@@ -8,7 +8,7 @@ func _ready():
 	tree_item_template.visible = false
 	update_tree()
 	
-	ProjectHammerEventBus.subscribe("ship/installed_systems_changed", update_tree)
+	ProjectHammerFallbackEventBus.subscribe("ship/installed_systems_changed", update_tree)
 
 func update_tree(_data : Dictionary = {}):
 	for inst_system in ShipManager.ship.installed_systems:

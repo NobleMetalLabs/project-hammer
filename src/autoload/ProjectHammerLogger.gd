@@ -5,9 +5,9 @@ var tags : Array[String] = [
 	"story",
 	"emergent",
 	"quest",
-	"storyevent",
+	"narration",
 	"ethics",
-	"event",
+	"game-event",
 	"ui",
 ]
 
@@ -15,9 +15,9 @@ var tag_colors : Dictionary = {
 	"story" : "BLUE",
 	"emergent" : "DARK_TURQUOISE",
 	"quest" : "CORNFLOWER_BLUE",
-	"storyevent" : "DARK_CYAN",
+	"narration" : "DARK_CYAN",
 	"ethics" : "CYAN",
-	"event" : "GREY",
+	"game-event" : "GREY",
 	"ui" : "GREEN",
 }
 
@@ -25,9 +25,9 @@ var tag_colors : Dictionary = {
 	"story" : true,
 	"emergent" : true,
 	"quest" : true,
-	"storyevent" : true,
+	"narration" : true,
 	"ethics" : true,
-	"event" : true,
+	"game-event" : true,
 	"ui" : true,
 }
 

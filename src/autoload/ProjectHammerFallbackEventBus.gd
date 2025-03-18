@@ -1,4 +1,4 @@
-#class_name ProjectHammerEventBus
+#class_name ProjectHammerFallbackEventBus
 extends Node
 
 var subscriptions : Dictionary = {} #Dictionary[StringName, Array[Callable]]

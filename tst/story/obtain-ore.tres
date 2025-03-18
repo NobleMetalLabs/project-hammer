@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="StoryRelatedEventObtainThing" load_steps=2 format=3 uid="uid://dbf7m7phg7ufi"]
+[gd_resource type="Resource" script_class="GameEventObtainThing" load_steps=2 format=3 uid="uid://dbf7m7phg7ufi"]
 
-[ext_resource type="Script" path="res://lib/story/StoryRelatedEventObtainThing.gd" id="1_7ta6i"]
+[ext_resource type="Script" path="res://lib/game-event/GameEventObtainThing.gd" id="1_7ta6i"]
 
 [resource]
 script = ExtResource("1_7ta6i")

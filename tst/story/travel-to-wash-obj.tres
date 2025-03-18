@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="StoryRelatedEventTravelToPlace" load_steps=4 format=3 uid="uid://c2mp1fdqtsosi"]
+[gd_resource type="Resource" script_class="GameEventTravelToPlace" load_steps=4 format=3 uid="uid://c2mp1fdqtsosi"]
 
 [ext_resource type="Resource" uid="uid://bs21n2n7e5o4h" path="res://tst/story/BruhcagoLoc.tres" id="1_7isai"]
-[ext_resource type="Script" path="res://lib/story/StoryRelatedEventTravelToPlace.gd" id="2_6l0dq"]
+[ext_resource type="Script" path="res://lib/game-event/GameEventTravelToPlace.gd" id="2_6l0dq"]
 [ext_resource type="Resource" uid="uid://cgqjssatnxl71" path="res://tst/story/wash-spot.tres" id="3_r66ne"]
 
 [resource]
