@@ -32,5 +32,5 @@ func _display_narrative_chunk(event : NarrativeChunk) -> void:
 	for command in event.result_commands:
 		CommandServer.run_command(command)
 
-func handle_story_event_advance(next_event : NarrativeChunk) -> void:
-	_display_narrative_chunk(next_event)
+func handle_story_event_advance(next_chunk : NarrativeChunk) -> void:
+	_display_narrative_chunk(next_chunk)

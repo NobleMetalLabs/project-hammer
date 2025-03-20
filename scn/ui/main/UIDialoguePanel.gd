@@ -49,9 +49,9 @@ func update_ui() -> void:
 
 func button_pressed(button_index : int) -> void:
 	await get_tree().create_timer(0.2).timeout
-	var next_event : NarrativeChunk = null
+	var next_chunk : NarrativeChunk = null
 	if not _current_story_event is NarrativeChoiceChunk:
-		next_event = _current_story_event.next_event
+		next_chunk = _current_story_event.next_chunk
 	else:
-		next_event = _current_story_event.choices[button_index].resulting_narrative
-	NarrativeChunkHandler.handle_story_event_advance(next_event)
+		next_chunk = _current_story_event.choices[button_index].resulting_narrative
+	NarrativeChunkHandler.handle_story_event_advance(next_chunk)

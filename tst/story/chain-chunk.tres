@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="NarrativeChunk" load_steps=14 format=3 uid="uid://dnbibtv73skuw"]
+
+[ext_resource type="Script" path="res://lib/story/NarrativeChunk.gd" id="1_7lsa3"]
+[ext_resource type="Script" path="res://lib/story/NarrativeChoice.gd" id="1_80a1p"]
+[ext_resource type="Script" path="res://lib/story/NarrativeChoiceChunk.gd" id="3_mmwk3"]
+
+[sub_resource type="Resource" id="Resource_4yu5f"]
+script = ExtResource("1_7lsa3")
+description = "6a"
+result_description = ""
+result_commands = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_jsh0k"]
+script = ExtResource("1_7lsa3")
+description = "5a"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = SubResource("Resource_4yu5f")
+
+[sub_resource type="Resource" id="Resource_thaph"]
+script = ExtResource("1_80a1p")
+text = ""
+ethical_partialities = {}
+resulting_narrative = SubResource("Resource_jsh0k")
+
+[sub_resource type="Resource" id="Resource_u3ugk"]
+script = ExtResource("1_7lsa3")
+description = "6b"
+result_description = ""
+result_commands = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_b10jx"]
+script = ExtResource("1_7lsa3")
+description = "5b"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = SubResource("Resource_u3ugk")
+
+[sub_resource type="Resource" id="Resource_xakr1"]
+script = ExtResource("1_80a1p")
+text = ""
+ethical_partialities = {}
+resulting_narrative = SubResource("Resource_b10jx")
+
+[sub_resource type="Resource" id="Resource_utu8c"]
+script = ExtResource("3_mmwk3")
+choices = Array[ExtResource("1_80a1p")]([SubResource("Resource_thaph"), SubResource("Resource_xakr1")])
+description = "5"
+result_description = ""
+result_commands = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_muypo"]
+script = ExtResource("1_7lsa3")
+description = "4"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = SubResource("Resource_utu8c")
+
+[sub_resource type="Resource" id="Resource_gqag5"]
+script = ExtResource("1_7lsa3")
+description = "3"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = SubResource("Resource_muypo")
+
+[sub_resource type="Resource" id="Resource_x1srp"]
+script = ExtResource("1_7lsa3")
+description = "2"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = SubResource("Resource_gqag5")
+
+[resource]
+script = ExtResource("1_7lsa3")
+description = "1"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = SubResource("Resource_x1srp")

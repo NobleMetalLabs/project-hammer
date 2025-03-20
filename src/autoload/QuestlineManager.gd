@@ -19,14 +19,14 @@ func _flush_game_event_buffer() -> void:
 		handle_story_related_event(event)
 	game_event_buffer.clear()
 
-func handle_story_event_advance(next_event : NarrativeChunk) -> void:
-	if next_event == null: 
+func handle_story_event_advance(next_chunk : NarrativeChunk) -> void:
+	if next_chunk == null: 
 		ProjectHammerLogger.log(["STORY", "QUEST", "NARRATION"], "Questline finished processing")
 		_current_processing_questline = null
 		_flush_game_event_buffer()
 		return
 	if _current_processing_questline == null: return
-	_current_processing_questline.handle_story_event_advance(next_event)
+	_current_processing_questline.handle_story_event_advance(next_chunk)
 
 func _ready():
 	var q : Questline = load("res://tst/story/qlines/blacksmith-order-quest.tres")

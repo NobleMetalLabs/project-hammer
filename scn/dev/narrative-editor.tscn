@@ -1,0 +1,239 @@
+[gd_scene load_steps=11 format=3 uid="uid://1k64vcu2he6p"]
+
+[ext_resource type="Script" path="res://scn/dev/NarrativeEditor.gd" id="1_gcu0y"]
+[ext_resource type="Resource" uid="uid://dnbibtv73skuw" path="res://tst/story/chain-chunk.tres" id="2_uc6fa"]
+[ext_resource type="Script" path="res://scn/dev/chunk_tree.gd" id="3_extkx"]
+[ext_resource type="Script" path="res://addons/command-terminal/src/CommandTerminal.gd" id="4_onwgm"]
+[ext_resource type="FontFile" uid="uid://cmmltma2gsu3a" path="res://addons/command-terminal/ast/windows_command_prompt.ttf" id="5_yhsot"]
+[ext_resource type="PackedScene" uid="uid://b5b8i4p40f5ua" path="res://addons/command-terminal/scn/command_terminal_guts.tscn" id="6_iyt1r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a40k8"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_ho2rx"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_wstit"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nmgc"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="NARRATIVE-EDITOR" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gcu0y")
+editing_narrative_root = ExtResource("2_uc6fa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="label-loc" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_top = 565.0
+offset_right = 208.0
+offset_bottom = 610.0
+theme_override_font_sizes/font_size = 32
+text = "list of choices"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 2
+offset_left = 3.0
+offset_top = 616.0
+offset_right = 841.0
+offset_bottom = 976.0
+
+[node name="CHOICES-CONTAINER" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Control/PanelContainer"]
+layout_mode = 2
+
+[node name="CHOICE-TEMPLATE" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Control/PanelContainer/CHOICES-CONTAINER"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "1. Continue"
+
+[node name="label-choice" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 618.0
+offset_right = 1032.0
+offset_bottom = 664.0
+theme_override_font_sizes/font_size = 32
+text = "choice text"
+
+[node name="CHOICE-EDIT" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 863.0
+offset_top = 666.0
+offset_right = 1914.0
+offset_bottom = 719.0
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[node name="ADD-CHOICE-BUTTON" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 736.0
+offset_right = 1098.0
+offset_bottom = 801.0
+theme_override_font_sizes/font_size = 32
+text = "add choice"
+
+[node name="REMOVE-CHOICE-BUTTON" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer/Control"]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 817.0
+offset_right = 1098.0
+offset_bottom = 882.0
+theme_override_font_sizes/font_size = 32
+text = "remove choice"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="CHUNK-EDITING" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NARRATIVE-LABEL" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHUNK-EDITING"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "DESCRIPTION"
+label_settings = SubResource("LabelSettings_a40k8")
+vertical_alignment = 1
+
+[node name="NARRATIVE-TEXT-EDIT" type="TextEdit" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHUNK-EDITING"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 32
+wrap_mode = 1
+
+[node name="RESULT-LABEL" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHUNK-EDITING"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "RESULT"
+label_settings = SubResource("LabelSettings_ho2rx")
+vertical_alignment = 1
+
+[node name="RESULT-TEXT-EDIT" type="TextEdit" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHUNK-EDITING"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="COMMAND-LABEL" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHUNK-EDITING"]
+layout_mode = 2
+text = "RUN COMMANDS"
+label_settings = SubResource("LabelSettings_wstit")
+vertical_alignment = 1
+
+[node name="COMMAND-TEXT-EDIT" type="TextEdit" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHUNK-EDITING"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="CHOICE-EDITING" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NARRATIVE-LABEL" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHOICE-EDITING"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "TEXT"
+label_settings = SubResource("LabelSettings_a40k8")
+vertical_alignment = 1
+
+[node name="TEXT-LINE-EDIT" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHOICE-EDITING"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme_override_font_sizes/font_size = 32
+
+[node name="ETHICS-LABEL" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHOICE-EDITING"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ETHICAL PARTIALITIES"
+label_settings = SubResource("LabelSettings_ho2rx")
+vertical_alignment = 1
+
+[node name="__" type="TextEdit" parent="VBoxContainer/MarginContainer/HBoxContainer/ScrollContainer/PanelContainer/MarginContainer/CHOICE-EDITING"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "NaN"
+editable = false
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="CHUNK-TREE" type="Tree" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+allow_search = false
+hide_root = true
+select_mode = 2
+scroll_horizontal_enabled = false
+script = ExtResource("3_extkx")
+
+[node name="CommandTerminal" type="Control" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+script = ExtResource("4_onwgm")
+font = ExtResource("5_yhsot")
+font_size = 32
+
+[node name="__guts__" parent="VBoxContainer/CommandTerminal" instance=ExtResource("6_iyt1r")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_3nmgc")

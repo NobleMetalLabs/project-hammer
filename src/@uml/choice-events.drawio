@@ -58,7 +58,7 @@
                 <mxCell id="r-k2IQQcktP8UsuVngvY-35" value="result_commands : Array[String]" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
                     <mxGeometry y="86" width="230" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="KljNtrRuVCwtTmo7OKSc-30" value="next_event : NarrativeChunk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
+                <mxCell id="KljNtrRuVCwtTmo7OKSc-30" value="next_chunk : NarrativeChunk" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="r-k2IQQcktP8UsuVngvY-32" vertex="1">
                     <mxGeometry y="116" width="230" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="KljNtrRuVCwtTmo7OKSc-31" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;elbow=vertical;" parent="r-k2IQQcktP8UsuVngvY-32" source="r-k2IQQcktP8UsuVngvY-32" target="KljNtrRuVCwtTmo7OKSc-30" edge="1">

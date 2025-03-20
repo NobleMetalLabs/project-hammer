@@ -24,10 +24,10 @@ func handle_game_event(event : GameEvent) -> void:
 			NarrativeChunkHandler._display_narrative_chunk(objectives[current_objective])
 			objectives.erase(current_objective)
 
-func handle_story_event_advance(next_event : NarrativeChunk) -> void:
-	ProjectHammerLogger.log(["STORY", "QUEST", "NARRATION"], "%s handling advancement to %s" % [self, next_event])
-	if next_objectives.has(next_event):
-		current_objectives = next_objectives[next_event]
+func handle_story_event_advance(next_chunk : NarrativeChunk) -> void:
+	ProjectHammerLogger.log(["STORY", "QUEST", "NARRATION"], "%s handling advancement to %s" % [self, next_chunk])
+	if next_objectives.has(next_chunk):
+		current_objectives = next_objectives[next_chunk]
 		ProjectHammerLogger.log(["STORY", "QUEST", "OBJECTIVE"], "%s objectives updated to %s" % [self, current_objectives])
-		next_objectives.erase(next_event)
+		next_objectives.erase(next_chunk)
 	

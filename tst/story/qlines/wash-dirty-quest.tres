@@ -15,3 +15,4 @@ ExtResource("2_i5cyk"): ExtResource("3_bpwdg")
 next_objectives = {
 ExtResource("1_7ycu5"): ExtResource("2_i5cyk")
 }
+current_objectives = []
