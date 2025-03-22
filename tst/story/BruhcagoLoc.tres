@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="SectorLocation" load_steps=11 format=3 uid="uid://bs21n2n7e5o4h"]
+
+[ext_resource type="Script" path="res://lib/world/SectorLocation.gd" id="1_chro3"]
+[ext_resource type="Script" path="res://lib/world/LocationSpot.gd" id="2_gxmsi"]
+[ext_resource type="Resource" uid="uid://cgqjssatnxl71" path="res://tst/story/wash-spot.tres" id="3_mdi2j"]
+[ext_resource type="Script" path="res://lib/world/LocationSpotGroup.gd" id="3_v84fp"]
+[ext_resource type="Resource" uid="uid://ddvi0o1uuj3bh" path="res://tst/story/quahog-spot.tres" id="4_qtwxn"]
+
+[sub_resource type="Resource" id="Resource_wsb4m"]
+script = ExtResource("2_gxmsi")
+name = &"Miller Grove"
+description = ""
+
+[sub_resource type="Resource" id="Resource_enm8o"]
+script = ExtResource("2_gxmsi")
+name = &"Wingstop"
+description = ""
+
+[sub_resource type="Resource" id="Resource_dt86l"]
+script = ExtResource("2_gxmsi")
+name = &"Trashland"
+description = ""
+
+[sub_resource type="Resource" id="Resource_7qusm"]
+script = ExtResource("2_gxmsi")
+name = &"Wash/Josh"
+description = ""
+
+[sub_resource type="Resource" id="Resource_3da4i"]
+script = ExtResource("3_v84fp")
+group_spots = Array[ExtResource("2_gxmsi")]([ExtResource("3_mdi2j"), SubResource("Resource_7qusm"), ExtResource("4_qtwxn")])
+name = &"Lol Detail"
+description = ""
+
+[resource]
+script = ExtResource("1_chro3")
+name = &"Bruhcago"
+description = ""
+spots = Array[ExtResource("2_gxmsi")]([SubResource("Resource_wsb4m"), SubResource("Resource_enm8o"), SubResource("Resource_dt86l"), SubResource("Resource_3da4i")])

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="Questline" load_steps=11 format=3 uid="uid://culaatwfiowm6"]
+
+[ext_resource type="Resource" uid="uid://brbypnnqcnjw5" path="res://tst/story/BlacksmithOrderStartEvent.tres" id="1_b0oix"]
+[ext_resource type="Script" path="res://lib/story/Questline.gd" id="1_nl3jb"]
+[ext_resource type="Resource" uid="uid://dbf7m7phg7ufi" path="res://tst/story/obtain-ore.tres" id="2_o76jk"]
+[ext_resource type="Resource" uid="uid://bs21n2n7e5o4h" path="res://tst/story/BruhcagoLoc.tres" id="4_k2yqs"]
+[ext_resource type="Resource" uid="uid://5w2ej7jttapv" path="res://tst/story/OreDiscoveryInQuahog.tres" id="4_wlb5j"]
+[ext_resource type="Script" path="res://lib/game-event/GameEventTravelToPlace.gd" id="5_bdgx1"]
+[ext_resource type="Resource" uid="uid://ddvi0o1uuj3bh" path="res://tst/story/quahog-spot.tres" id="6_a48pp"]
+[ext_resource type="Script" path="res://lib/story/NarrativeChunk.gd" id="7_empk2"]
+
+[sub_resource type="Resource" id="Resource_674om"]
+script = ExtResource("5_bdgx1")
+location = ExtResource("4_k2yqs")
+spot = ExtResource("6_a48pp")
+
+[sub_resource type="Resource" id="Resource_vgaeh"]
+script = ExtResource("7_empk2")
+description = "Thanks brah - Blacksmith"
+result_description = ""
+result_commands = Array[String]([])
+
+[resource]
+script = ExtResource("1_nl3jb")
+name = "Blacksmith Order"
+beginning_event = ExtResource("1_b0oix")
+objectives = {
+SubResource("Resource_674om"): ExtResource("4_wlb5j"),
+ExtResource("2_o76jk"): SubResource("Resource_vgaeh")
+}
+next_objectives = {
+ExtResource("1_b0oix"): [ExtResource("2_o76jk"), SubResource("Resource_674om")]
+}
+current_objectives = []

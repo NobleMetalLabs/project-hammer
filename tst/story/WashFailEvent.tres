@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NarrativeChunk" load_steps=2 format=3 uid="uid://m4fgm310mwjc"]
+
+[ext_resource type="Script" path="res://lib/story/NarrativeChunk.gd" id="1_3h0hh"]
+
+[resource]
+script = ExtResource("1_3h0hh")
+description = "You go to Wash but you can't be washed. Sad"
+result_description = ""
+result_commands = Array[String]([])

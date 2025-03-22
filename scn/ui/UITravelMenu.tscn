@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://dgcgo1si1cx4q"]
+
+[ext_resource type="Script" path="res://scn/ui/UITravelMenu.gd" id="1_jr27s"]
+[ext_resource type="Script" path="res://scn/ui/UITravelSpotListDisplay.gd" id="2_m14ns"]
+[ext_resource type="Texture2D" uid="uid://c8gb2mdhkdjc6" path="res://ast/bg/gen/office-stairwell.png" id="2_o8l5y"]
+[ext_resource type="FontFile" uid="uid://ctfacr4mpo55p" path="res://ast/ui/font/Classica.ttf" id="3_rr8qa"]
+[ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="4_jjhmq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgqx2"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1marc"]
+font = ExtResource("3_rr8qa")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_krmid"]
+font = ExtResource("4_jjhmq")
+font_size = 48
+
+[node name="UI-TRAVEL-MENU" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rgqx2")
+script = ExtResource("1_jr27s")
+
+[node name="_" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Margins" type="MarginContainer" parent="_"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="TextureRect" type="TextureRect" parent="_/Margins"]
+layout_mode = 2
+texture = ExtResource("2_o8l5y")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SPOT-LIST-DISPLAY" type="PanelContainer" parent="_"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_m14ns")
+
+[node name="MarginContainer" type="MarginContainer" parent="_/SPOT-LIST-DISPLAY"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="_/SPOT-LIST-DISPLAY/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "TRAVEL"
+label_settings = SubResource("LabelSettings_1marc")
+horizontal_alignment = 1
+
+[node name="LOC-LABEL" type="Label" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<LOCATION_NAME>"
+label_settings = SubResource("LabelSettings_krmid")
+horizontal_alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ITEM-ROW" type="HBoxContainer" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="BUTTON" type="Button" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer/VBoxContainer2/ITEM-ROW"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "<SPOT_NAME>"
+
+[node name="LEAVE-BUTTON" type="Button" parent="_/SPOT-LIST-DISPLAY/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Leave"

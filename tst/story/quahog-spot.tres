@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LocationSpot" load_steps=2 format=3 uid="uid://ddvi0o1uuj3bh"]
+
+[ext_resource type="Script" path="res://lib/world/LocationSpot.gd" id="1_g15kx"]
+
+[resource]
+script = ExtResource("1_g15kx")
+name = &"Quahog"
+description = ""

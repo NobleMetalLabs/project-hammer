@@ -14,7 +14,7 @@ func register_commands() -> void:
 			.Literal("new")
 			.Callback(func() -> void: 
 				editing_dialogue = DialoguePart.new()
-				ProjectHammerEventBus.push_event("dialogue_editor_initialize", {"root": editing_dialogue})
+				ProjectHammerFallbackEventBus.push_event("dialogue_editor_initialize", {"root": editing_dialogue})
 				)
 		.Build()
 	)
@@ -27,7 +27,7 @@ func register_commands() -> void:
 				.Validated("path", GlobalCommandValidators.is_valid_filepath).Tag_gnst()
 				.Callback(func(path) -> void:
 					editing_dialogue = FileManager.load_file(path, ["ser"])
-					ProjectHammerEventBus.push_event("dialogue_editor_initialize", {"root": editing_dialogue})
+					ProjectHammerFallbackEventBus.push_event("dialogue_editor_initialize", {"root": editing_dialogue})
 					, ["path"])
 		.Build()
 	)
