@@ -36,6 +36,7 @@ func _tree_build_chunk_section(chunk : NarrativeChunk, parent : TreeItem = null)
 	_obj_to_tree_item[chunk] = chunk_item
 	var text = chunk.description
 	if text.length() > 15: text = text.left(15) + "..."
+	if chunk_item == null: return
 	chunk_item.set_text(0, text)
 	if existing: return
 	if chunk.next_chunk != null:
@@ -50,8 +51,10 @@ func _tree_build_choice_section(choice : NarrativeChoice, parent : TreeItem = nu
 	if not existing: choice_item = self.create_item(parent)
 	_tree_item_to_obj[choice_item] = choice
 	_obj_to_tree_item[choice] = choice_item
+	if choice_item == null: return
 	choice_item.set_text(0, choice.text)
 	if not existing:
+		if choice.resulting_narrative == null: return
 		_tree_build_chunk_section(choice.resulting_narrative, choice_item)
 
 func _convert_selected_chunk_to_choice() -> void:
@@ -78,6 +81,7 @@ func _add_chunk_to_selected_choice() -> void:
 	var new_chunk = NarrativeChunk.new()
 	_tree_build_chunk_section(new_chunk, selected_item)
 
+#BUG: deleting is cooked rn. references to deleted objects still exist in other objects
 func _delete_selected() -> void:
 	var selected_item = self.get_selected()
 	if selected_item == null: return

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="NarrativeChunk" load_steps=3 format=3 uid="uid://bdcg8j4r5fj2j"]
+
+[ext_resource type="Resource" uid="uid://dnbibtv73skuw" path="res://tst/story/chain-chunk.tres" id="1_7yg5n"]
+[ext_resource type="Script" path="res://lib/story/NarrativeChunk.gd" id="2_l8ql7"]
+
+[resource]
+script = ExtResource("2_l8ql7")
+description = "4"
+result_description = ""
+result_commands = Array[String]([])
+next_chunk = ExtResource("1_7yg5n")

@@ -29,6 +29,10 @@ func _ready():
 
 	menu_bar.menu_selected.connect(func handle_menu_selected(path : String):
 		match path:
+			"file/new": 
+				editing_narrative_root = NarrativeChunk.new()
+				chunk_tree._build_tree(editing_narrative_root)
+				_edit_narrative_chunk(editing_narrative_root)
 			"file/open": 
 				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 				var conns = file_dialog.file_selected.get_connections().map(func (d): return d["callable"])
@@ -80,9 +84,9 @@ func _save_narrative_choice() -> void:
 
 func _save_chunk_structure() -> void:
 	editing_narrative_root = _build_chunk_chain(chunk_tree.get_root().get_child(0))
+	#BUG: this shit just dies sometimes idk y
 
 func _build_chunk_chain(start_item : TreeItem) -> NarrativeChunk:
-	var start_chunk : NarrativeChunk = chunk_tree._tree_item_to_obj[start_item]
 	var current_item : TreeItem = start_item
 	while current_item != null:
 		var prev_item : TreeItem = current_item 
@@ -92,7 +96,12 @@ func _build_chunk_chain(start_item : TreeItem) -> NarrativeChunk:
 		prev_obj.next_chunk = item_obj
 		if current_item == null: break
 		if current_item.get_child_count() > 0:
+			print(item_obj.get_script().get_global_name())
+			if not item_obj is NarrativeChoiceChunk: 
+				var choicec = item_obj as NarrativeChoiceChunk
+				print(choicec)
 			item_obj.choices = _build_choices(current_item)
+	var start_chunk : NarrativeChunk = chunk_tree._tree_item_to_obj.get(start_item, null)
 	return start_chunk
 
 func _build_choices(choice_chunk_item : TreeItem) -> Array[NarrativeChoice]:
