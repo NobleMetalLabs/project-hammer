@@ -3,6 +3,9 @@ extends Control
 
 @export var editing_narrative_root : NarrativeChunk = null
 
+@onready var menu_bar : NarrativeEditorMenuBar = $"%MENU-BAR"
+@onready var file_dialog : FileDialog = $"%FILE-DIALOG"
+
 @onready var chunk_editing_vbox : VBoxContainer = $"%CHUNK-EDITING"
 @onready var narrative_text_edit : TextEdit = $"%NARRATIVE-TEXT-EDIT"
 @onready var result_text_edit : TextEdit = $"%RESULT-TEXT-EDIT"
@@ -14,9 +17,6 @@ extends Control
 @onready var chunk_tree : NarrativeChunkTree = $"%CHUNK-TREE"
 
 func _ready():
-	chunk_tree._build_tree(editing_narrative_root)
-	_edit_narrative_chunk(editing_narrative_root)
-
 	chunk_tree.cell_selected.connect(func handle_selected():
 		var obj = chunk_tree._tree_item_to_obj[chunk_tree.get_selected()]
 		if obj is NarrativeChunk:
@@ -26,6 +26,22 @@ func _ready():
 	)
 
 	chunk_tree.tree_restructured.connect(_save_chunk_structure)
+
+	menu_bar.menu_selected.connect(func handle_menu_selected(path : String):
+		match path:
+			"file/open": 
+				file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+				var conns = file_dialog.file_selected.get_connections().map(func (d): return d["callable"])
+				for conn in conns: file_dialog.file_selected.disconnect(conn)
+				file_dialog.file_selected.connect(_load_file)
+				file_dialog.popup_centered()
+			"file/save":
+				file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+				var conns = file_dialog.file_selected.get_connections().map(func (d): return d["callable"])
+				for conn in conns: file_dialog.file_selected.disconnect(conn)
+				file_dialog.file_selected.connect(_save_file)
+				file_dialog.popup_centered()
+	)
 
 var _current_obj : Object = null
 func _edit_narrative_chunk(chunk : NarrativeChunk) -> void:
@@ -86,3 +102,11 @@ func _build_choices(choice_chunk_item : TreeItem) -> Array[NarrativeChoice]:
 		choice_obj.resulting_narrative = _build_chunk_chain(choice_item.get_child(0))
 		choices.append(choice_obj)
 	return choices
+
+func _load_file(path : String) -> void:
+	editing_narrative_root = load(path)
+	chunk_tree._build_tree(editing_narrative_root)
+	_edit_narrative_chunk(editing_narrative_root)
+
+func _save_file(path : String) -> void:
+	ResourceSaver.save(editing_narrative_root, path)

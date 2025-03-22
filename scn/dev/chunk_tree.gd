@@ -18,6 +18,10 @@ var _tree_item_to_obj : Dictionary = {}
 var _obj_to_tree_item : Dictionary = {}
 
 func _build_tree(root_chunk : NarrativeChunk) -> void:
+	if self.get_root() != null:
+		self.clear()
+		_tree_item_to_obj.clear()
+		_obj_to_tree_item.clear()
 	var root = self.create_item()
 	self.hide_root = true
 	self.set_column_expand(0, true)
