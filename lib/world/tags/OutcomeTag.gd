@@ -17,5 +17,3 @@ const VERY_GOOD : int = Values.VERY_GOOD
 
 func _init(outcome : Values) -> void:
 	self.value = outcome
-
-	

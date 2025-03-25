@@ -8,4 +8,3 @@ enum Faction {
 	MEEPLOIDS,
 	ROBOTS,
 }
-
