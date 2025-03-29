@@ -1,6 +1,15 @@
 class_name Tag
 extends RefCounted
 
+func equals(other : Tag) -> bool:
+	var type = self.get_script().get_global_name()
+	if type != other.get_script().get_global_name(): return false
+	if self is EnumTag:
+		return self.value == other.value
+	
+	return false
+
+
 # TODO:
 # tag brainstorm --- 03/24/2025
 #

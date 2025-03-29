@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chnhipyi08cfo"]
+
+[ext_resource type="Script" path="res://tst/gen/worldgen-test.gd" id="1_qiqkq"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_qiqkq")
