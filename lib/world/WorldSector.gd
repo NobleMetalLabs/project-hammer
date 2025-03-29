@@ -1,5 +1,5 @@
 class_name WorldSector
-extends Resource
+extends Taggable
 
 var name : String = ""
 var locations : Array[SectorLocation] = []

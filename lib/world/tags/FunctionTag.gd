@@ -10,6 +10,10 @@ enum Values {
 	SOCIAL,
 	UTILITY,
 	COMMERCE,
+	CARGO,
+	ENTERTAINMENT,
+	HEALTHCARE,
+	RECREATION,
 }
 
 const ADAPTIVE : int = Values.ADAPTIVE
@@ -20,8 +24,11 @@ const DEFENSE : int = Values.DEFENSE
 const SOCIAL : int = Values.SOCIAL
 const UTILITY : int = Values.UTILITY
 const COMMERCE : int = Values.COMMERCE
+const CARGO : int = Values.CARGO
+const ENTERTAINMENT : int = Values.ENTERTAINMENT
+const HEALTHCARE : int = Values.HEALTHCARE
+const RECREATION : int = Values.RECREATION
 
 func _init(function : Values) -> void:
 	self.value = function
-
 	

@@ -1,5 +1,5 @@
 class_name LocationSpot
-extends Resource
+extends Taggable
 
 @export var name : StringName
 @export var description : String

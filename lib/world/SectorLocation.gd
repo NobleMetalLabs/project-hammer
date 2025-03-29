@@ -1,5 +1,5 @@
 class_name SectorLocation
-extends Resource
+extends Taggable
 
 @export var name : StringName
 @export var description : String
