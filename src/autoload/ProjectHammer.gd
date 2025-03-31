@@ -44,9 +44,9 @@ func craft_stat_units(stat : CraftStatistic) -> StringName:
 		_: return ""
 
 
-func weighted_random_index(arg1 = INF, arg2 = INF, arg3 = INF, arg4 = INF, arg5 = INF, arg6 = INF, arg7 = INF, arg8 = INF, arg9 = INF):
+func weighted_random_index(arg1 = INF, arg2 = INF, arg3 = INF, arg4 = INF, arg5 = INF, arg6 = INF, arg7 = INF, arg8 = INF, arg9 = INF, arg10 = INF, arg11 = INF):
 	var weights : Array[float] = []
-	for argument in [arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9]:
+	for argument in [arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11]:
 		if argument != INF:
 			weights.append(argument)
 

@@ -27,3 +27,6 @@ const BELOW_GROUND : Values = Values.BELOW_GROUND
 
 func _init(altitude_zone : Values) -> void:
 	self.value = altitude_zone
+
+func _to_string() -> String:
+	return "AltitudeZoneTag<%s>" % Values.keys()[self.value]

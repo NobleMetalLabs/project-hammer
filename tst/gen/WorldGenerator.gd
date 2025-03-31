@@ -2,11 +2,13 @@ class_name WorldGenerator
 extends Node
 
 # idea
-# func generate_spots_for_location(location : SectorLocation) -> Array[LocationSpot]:
+func generate_spots_for_location(location : SectorLocation) -> SectorLocation:
+	for i in range(8): # range should be determined by location
+		mutate_location_spots(location)
 	
+	assign_spot_altitudes(location)
 	
-# 	var spots = Array[LocationSpot]
-# 	return spots
+	return location
 
 func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 	if false: # temporary
@@ -142,7 +144,17 @@ func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 	
 	return location
 
-# TODO: altitudezonetags
+func assign_spot_altitudes(location : SectorLocation) -> SectorLocation:
+	var altitude_values := AltitudeZoneTag.Values.values()
+	var avg_altitude : AltitudeZoneTag.Values = altitude_values[ProjectHammer.weighted_random_index(0, 0, 0, 1, 5, 7, 5, 3, 1, 0.25)]
+	
+	for spot : LocationSpot in location.spots:
+		var offset = [-2, -1, 0, 1, 2][ProjectHammer.weighted_random_index(1, 5, 7, 5, 1)]
+		var altitude : AltitudeZoneTag.Values = clampi(avg_altitude + offset, 0, altitude_values.size() - 1) as AltitudeZoneTag.Values
+		spot.tags.append(AltitudeZoneTag.new(altitude))
+	
+	return location
+
 # TODO: names
 # TODO: descriptions
 
