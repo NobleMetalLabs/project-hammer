@@ -1,4 +1,4 @@
-class_name OutcomeTag
+class_name PerceptionTag
 extends EnumTag
 
 enum Values {
@@ -15,5 +15,5 @@ const NEUTRAL : Values = Values.NEUTRAL
 const GOOD : Values = Values.GOOD
 const VERY_GOOD : Values = Values.VERY_GOOD
 
-func _init(outcome : Values) -> void:
-	self.value = outcome
+func _init(perception : Values) -> void:
+	self.value = perception

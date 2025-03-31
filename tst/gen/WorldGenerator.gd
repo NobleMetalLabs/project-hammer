@@ -43,42 +43,42 @@ func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 		var functiont : FunctionTag = spot.get_tags_of_type("FunctionTag").pop_front()
 		match functiont.value:
 			FunctionTag.RESIDENTIAL: 
-				spot.tags.append(FunctionTag.new([
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
 					FunctionTag.SOCIAL,
 					FunctionTag.ENTERTAINMENT,
 					FunctionTag.HEALTHCARE,
 					FunctionTag.RECREATION,
-				].pick_random()))
+				].pick_random())])
 			FunctionTag.CARGO:
-				spot.tags.append(FunctionTag.new([
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
 					FunctionTag.PRODUCTION,
 					FunctionTag.COMMERCE,
-				].pick_random()))
+				].pick_random())])
 			FunctionTag.PRODUCTION:
-				spot.tags.append(FunctionTag.new(FunctionTag.RESIDENTIAL))
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new(FunctionTag.RESIDENTIAL)])
 			FunctionTag.DEFENSE:
-				spot.tags.append(FunctionTag.new([
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
 					FunctionTag.SOCIAL,
 					FunctionTag.RECREATION,
-				].pick_random()))
+				].pick_random())])
 			FunctionTag.SOCIAL: 
-				spot.tags.append(FunctionTag.new([
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
 					FunctionTag.EDUCATION,
 					FunctionTag.COMMERCE,
-				].pick_random()))
+				].pick_random())])
 			FunctionTag.COMMERCE: 
-				spot.tags.append(FunctionTag.new([
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
 					FunctionTag.PRODUCTION,
 					FunctionTag.EDUCATION,
-				].pick_random()))
+				].pick_random())])
 			FunctionTag.RECREATION: 
-				spot.tags.append(FunctionTag.new(FunctionTag.HEALTHCARE))
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new(FunctionTag.HEALTHCARE)])
 			FunctionTag.TRANSPORT: 
-				spot.tags.append(FunctionTag.new([
+				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
 					FunctionTag.DEFENSE,
 					FunctionTag.RESIDENTIAL,
 					FunctionTag.SOCIAL,
-				].pick_random()))
+				].pick_random())])
 
 	# HOUSING DEVELOPMENT FAILSAFE
 	elif location.spots.size() > count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) * 4:
@@ -104,17 +104,17 @@ func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 				SpotBuilder.new().Function(FunctionTag.DEFENSE).Build(),
 				SpotBuilder.new().Function(FunctionTag.COMMERCE).Build(),
 				SpotBuilder.new().Function(FunctionTag.UTILITY).Build(),
-			][ProjectHammer.weighted_random_index(1, 1, 1, 1)])
+			][ProjectHammer.weighted_random_index(15, 10, 8, 10)])
 
 	# RANDOM DEVELOPMENT 1
 	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 1:
 		for i in range(0, 1):
 			location.spots.append([
 				SpotBuilder.new().Function(FunctionTag.SOCIAL).Build(),
-				SpotBuilder.new().Function(FunctionTag.PRODUCTION).Build(),
+				SpotBuilder.new().Function(FunctionTag.PRODUCTION).Item(ItemDB.Item.values().pick_random()).Build(),
 				SpotBuilder.new().Function(FunctionTag.COMMERCE).Build(),
 				SpotBuilder.new().Function(FunctionTag.RECREATION).Build(),
-			][ProjectHammer.weighted_random_index(1, 1, 1, 1)])
+			][ProjectHammer.weighted_random_index(7, 12, 12, 7)])
 
 	# PRODUCTION
 	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.CARGO).Build()) == 1 \
@@ -142,21 +142,21 @@ func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 	
 	return location
 
+# TODO: altitudezonetags
+# TODO: names
+# TODO: descriptions
+
 # note to asoing: you wanted to move this somewhere
 func location_has_kindred_spot(location : SectorLocation, match_spot : LocationSpot) -> bool:
 	return count_kindred_spots(location, match_spot) > 0
 
 func count_kindred_spots(location : SectorLocation, match_spot : LocationSpot) -> int:
-	#print("counting kindreds", match_spot.tags)
-	var result : int = location.spots.reduce(
-		func satisfies_match_tags(count, spot):
-			for tag in match_spot.tags:
-				if !spot.tags.any(tag.equals): 
-					return count 
-			return count + 1
+	return location.spots.reduce(
+		func is_superset_spot(count, spot):
+			if spot.is_superset_of(match_spot, "FunctionTag"):
+				return count + 1
+			return count 
 			, 0)
-	#print(result)
-	return result
 
 
 # temporarily here
