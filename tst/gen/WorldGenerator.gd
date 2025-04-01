@@ -1,66 +1,88 @@
 class_name WorldGenerator
 extends Node
 
+#region Sector Generation
 func generate_locations_for_sector(sector : WorldSector) -> WorldSector:
+	if ProjectHammer.weighted_random_index(5, 1) == 0:
+		sector.locations.append(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.STAR).Build())
+
 	for i in range(8):
-		pass
-		#var 
+		generate_location_for_sector(sector)
 	
 	return sector
 
 func generate_location_for_sector(sector : WorldSector) -> WorldSector:
 	var objects := CelestialObjectTag.Values.values()
-	var celestial_object : CelestialObjectTag.Values = objects[ProjectHammer.weighted_random_index(60, 16, 12, 7, 3, 1, 1, 0)]
+	# TODO: rules (type maximums) to prevent dull sectors?
+	var celestial_object : CelestialObjectTag.Values = objects[ProjectHammer.weighted_random_index(60, 30, 20, 10, 7, 3, 0.1, 0)]
 	
 	var location := LocationBuilder.new().CelestialObject(celestial_object).Build()
-	if ProjectHammer.weighted_random_index(1, 1) == 0:
+	var dont_hook_odds : float = 0
+	match(celestial_object):
+		CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR: dont_hook_odds = 0
+		CelestialObjectTag.ANOMALY, CelestialObjectTag.SPACE_STATION: dont_hook_odds = 10
+		CelestialObjectTag.ASTEROID: dont_hook_odds = 4
+		CelestialObjectTag.MOON: dont_hook_odds = 0.05
+		CelestialObjectTag.SHIP: dont_hook_odds = 0.66
+
+	if ProjectHammer.weighted_random_index(1, dont_hook_odds) == 0:
+		var valid_objects_to_hook : Array[SectorLocation] = []
 		match(celestial_object):
 			CelestialObjectTag.MOON:
-				var valid_objects_to_hook : Array[SectorLocation] = sector.locations.filter(func(loc : SectorLocation):
-					return loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build())
+				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+					Taggable.is_superset_of.bind(
+						LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build()
 					)
-				if not valid_objects_to_hook.is_empty():
-					valid_objects_to_hook.pick_random().sublocations.append(location)
-					
-			CelestialObjectTag.SHIP: 
-				sector.locations.pick_random().sublocations.append(location)
+				))
+
 			CelestialObjectTag.SPACE_STATION:
-				# 💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀
-				var valid_objects_to_hook : Array[SectorLocation] = sector.locations.filter(func(loc : SectorLocation):
-					return loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.MOON).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.ASTEROID).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.ANOMALY).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.STAR).Build())\
-					)
-				if not valid_objects_to_hook.is_empty():
-					valid_objects_to_hook.pick_random().sublocations.append(location)
+				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+					Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
+						.CelestialObject(CelestialObjectTag.Values.PLANET)
+						.CelestialObject(CelestialObjectTag.Values.MOON)
+						.CelestialObject(CelestialObjectTag.Values.ASTEROID)
+						.CelestialObject(CelestialObjectTag.Values.ANOMALY)
+						.CelestialObject(CelestialObjectTag.Values.STAR)
+					.Build())
+				))
 					
 			CelestialObjectTag.ASTEROID: 
-				var valid_objects_to_hook : Array[SectorLocation] = sector.locations.filter(func(loc : SectorLocation):
-					return loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.MOON).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.SPACE_STATION).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.ANOMALY).Build())\
-					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.STAR).Build())\
-					)
-				if not valid_objects_to_hook.is_empty():
-					valid_objects_to_hook.pick_random().sublocations.append(location)
+				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+					Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
+						.CelestialObject(CelestialObjectTag.Values.PLANET)
+						.CelestialObject(CelestialObjectTag.Values.MOON)
+						.CelestialObject(CelestialObjectTag.Values.SPACE_STATION)
+						.CelestialObject(CelestialObjectTag.Values.ANOMALY)
+						.CelestialObject(CelestialObjectTag.Values.STAR)
+					.Build())
+				))
+
+			CelestialObjectTag.SHIP:
+				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+					Taggable.is_intersection_empty.bind(LocationBuilder.new()
+						.CelestialObject(CelestialObjectTag.Values.SHIP)
+					.Build())
+				))
+			
 			CelestialObjectTag.ANOMALY:
-				sector.locations.pick_random().sublocations.append(location)
+				valid_objects_to_hook = sector.locations_with_sublocations
 			
 			CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR, _: pass
-			
-			
-	
+		
+		if not valid_objects_to_hook.is_empty():
+			valid_objects_to_hook.pick_random().sublocations.append(location)
+			return sector
+
+	sector.locations.append(location)
 	return sector
+#endregion
 
-# TODO: these functions below are really more like "generate spots for city"
-# locations should be able to have cities (essentially spot groups)
-# examples - cities on the planet, or a city on its orbiting bodies (moon; space station)
-# also - locations can be individual bodies (moon; ship; space station; asteroid; comet; anomaly👽)
-#						(planet is 60)	[60, 16,   12, 		7				3		1		1	]
+#region Location Generation
 
+# TODO: make other location generation strategies
+# locations should be able group output of citygen (LocationSpotGroup)
+
+#region Cities
 func generate_spots_for_location(location : SectorLocation) -> SectorLocation:
 	for i in range(8): # range should be determined by location
 		mutate_location_spots(location)
@@ -150,22 +172,24 @@ func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 	# RANDOM DEVELOPMENT 3
 	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 3:
 		for i in range(0, 1):
-			location.spots.append([
-				SpotBuilder.new().Function(FunctionTag.HEALTHCARE).Build(),
-				SpotBuilder.new().Function(FunctionTag.TRANSPORT).Build(),
-				SpotBuilder.new().Function(FunctionTag.ENTERTAINMENT).Build(),
-				SpotBuilder.new().Function(FunctionTag.EDUCATION).Build(),
-			][ProjectHammer.weighted_random_index(1, 1, 1, 1)]) #TODO: modify weights by faction, race, etc
+			location.spots.append(SpotBuilder.new().Function([
+					FunctionTag.HEALTHCARE,
+					FunctionTag.TRANSPORT,
+					FunctionTag.ENTERTAINMENT,
+					FunctionTag.EDUCATION,
+				][ProjectHammer.weighted_random_index(1, 1, 1, 1)])
+			.Build()) #TODO: modify weights by faction, race, etc
 
 	# RANDOM DEVELOPMENT 2
 	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 2:
 		for i in range(0, 1):
-			location.spots.append([
-				SpotBuilder.new().Function(FunctionTag.SOCIAL).Build(),
-				SpotBuilder.new().Function(FunctionTag.DEFENSE).Build(),
-				SpotBuilder.new().Function(FunctionTag.COMMERCE).Build(),
-				SpotBuilder.new().Function(FunctionTag.UTILITY).Build(),
-			][ProjectHammer.weighted_random_index(15, 10, 8, 10)])
+			location.spots.append(SpotBuilder.new().Function([
+				FunctionTag.SOCIAL,
+				FunctionTag.DEFENSE,
+				FunctionTag.COMMERCE,
+				FunctionTag.UTILITY,
+				][ProjectHammer.weighted_random_index(15, 10, 8, 10)])
+			.Build())
 
 	# RANDOM DEVELOPMENT 1
 	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 1:
@@ -222,13 +246,10 @@ func location_has_kindred_spot(location : SectorLocation, match_spot : LocationS
 	return count_kindred_spots(location, match_spot) > 0
 
 func count_kindred_spots(location : SectorLocation, match_spot : LocationSpot) -> int:
-	return location.spots.reduce(
-		func is_superset_spot(count, spot):
-			if spot.is_superset_of(match_spot, "FunctionTag"):
-				return count + 1
-			return count 
-			, 0)
+	return location.spots.filter(Taggable.is_superset_of.bind(match_spot, "FunctionTag")).size()
 
+#endregion
+#endregion
 
 # temporarily here
 class SpotBuilder:

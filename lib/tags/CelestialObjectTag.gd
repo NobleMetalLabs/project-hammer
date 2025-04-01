@@ -23,3 +23,6 @@ const STAR = Values.STAR
 
 func _init(celestial_object : Values) -> void:
 	self.value = celestial_object
+
+func _to_string() -> String:
+	return "CelestialObjectTag<%s>" % Values.keys()[self.value]
