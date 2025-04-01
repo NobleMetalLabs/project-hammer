@@ -4,11 +4,15 @@ extends Node
 #region Sector Generation
 func generate_locations_for_sector(sector : WorldSector) -> WorldSector:
 	if ProjectHammer.weighted_random_index(5, 1) == 0:
-		sector.locations.append(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.STAR).Build())
+		sector.locations.append(LocationBuilder.new()
+			.CelestialObject(CelestialObjectTag.Values.STAR)
+			.StarColor(StarColorTag.Values.values()[ProjectHammer.weighted_random_index(1, 2, 7, 5, 1, 0.25)])
+		.Build())
 
 	for i in range(8):
 		generate_location_for_sector(sector)
 	determine_sublocations_for_sector(sector)
+	assign_location_climates(sector)
 	
 	return sector
 
@@ -16,8 +20,8 @@ func generate_location_for_sector(sector : WorldSector) -> WorldSector:
 	var objects := CelestialObjectTag.Values.values()
 	# TODO: rules (type maximums) to prevent dull sectors?
 	var celestial_object : CelestialObjectTag.Values = objects[ProjectHammer.weighted_random_index(60, 30, 20, 10, 7, 3, 0.1, 0)]
-	
-	sector.locations.append(LocationBuilder.new().CelestialObject(celestial_object).Build())
+	var celestial_size : CelestialObjectSizeTag.Values = CelestialObjectSizeTag.Values.values()[ProjectHammer.weighted_random_index(0.25, 3, 5, 7, 5, 1)]
+	sector.locations.append(LocationBuilder.new().CelestialObject(celestial_object).CelestialObjectSize(celestial_size).Build())
 	return sector
 
 func determine_sublocations_for_sector(sector : WorldSector) -> WorldSector:
@@ -80,8 +84,28 @@ func determine_sublocations_for_sector(sector : WorldSector) -> WorldSector:
 				sector.locations.erase(location)
 
 	return sector
-#endregion
 
+func assign_location_climates(sector : WorldSector) -> WorldSector:
+	for location : SectorLocation in sector.locations:
+		var object_type : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
+		
+		var climate_baseline : ClimateBaselineTag.Values = ClimateBaselineTag.Values.values()[ProjectHammer.weighted_random_index(0, 1, 3, 4, 5, 4, 4, 2)]
+		var climate_diversity : ClimateDiversityTag.Values = ClimateDiversityTag.Values.values()[ProjectHammer.weighted_random_index(0, 0.25, 1, 5, 7, 5, 1)]
+		
+		match(object_type):
+			CelestialObjectTag.PLANET: pass
+			CelestialObjectTag.MOON:
+				climate_baseline = ClimateBaselineTag.Values.NONE
+				climate_diversity = ClimateDiversityTag.Values.NONE
+			_:
+				continue
+
+		location.tags.append(ClimateBaselineTag.new(climate_baseline))
+		location.tags.append(ClimateDiversityTag.new(climate_diversity))
+	
+	return sector
+
+#endregion
 #region Location Generation
 
 # TODO: make other location generation strategies
@@ -276,6 +300,14 @@ class LocationBuilder:
 	
 	func CelestialObject(value : CelestialObjectTag.Values) -> LocationBuilder:
 		location.tags.append(CelestialObjectTag.new(value))
+		return self
+
+	func CelestialObjectSize(value : CelestialObjectSizeTag.Values) -> LocationBuilder:
+		location.tags.append(CelestialObjectSizeTag.new(value))
+		return self
+
+	func StarColor(value : StarColorTag.Values) -> LocationBuilder:
+		location.tags.append(StarColorTag.new(value))
 		return self
 	
 	func Build() -> SectorLocation:
