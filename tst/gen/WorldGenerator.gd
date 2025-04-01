@@ -8,6 +8,7 @@ func generate_locations_for_sector(sector : WorldSector) -> WorldSector:
 
 	for i in range(8):
 		generate_location_for_sector(sector)
+	determine_sublocations_for_sector(sector)
 	
 	return sector
 
@@ -16,64 +17,68 @@ func generate_location_for_sector(sector : WorldSector) -> WorldSector:
 	# TODO: rules (type maximums) to prevent dull sectors?
 	var celestial_object : CelestialObjectTag.Values = objects[ProjectHammer.weighted_random_index(60, 30, 20, 10, 7, 3, 0.1, 0)]
 	
-	var location := LocationBuilder.new().CelestialObject(celestial_object).Build()
-	var dont_hook_odds : float = 0
-	match(celestial_object):
-		CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR: dont_hook_odds = 0
-		CelestialObjectTag.ANOMALY, CelestialObjectTag.SPACE_STATION: dont_hook_odds = 10
-		CelestialObjectTag.ASTEROID: dont_hook_odds = 4
-		CelestialObjectTag.MOON: dont_hook_odds = 0.05
-		CelestialObjectTag.SHIP: dont_hook_odds = 0.66
+	sector.locations.append(LocationBuilder.new().CelestialObject(celestial_object).Build())
+	return sector
 
-	if ProjectHammer.weighted_random_index(1, dont_hook_odds) == 0:
-		var valid_objects_to_hook : Array[SectorLocation] = []
+func determine_sublocations_for_sector(sector : WorldSector) -> WorldSector:
+	for location : SectorLocation in sector.locations.duplicate():
+		var celestial_object : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
+		var dont_hook_odds : float = 0
 		match(celestial_object):
-			CelestialObjectTag.MOON:
-				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-					Taggable.is_superset_of.bind(
-						LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build()
-					)
-				))
+			CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR: dont_hook_odds = 0
+			CelestialObjectTag.ANOMALY, CelestialObjectTag.SPACE_STATION: dont_hook_odds = 10
+			CelestialObjectTag.ASTEROID: dont_hook_odds = 4
+			CelestialObjectTag.MOON: dont_hook_odds = 0.05
+			CelestialObjectTag.SHIP: dont_hook_odds = 0.66
 
-			CelestialObjectTag.SPACE_STATION:
-				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-					Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
-						.CelestialObject(CelestialObjectTag.Values.PLANET)
-						.CelestialObject(CelestialObjectTag.Values.MOON)
-						.CelestialObject(CelestialObjectTag.Values.ASTEROID)
-						.CelestialObject(CelestialObjectTag.Values.ANOMALY)
-						.CelestialObject(CelestialObjectTag.Values.STAR)
-					.Build())
-				))
-					
-			CelestialObjectTag.ASTEROID: 
-				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-					Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
-						.CelestialObject(CelestialObjectTag.Values.PLANET)
-						.CelestialObject(CelestialObjectTag.Values.MOON)
-						.CelestialObject(CelestialObjectTag.Values.SPACE_STATION)
-						.CelestialObject(CelestialObjectTag.Values.ANOMALY)
-						.CelestialObject(CelestialObjectTag.Values.STAR)
-					.Build())
-				))
+		if ProjectHammer.weighted_random_index(1, dont_hook_odds) == 0:
+			var valid_objects_to_hook : Array[SectorLocation] = []
+			match(celestial_object):
+				CelestialObjectTag.MOON:
+					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+						Taggable.is_superset_of.bind(
+							LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build()
+						)
+					))
 
-			CelestialObjectTag.SHIP:
-				valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-					Taggable.is_intersection_empty.bind(LocationBuilder.new()
-						.CelestialObject(CelestialObjectTag.Values.SHIP)
-					.Build())
-				))
+				CelestialObjectTag.SPACE_STATION:
+					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+						Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
+							.CelestialObject(CelestialObjectTag.Values.PLANET)
+							.CelestialObject(CelestialObjectTag.Values.MOON)
+							.CelestialObject(CelestialObjectTag.Values.ASTEROID)
+							.CelestialObject(CelestialObjectTag.Values.ANOMALY)
+							.CelestialObject(CelestialObjectTag.Values.STAR)
+						.Build())
+					))
+						
+				CelestialObjectTag.ASTEROID: 
+					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+						Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
+							.CelestialObject(CelestialObjectTag.Values.PLANET)
+							.CelestialObject(CelestialObjectTag.Values.MOON)
+							.CelestialObject(CelestialObjectTag.Values.SPACE_STATION)
+							.CelestialObject(CelestialObjectTag.Values.ANOMALY)
+							.CelestialObject(CelestialObjectTag.Values.STAR)
+						.Build())
+					))
+
+				CelestialObjectTag.SHIP:
+					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
+						Taggable.is_intersection_empty.bind(LocationBuilder.new()
+							.CelestialObject(CelestialObjectTag.Values.SHIP)
+						.Build())
+					))
+				
+				CelestialObjectTag.ANOMALY:
+					valid_objects_to_hook = sector.locations_with_sublocations
+				
+				CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR, _: pass
 			
-			CelestialObjectTag.ANOMALY:
-				valid_objects_to_hook = sector.locations_with_sublocations
-			
-			CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR, _: pass
-		
-		if not valid_objects_to_hook.is_empty():
-			valid_objects_to_hook.pick_random().sublocations.append(location)
-			return sector
+			if not valid_objects_to_hook.is_empty():
+				valid_objects_to_hook.pick_random().sublocations.append(location)
+				sector.locations.erase(location)
 
-	sector.locations.append(location)
 	return sector
 #endregion
 
