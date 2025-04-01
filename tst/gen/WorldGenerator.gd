@@ -1,7 +1,66 @@
 class_name WorldGenerator
 extends Node
 
-# idea
+func generate_locations_for_sector(sector : WorldSector) -> WorldSector:
+	for i in range(8):
+		pass
+		#var 
+	
+	return sector
+
+func generate_location_for_sector(sector : WorldSector) -> WorldSector:
+	var objects := CelestialObjectTag.Values.values()
+	var celestial_object : CelestialObjectTag.Values = objects[ProjectHammer.weighted_random_index(60, 16, 12, 7, 3, 1, 1, 0)]
+	
+	var location := LocationBuilder.new().CelestialObject(celestial_object).Build()
+	if ProjectHammer.weighted_random_index(1, 1) == 0:
+		match(celestial_object):
+			CelestialObjectTag.MOON:
+				var valid_objects_to_hook : Array[SectorLocation] = sector.locations.filter(func(loc : SectorLocation):
+					return loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build())
+					)
+				if not valid_objects_to_hook.is_empty():
+					valid_objects_to_hook.pick_random().sublocations.append(location)
+					
+			CelestialObjectTag.SHIP: 
+				sector.locations.pick_random().sublocations.append(location)
+			CelestialObjectTag.SPACE_STATION:
+				# 💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀💀
+				var valid_objects_to_hook : Array[SectorLocation] = sector.locations.filter(func(loc : SectorLocation):
+					return loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.MOON).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.ASTEROID).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.ANOMALY).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.STAR).Build())\
+					)
+				if not valid_objects_to_hook.is_empty():
+					valid_objects_to_hook.pick_random().sublocations.append(location)
+					
+			CelestialObjectTag.ASTEROID: 
+				var valid_objects_to_hook : Array[SectorLocation] = sector.locations.filter(func(loc : SectorLocation):
+					return loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.MOON).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.SPACE_STATION).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.ANOMALY).Build())\
+					or loc.is_superset_of(LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.STAR).Build())\
+					)
+				if not valid_objects_to_hook.is_empty():
+					valid_objects_to_hook.pick_random().sublocations.append(location)
+			CelestialObjectTag.ANOMALY:
+				sector.locations.pick_random().sublocations.append(location)
+			
+			CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR, _: pass
+			
+			
+	
+	return sector
+
+# TODO: these functions below are really more like "generate spots for city"
+# locations should be able to have cities (essentially spot groups)
+# examples - cities on the planet, or a city on its orbiting bodies (moon; space station)
+# also - locations can be individual bodies (moon; ship; space station; asteroid; comet; anomaly👽)
+#						(planet is 60)	[60, 16,   12, 		7				3		1		1	]
+
 func generate_spots_for_location(location : SectorLocation) -> SectorLocation:
 	for i in range(8): # range should be determined by location
 		mutate_location_spots(location)
@@ -185,3 +244,13 @@ class SpotBuilder:
 	
 	func Build() -> LocationSpot:
 		return spot
+
+class LocationBuilder:
+	var location := SectorLocation.new()
+	
+	func CelestialObject(value : CelestialObjectTag.Values) -> LocationBuilder:
+		location.tags.append(CelestialObjectTag.new(value))
+		return self
+	
+	func Build() -> SectorLocation:
+		return location
