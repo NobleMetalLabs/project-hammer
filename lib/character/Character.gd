@@ -1,5 +1,5 @@
 class_name Character
-extends Resource
+extends Taggable
 
 var name : String = ""
 var faction : FactionDB.Faction
