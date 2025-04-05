@@ -58,3 +58,21 @@ func weighted_random_index(arg1 = INF, arg2 = INF, arg3 = INF, arg4 = INF, arg5 
 		value -= weights[weight_idx]
 		if value < 0:
 			return weight_idx
+
+func string_multi_split(s: String, delimiters, allow_empty: bool = true) -> Array:
+	var parts := []
+    
+	var start := 0
+	var i := 0
+    
+	while i < s.length():
+		if s[i] in delimiters:
+			if allow_empty or start < i:
+				parts.push_back(s.substr(start, i - start))
+			start = i + 1
+		i += 1
+    
+	if allow_empty or start < i:
+		parts.push_back(s.substr(start, i - start))
+    
+	return parts

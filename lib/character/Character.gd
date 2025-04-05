@@ -20,3 +20,8 @@ enum Race {
 	MOTH,
 	PLANT,
 }
+
+func _init(random : bool = true) -> void:
+	if random:
+		race = Race.values().pick_random()
+		name = CharacterName.generate(self)
