@@ -2,7 +2,9 @@ class_name Character
 extends Taggable
 
 var name : String = ""
-var faction : FactionDB.Faction
+var race : Race = Race.HUMAN
+var gender : StringName = "N"
+var faction : FactionDB.Faction = FactionDB.Faction.UNAFFILIATED
 var ethics : Ethics = Ethics.new()
 var skills : Skills = Skills.new()
 var wallet : Wallet = Wallet.new()
