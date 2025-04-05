@@ -1,0 +1,171 @@
+[gd_scene load_steps=8 format=3 uid="uid://cq1qrg1h4m1ns"]
+
+[ext_resource type="Script" path="res://tst/char_test.gd" id="1_gijv4"]
+[ext_resource type="PackedScene" uid="uid://dn7l3krkqni7k" path="res://scn/ui/BarChart.tscn" id="2_k3mne"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_75tvj"]
+size = Vector2(256, 256)
+
+[sub_resource type="LabelSettings" id="LabelSettings_quain"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_jkjcp"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0qnc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4iacp"]
+font_size = 17
+
+[node name="Ethics-test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gijv4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="__" type="Control" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NEW-BUTTON" type="Button" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create a stupid"
+
+[node name="___" type="Control" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_75tvj")
+stretch_mode = 5
+
+[node name="CHARACTER-INFO-LABEL" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NO CHARACTER"
+label_settings = SubResource("LabelSettings_quain")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+text = "INFO"
+label_settings = SubResource("LabelSettings_jkjcp")
+
+[node name="ASL-STACK" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer2/ASL-STACK"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RACE: "
+label_settings = SubResource("LabelSettings_s0qnc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+text = "SKILLS"
+label_settings = SubResource("LabelSettings_jkjcp")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "	ATHLETICS
+	CRIME
+	PERCEPTION
+	CRAFTSMANSHIP
+	LORE
+	SOCIETY
+	INGENUITY
+	PRESENCE"
+label_settings = SubResource("LabelSettings_s0qnc")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SKILLS-CHART" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer/HBoxContainer" instance=ExtResource("2_k3mne")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer3"]
+layout_mode = 2
+text = "ETHICS"
+label_settings = SubResource("LabelSettings_jkjcp")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer3"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "	AUTONOMY
+	DECENCY
+	EMPATHY
+	HONESTY
+	JUSTICE
+	LOYALTY
+	PRAGMATISM
+	RESPECT
+	SELFLESSNESS"
+label_settings = SubResource("LabelSettings_4iacp")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ETHICS-CHART" parent="HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer3/VBoxContainer3/HBoxContainer2" instance=ExtResource("2_k3mne")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

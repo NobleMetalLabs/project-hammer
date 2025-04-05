@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn7l3krkqni7k"]
+
+[ext_resource type="Script" path="res://src/BarChart.gd" id="1_kmbpo"]
+[ext_resource type="Script" path="res://src/BarChartBar.gd" id="2_kg11l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a4qq7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s2ff"]
+bg_color = Color(0.165656, 0.165656, 0.165656, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma4kb"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="BarChart" type="BoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+vertical = true
+script = ExtResource("1_kmbpo")
+
+[node name="BAR-CHART-BAR" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_a4qq7")
+script = ExtResource("2_kg11l")
+
+[node name="MarginContainer" type="MarginContainer" parent="BAR-CHART-BAR"]
+layout_mode = 2
+
+[node name="_" type="BoxContainer" parent="BAR-CHART-BAR/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+vertical = true
+
+[node name="ProgressBar" type="ProgressBar" parent="BAR-CHART-BAR/MarginContainer/_"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_5s2ff")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ma4kb")
+max_value = 1.0
+value = 0.5
+fill_mode = 3
+show_percentage = false
+
+[node name="__" type="Control" parent="BAR-CHART-BAR/MarginContainer/_"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
