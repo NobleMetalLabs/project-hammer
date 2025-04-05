@@ -19,15 +19,18 @@ func _init(random : bool = true) -> void:
 	if random:
 		var values : Array[float] = [
 			1,
-			1,
-			1,
-			0.5,
+			0.25,
+			0.25,
+			0.0,
+			0.0,
 			0,
 			0,
-			0,
+			-0.125,
 			-0.5,
-			-1,
 		]
+		#values.assign(values.map(func (f : float) -> float: return f + randf_range(-0.125, 0.125)))
+		values.assign(values.map(snappedf.bind(0.0625)))
+		values.assign(values.map(clampf.bind(-1, 1)))
 		values.shuffle()
 		for i in range(0, values.size()):
 			_values[Principle.values()[i]] = values[i]
