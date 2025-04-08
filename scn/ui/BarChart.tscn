@@ -7,10 +7,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s2ff"]
 bg_color = Color(0.165656, 0.165656, 0.165656, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
 border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ma4kb"]
@@ -53,8 +49,9 @@ value = 0.5
 fill_mode = 3
 show_percentage = false
 
-[node name="__" type="Control" parent="BAR-CHART-BAR/MarginContainer/_"]
+[node name="_gapbar_" type="PanelContainer" parent="BAR-CHART-BAR/MarginContainer/_"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5s2ff")
