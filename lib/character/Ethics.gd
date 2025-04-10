@@ -3,9 +3,8 @@ extends Resource
 
 enum Principle {
 	AUTONOMY,
-	DECENCY,
+	AUTHENTICITY,
 	EMPATHY,
-	HONESTY,
 	JUSTICE,
 	LOYALTY,
 	PRAGMATISM,

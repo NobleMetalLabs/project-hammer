@@ -40,7 +40,8 @@ static var human_surnames : Array[StringName] = [
 static var bot_models : Array[StringName] = [
 	"BLACKTIDE", "OLYMPIC", "EVANS", "CAWESP", "CB-C",
 	"IoEERIE", "KUANAN", "E7C", "KTMGK", "AVIE",
-	"LOTTOK", "HYDRA", "PTAEK", "GATZ", "GARDEN"
+	"LOTTOK", "HYDRA", "PTAEK", "GATZ", "GARDEN",
+	"0R-E",
 ]
 
 
@@ -148,7 +149,7 @@ static var adjectives_nature : Array[StringName] = [
 static var adjectives_metal : Array[StringName] = [
 	"Iron", "Steel", "Copper", "Gold", "Silver",
 	"Platinum", "Titanium", "Dense", "Light", "Heavy",
-	"Thick", "Thin"
+	"Thick", "Thin", "Brushed", "Polished",
 ]
 
 static var adjectives_ocean : Array[StringName] = [
