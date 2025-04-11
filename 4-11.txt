@@ -1,0 +1,17 @@
+1. Make the sector map
+	- Populate with objects
+	- Objects somehow change to reflect tag presence
+	- Basic positioning solution?, no positioning ok too
+
+2. Make character stress system foundation
+	- Characters have stress
+	- Easy access to increase/decrease stress
+	- Certain thresholds trigger stress responses
+	- Type of response may be individual
+
+3. Make ships able to take/assign/remove crew members
+	- Modify ship/character (+ related) data classes if nessecary
+	- Role assignment should be multiple choice, to permit skeleton crews (think DF)
+		- Obviously, if you have enough crew to not have people in two roles you're better off
+	- Determine what Skills.Skill values influences success in a given role?
+	- Display a vague summary of a given crew's ability to succeed in a role when assigning? (think DF)
