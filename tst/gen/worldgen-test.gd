@@ -34,7 +34,7 @@ func print_spots(location : SectorLocation):
 
 # extremely temp just fing around mostly
 func test_draw_sector(sector: WorldSector):
-	var center : Vector2 = get_viewport().size / 2
+	var occupied_offsets : Array[Vector2] = []
 	
 	for location : SectorLocation in sector.locations:
 		var celestial_object : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
@@ -43,16 +43,33 @@ func test_draw_sector(sector: WorldSector):
 		match(celestial_object):
 			CelestialObjectTag.STAR:
 				object_sprite.texture = load("res://tst/gen/location-ast/star.png")
-				object_sprite.position = center
 				# goofy
 				var startag_str = str(location.get_tags_of_type("StarColorTag")[0])
 				var starcolor = startag_str.substr(startag_str.find("<") + 1, -1).trim_suffix(">")
-				object_sprite.modulate = Color(starcolor)
+				object_sprite.self_modulate = Color(starcolor)
 			CelestialObjectTag.PLANET:
 				object_sprite.texture = load("res://tst/gen/location-ast/planet.png")
-				object_sprite.position = center + Vector2(randi_range(-600, 600), randi_range(-600, 600))
-				object_sprite.scale *= (1.0/(6 - location.get_tags_of_type("CelestialObjectSizeTag")[0].value))
+				# give position spaced away from others
+				while(not spawned_appropriately_spaced(object_sprite.offset, occupied_offsets, 800)):
+					object_sprite.offset = Vector2(randi_range(-1600, 1600), randi_range(-1600, 1600))
+				
+				# should be linear in reality
+				object_sprite.scale *= (1.0/(location.get_tags_of_type("CelestialObjectSizeTag")[0].value + 1))
 				
 				
 		
-		$maptest.add_child(object_sprite)
+		occupied_offsets.append(object_sprite.offset)
+		if central_sprite == null: 
+			central_sprite = object_sprite
+			$MapCenter.add_child(central_sprite)
+		else:
+			central_sprite.add_child(object_sprite)
+
+func spawned_appropriately_spaced(pos : Vector2, avoid : Array[Vector2], minimum_distance : int) -> bool:
+	for bp in avoid: if bp.distance_to(pos) <= minimum_distance: return false
+	return true
+
+var central_sprite : Sprite2D = null
+func _process(delta: float) -> void:
+	for sprite : Sprite2D in central_sprite.get_children():
+		sprite.rotation += PI/8 * delta # / (sprite.offset.distance_squared_to(Vector2.ZERO))
