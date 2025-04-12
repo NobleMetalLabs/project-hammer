@@ -38,21 +38,21 @@ func test_draw_sector(sector: WorldSector):
 	
 	for location : SectorLocation in sector.locations:
 		var celestial_object : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
-		var object_rect := ColorRect.new()
+		var object_sprite := Sprite2D.new()
 		
 		match(celestial_object):
 			CelestialObjectTag.STAR:
-				object_rect.position = center - Vector2(100,100)
-				object_rect.size = Vector2(200,200) 
-				
+				object_sprite.texture = load("res://tst/gen/location-ast/star.png")
+				object_sprite.position = center
 				# goofy
 				var startag_str = str(location.get_tags_of_type("StarColorTag")[0])
 				var starcolor = startag_str.substr(startag_str.find("<") + 1, -1).trim_suffix(">")
-				object_rect.color = Color(starcolor)
+				object_sprite.modulate = Color(starcolor)
 			CelestialObjectTag.PLANET:
-				object_rect.position = center + Vector2(randi_range(-600, 600), randi_range(-600, 600))
-				object_rect.size = Vector2(25,25) * (6 - location.get_tags_of_type("CelestialObjectSizeTag")[0].value)
+				object_sprite.texture = load("res://tst/gen/location-ast/planet.png")
+				object_sprite.position = center + Vector2(randi_range(-600, 600), randi_range(-600, 600))
+				object_sprite.scale *= (1.0/(6 - location.get_tags_of_type("CelestialObjectSizeTag")[0].value))
 				
 				
 		
-		$maptest.add_child(object_rect)
+		$maptest.add_child(object_sprite)
