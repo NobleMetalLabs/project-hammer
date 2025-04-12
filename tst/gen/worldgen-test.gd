@@ -10,6 +10,10 @@ func _ready():
 
 	#wg.generate_spots_for_location(location)
 	#print_spots(location)
+	
+	test_draw_sector(sector)
+
+
 
 func print_locations(sector : WorldSector):
 	print("-".repeat(30))
@@ -27,3 +31,23 @@ func print_spots(location : SectorLocation):
 	print("-".repeat(30))
 	for spot in location.spots:
 		print("%s-".repeat(spot.tags.size())%spot.tags)
+
+# extremely temp just fing around mostly
+func test_draw_sector(sector: WorldSector):
+	var center : Vector2 = get_viewport().size / 2
+	
+	for location : SectorLocation in sector.locations:
+		var celestial_object : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
+		var object_rect := ColorRect.new()
+		
+		match(celestial_object):
+			CelestialObjectTag.STAR:
+				object_rect.position = center - Vector2(100,100)
+				object_rect.size = Vector2(200,200) 
+				
+				# goofy
+				var startag_str = str(location.get_tags_of_type("StarColorTag")[0])
+				var starcolor = startag_str.substr(startag_str.find("<") + 1, -1).trim_suffix(">")
+				object_rect.color = Color(starcolor)
+		
+		$maptest.add_child(object_rect)
