@@ -49,5 +49,10 @@ func test_draw_sector(sector: WorldSector):
 				var startag_str = str(location.get_tags_of_type("StarColorTag")[0])
 				var starcolor = startag_str.substr(startag_str.find("<") + 1, -1).trim_suffix(">")
 				object_rect.color = Color(starcolor)
+			CelestialObjectTag.PLANET:
+				object_rect.position = center + Vector2(randi_range(-600, 600), randi_range(-600, 600))
+				object_rect.size = Vector2(25,25) * (6 - location.get_tags_of_type("CelestialObjectSizeTag")[0].value)
+				
+				
 		
 		$maptest.add_child(object_rect)
