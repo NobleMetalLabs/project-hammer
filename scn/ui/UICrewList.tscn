@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2pwknbtd0ho4"]
+
+[ext_resource type="Script" path="res://scn/ui/UICrewList.gd" id="1_h2cae"]
+[ext_resource type="FontFile" uid="uid://ctfacr4mpo55p" path="res://ast/ui/font/Classica.ttf" id="2_yyguv"]
+[ext_resource type="FontFile" uid="uid://3od2ihmvb2f5" path="res://ast/ui/font/LCDBlock.ttf" id="3_rd5fx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1marc"]
+font = ExtResource("2_yyguv")
+font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ikbo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3rrbr"]
+font = ExtResource("3_rd5fx")
+font_size = 48
+
+[node name="CREW-LIST" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_h2cae")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="HEADER-LABEL" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "CREW"
+label_settings = SubResource("LabelSettings_1marc")
+horizontal_alignment = 1
+
+[node name="ITEM-ROW" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6ikbo")
+
+[node name="ROW-BUTTON" type="Button" parent="MarginContainer/VBoxContainer/ITEM-ROW"]
+layout_mode = 2
+flat = true
+
+[node name="__" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ITEM-ROW"]
+layout_mode = 2
+
+[node name="CHAR-NAME-LABEL" type="Label" parent="MarginContainer/VBoxContainer/ITEM-ROW/__"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CREW NAME"
+label_settings = SubResource("LabelSettings_3rrbr")
+
+[node name="MOVE-BUTTON" type="Button" parent="MarginContainer/VBoxContainer/ITEM-ROW/__"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = " > "
