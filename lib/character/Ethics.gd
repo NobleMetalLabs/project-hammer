@@ -23,7 +23,6 @@ func _init(random : bool = true) -> void:
 			0.0,
 			0.0,
 			0,
-			0,
 			-0.125,
 			-0.5,
 		]

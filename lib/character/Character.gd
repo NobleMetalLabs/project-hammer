@@ -6,6 +6,7 @@ var race : Race = Race.HUMAN
 var gender : StringName = "N"
 var faction : FactionDB.Faction = FactionDB.Faction.UNAFFILIATED
 var ethics : Ethics = Ethics.new()
+var mental_health : MentalHealth = MentalHealth.new()
 var skills : Skills = Skills.new()
 var wallet : Wallet = Wallet.new()
 
