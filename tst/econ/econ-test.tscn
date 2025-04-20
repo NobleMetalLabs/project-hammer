@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyy4kkl8ebdcb"]
+
+[ext_resource type="Script" path="res://tst/econ/econ_test.gd" id="1_q118t"]
+[ext_resource type="Script" path="res://lib/economy/MarketParticipant.gd" id="2_lheas"]
+[ext_resource type="Script" path="res://lib/economy/MarketInfluence.gd" id="3_wy6f5"]
+
+[sub_resource type="Resource" id="Resource_extqa"]
+script = ExtResource("3_wy6f5")
+influence_type = 0
+market = 0
+value = 10.0
+
+[sub_resource type="Resource" id="Resource_n5cly"]
+script = ExtResource("3_wy6f5")
+influence_type = 1
+market = 0
+value = 1.0
+
+[node name="Econ-test" type="Node"]
+script = ExtResource("1_q118t")
+
+[node name="MarketParticipant" type="Node" parent="."]
+script = ExtResource("2_lheas")
+influence = SubResource("Resource_extqa")
+
+[node name="MarketParticipant2" type="Node" parent="."]
+script = ExtResource("2_lheas")
+influence = SubResource("Resource_n5cly")
+
+[node name="CHART-HOLDER" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 375.0
+offset_top = 227.0
+offset_right = 1438.0
+offset_bottom = 774.0

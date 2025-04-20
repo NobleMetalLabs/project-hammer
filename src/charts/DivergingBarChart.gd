@@ -1,7 +1,7 @@
 class_name DivergingBarChart
 extends BarChart
 
-var values : Array[Array] = []
+var values : Array[Array] = [] # TODO: values currently array of rows, should instead be array of series
 var colors : Array[Color] = []
 var baseline_index : int = 0
 
