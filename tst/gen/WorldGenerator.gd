@@ -4,80 +4,81 @@ extends Node
 #region Sector Generation
 func generate_locations_for_sector(sector : WorldSector) -> WorldSector:
 	if ProjectHammer.weighted_random_index(5, 1) == 0:
-		sector.locations.append(LocationBuilder.new()
-			.CelestialObject(CelestialObjectTag.Values.STAR)
-			.StarColor(StarColorTag.Values.values()[ProjectHammer.weighted_random_index(1, 2, 7, 5, 1, 0.25)])
-		.Build())
+		var new_loc := SectorLocation.new()
+		sector.locations.append(new_loc)
+		new_loc.tags.add_fan([
+			Tag.CelestialObjectTypeStar,
+			Tag.StarColor + 1 + ProjectHammer.weighted_random_index(1, 2, 7, 5, 1, 0.25),
+		])
 
 	for i in range(8):
 		generate_location_for_sector(sector)
+
 	determine_sublocations_for_sector(sector)
 	assign_location_climates(sector)
 	
 	return sector
 
 func generate_location_for_sector(sector : WorldSector) -> WorldSector:
-	var objects := CelestialObjectTag.Values.values()
 	# TODO: rules (type maximums) to prevent dull sectors?
-	var celestial_object : CelestialObjectTag.Values = objects[ProjectHammer.weighted_random_index(60, 30, 20, 10, 7, 3, 0.1, 0)]
-	var celestial_size : CelestialObjectSizeTag.Values = CelestialObjectSizeTag.Values.values()[ProjectHammer.weighted_random_index(0.25, 3, 5, 7, 5, 1)]
-	sector.locations.append(LocationBuilder.new().CelestialObject(celestial_object).CelestialObjectSize(celestial_size).Build())
+	var new_loc := SectorLocation.new()
+	sector.locations.append(new_loc)
+	new_loc.tags.add_fan([
+		Tag.CelestialObjectType + 1 + ProjectHammer.weighted_random_index(60, 30, 20, 10, 7, 3, 0.1, 0),
+		Tag.CelestialObjectSize + 1 + ProjectHammer.weighted_random_index(0.25, 3, 5, 7, 5, 1),
+	])
 	return sector
 
 func determine_sublocations_for_sector(sector : WorldSector) -> WorldSector:
 	for location : SectorLocation in sector.locations.duplicate():
-		var celestial_object : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
+		var celestial_object_type : int = location.tags.get_tag_of_type(Tag.CelestialObjectType)
 		var dont_hook_odds : float = 0
-		match(celestial_object):
-			CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR: dont_hook_odds = 0
-			CelestialObjectTag.ANOMALY, CelestialObjectTag.SPACE_STATION: dont_hook_odds = 10
-			CelestialObjectTag.ASTEROID: dont_hook_odds = 4
-			CelestialObjectTag.MOON: dont_hook_odds = 0.05
-			CelestialObjectTag.SHIP: dont_hook_odds = 0.66
+		match(celestial_object_type):
+			Tag.CelestialObjectTypePlanet, Tag.CelestialObjectTypeComet, Tag.CelestialObjectTypeStar: dont_hook_odds = 0
+			Tag.CelestialObjectTypeAnomaly, Tag.CelestialObjectTypeSpaceStation: dont_hook_odds = 10
+			Tag.CelestialObjectTypeAsteroid: dont_hook_odds = 4
+			Tag.CelestialObjectTypeMoon: dont_hook_odds = 0.05
+			Tag.CelestialObjectTypeShip: dont_hook_odds = 0.66
 
 		if ProjectHammer.weighted_random_index(1, dont_hook_odds) == 0:
 			var valid_objects_to_hook : Array[SectorLocation] = []
-			match(celestial_object):
-				CelestialObjectTag.MOON:
+			match(celestial_object_type):
+				Tag.CelestialObjectTypeMoon:
 					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-						Taggable.is_superset_of.bind(
-							LocationBuilder.new().CelestialObject(CelestialObjectTag.Values.PLANET).Build()
-						)
+						TagTree.actor_has.bind(Tag.CelestialObjectTypePlanet)
 					))
 
-				CelestialObjectTag.SPACE_STATION:
+				Tag.CelestialObjectTypeSpaceStation:
 					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-						Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
-							.CelestialObject(CelestialObjectTag.Values.PLANET)
-							.CelestialObject(CelestialObjectTag.Values.MOON)
-							.CelestialObject(CelestialObjectTag.Values.ASTEROID)
-							.CelestialObject(CelestialObjectTag.Values.ANOMALY)
-							.CelestialObject(CelestialObjectTag.Values.STAR)
-						.Build())
+						TagTree.actor_has_any.bind([
+							Tag.CelestialObjectTypePlanet,
+							Tag.CelestialObjectTypeMoon,
+							Tag.CelestialObjectTypeAsteroid,
+							Tag.CelestialObjectTypeAnomaly,
+							Tag.CelestialObjectTypeStar,
+						])
 					))
 						
-				CelestialObjectTag.ASTEROID: 
+				Tag.CelestialObjectTypeAsteroid: 
 					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-						Taggable.is_intersection_not_empty.bind(LocationBuilder.new()
-							.CelestialObject(CelestialObjectTag.Values.PLANET)
-							.CelestialObject(CelestialObjectTag.Values.MOON)
-							.CelestialObject(CelestialObjectTag.Values.SPACE_STATION)
-							.CelestialObject(CelestialObjectTag.Values.ANOMALY)
-							.CelestialObject(CelestialObjectTag.Values.STAR)
-						.Build())
+						TagTree.actor_has_any.bind([
+							Tag.CelestialObjectTypePlanet,
+							Tag.CelestialObjectTypeMoon,
+							Tag.CelestialObjectTypeSpaceStation,
+							Tag.CelestialObjectTypeAnomaly,
+							Tag.CelestialObjectTypeStar,
+						])
 					))
 
-				CelestialObjectTag.SHIP:
+				Tag.CelestialObjectTypeShip:
 					valid_objects_to_hook.assign(sector.locations_with_sublocations.filter(
-						Taggable.is_intersection_empty.bind(LocationBuilder.new()
-							.CelestialObject(CelestialObjectTag.Values.SHIP)
-						.Build())
+						TagTree.actor_not_has.bind(Tag.CelestialObjectTypeShip)
 					))
 				
-				CelestialObjectTag.ANOMALY:
+				Tag.CelestialObjectTypeAnomaly:
 					valid_objects_to_hook = sector.locations_with_sublocations
 				
-				CelestialObjectTag.PLANET, CelestialObjectTag.COMET, CelestialObjectTag.STAR, _: pass
+				Tag.CelestialObjectTypePlanet, Tag.CelestialObjectTypeComet, Tag.CelestialObjectTypeStar, _: pass
 			
 			if not valid_objects_to_hook.is_empty():
 				valid_objects_to_hook.pick_random().sublocations.append(location)
@@ -87,21 +88,18 @@ func determine_sublocations_for_sector(sector : WorldSector) -> WorldSector:
 
 func assign_location_climates(sector : WorldSector) -> WorldSector:
 	for location : SectorLocation in sector.locations:
-		var object_type : CelestialObjectTag.Values = location.get_tags_of_type("CelestialObjectTag")[0].value
+		var climate_baseline : int = Tag.ClimateBaseline + 1 + ProjectHammer.weighted_random_index(0, 1, 3, 4, 5, 4, 4, 2)
+		var climate_diversity : int = Tag.ClimateDiversity + 1 + ProjectHammer.weighted_random_index(0, 0.25, 1, 5, 7, 5, 1)
 		
-		var climate_baseline : ClimateBaselineTag.Values = ClimateBaselineTag.Values.values()[ProjectHammer.weighted_random_index(0, 1, 3, 4, 5, 4, 4, 2)]
-		var climate_diversity : ClimateDiversityTag.Values = ClimateDiversityTag.Values.values()[ProjectHammer.weighted_random_index(0, 0.25, 1, 5, 7, 5, 1)]
-		
-		match(object_type):
-			CelestialObjectTag.PLANET: pass
-			CelestialObjectTag.MOON:
-				climate_baseline = ClimateBaselineTag.Values.NONE
-				climate_diversity = ClimateDiversityTag.Values.NONE
+		match(location.tags.get_tag_of_type(Tag.CelestialObjectType)):
+			Tag.CelestialObjectTypePlanet: pass
+			Tag.CelestialObjectTypeMoon:
+				climate_baseline = Tag.ClimateBaselineNone
+				climate_diversity = Tag.ClimateDiversityNone
 			_:
 				continue
 
-		location.tags.append(ClimateBaselineTag.new(climate_baseline))
-		location.tags.append(ClimateDiversityTag.new(climate_diversity))
+		location.tags.add_fan([climate_baseline, climate_diversity])
 	
 	return sector
 
@@ -125,145 +123,193 @@ func mutate_location_spots(location : SectorLocation) -> SectorLocation:
 		pass
 
 	# HEALTHCARE IF NO RECREATION
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) > 2 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RECREATION).Build()) == 0 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.HEALTHCARE).Build()) == 0:
-		location.spots.append(SpotBuilder.new().Function(FunctionTag.HEALTHCARE).Build())
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidence])) > 2 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptRecreation])) == 0 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptHealthcare])) == 0:
+		var new_loc := LocationSpot.new()
+		location.spots.append(new_loc)
+		new_loc.tags.tag_chain([Tag.RelationshipFunction, Tag.ConceptHealthcare])
 
 	# TRANSPORT IF ENOUGH RESIDENTIAL
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) > 3 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.TRANSPORT).Build()) == 0:
-		location.spots.append(SpotBuilder.new().Function(FunctionTag.TRANSPORT).Build())
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) > 3 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptTransport])) == 0:
+		var new_loc := LocationSpot.new()
+		location.spots.append(new_loc)
+		new_loc.tags.tag_chain([Tag.RelationshipFunction, Tag.ConceptTransport])
 
 	# DEFENSE IF ENOUGH COMMERCE
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.COMMERCE).Build()) + \
-		count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.PRODUCTION).Build()) + \
-		count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.CARGO).Build()) > 4 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.DEFENSE).Build()) == 0:
-		location.spots.append(SpotBuilder.new().Function(FunctionTag.DEFENSE).Build())
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCommerce])) + \
+		count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptProduction])) + \
+		count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCargo])) > 4 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptDefense])) == 0:
+		var new_loc := LocationSpot.new()
+		location.spots.append(new_loc)
+		new_loc.tags.tag_chain([Tag.RelationshipFunction, Tag.ConceptDefense])
 
 	# EDUCATION IF ENOUGH RESIDENTIAL
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) > 5 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.TRANSPORT).Build()) > 1 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.EDUCATION).Build()) == 0:
-		location.spots.append(SpotBuilder.new().Function(FunctionTag.EDUCATION).Build())
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) > 5 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptTransport])) > 1 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptEducation])) == 0:
+		var new_loc := LocationSpot.new()
+		location.spots.append(new_loc)
+		new_loc.tags.tag_chain([Tag.RelationshipFunction, Tag.ConceptEducation])
 
 	# RANDOM ADDITIONAL FUNCTION
 	elif ProjectHammer.weighted_random_index(1, 12) == 0:
 		if location.spots.is_empty(): return
 		var spot : LocationSpot = location.spots.pick_random()
-		var functiont : FunctionTag = spot.get_tags_of_type("FunctionTag").pop_front()
-		match functiont.value:
-			FunctionTag.RESIDENTIAL: 
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
-					FunctionTag.SOCIAL,
-					FunctionTag.ENTERTAINMENT,
-					FunctionTag.HEALTHCARE,
-					FunctionTag.RECREATION,
-				].pick_random())])
-			FunctionTag.CARGO:
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
-					FunctionTag.PRODUCTION,
-					FunctionTag.COMMERCE,
-				].pick_random())])
-			FunctionTag.PRODUCTION:
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new(FunctionTag.RESIDENTIAL)])
-			FunctionTag.DEFENSE:
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
-					FunctionTag.SOCIAL,
-					FunctionTag.RECREATION,
-				].pick_random())])
-			FunctionTag.SOCIAL: 
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
-					FunctionTag.EDUCATION,
-					FunctionTag.COMMERCE,
-				].pick_random())])
-			FunctionTag.COMMERCE: 
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
-					FunctionTag.PRODUCTION,
-					FunctionTag.EDUCATION,
-				].pick_random())])
-			FunctionTag.RECREATION: 
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new(FunctionTag.HEALTHCARE)])
-			FunctionTag.TRANSPORT: 
-				Taggable.tag_array_union(spot.tags, [FunctionTag.new([
-					FunctionTag.DEFENSE,
-					FunctionTag.RESIDENTIAL,
-					FunctionTag.SOCIAL,
-				].pick_random())])
+		if spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])):
+			spot.tags.add_chain([Tag.RelationshipFunction, Tag.ConceptEducation, Tag.ConceptEngineering])
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptSocial, 
+					Tag.ConceptEntertainment, 
+					Tag.ConceptHealthcare, 
+					Tag.ConceptRecreation
+				].pick_random()
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCargo])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptProduction, 
+					Tag.ConceptCommerce
+				].pick_random()
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptProduction])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				Tag.ConceptResidential
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptDefense])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptSocial, 
+					Tag.ConceptRecreation
+				].pick_random()
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptSocial])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptEducation, 
+					Tag.ConceptCommerce
+				].pick_random()
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCommerce])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptProduction, 
+					Tag.ConceptEducation
+				].pick_random()
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptRecreation])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				Tag.ConceptHealthcare
+			])
+		elif spot.tags.has_tree(TagTree.chain([Tag.RelationshipFunction, Tag.ConceptTransport])):
+			spot.tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptDefense, 
+					Tag.ConceptResidential, 
+					Tag.ConceptSocial
+				].pick_random()
+			])
 
 	# HOUSING DEVELOPMENT FAILSAFE
-	elif location.spots.size() > count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) * 4:
-		match(ProjectHammer.weighted_random_index(75, 25)):
-			0: location.spots.append(SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build())
-			1: location.spots.pick_random().tags.append(FunctionTag.new(FunctionTag.RESIDENTIAL))
+	elif location.spots.size() > count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) * 4:
+		var target : LocationSpot = location.spots.pick_random()
+		if ProjectHammer.weighted_random_index(25, 75):
+			target = LocationSpot.new()
+			location.spots.append(target)
+		target.tags.add_chain([Tag.RelationshipFunction, Tag.ConceptResidential])
 
 	# RANDOM DEVELOPMENT 3
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 3:
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) == 3:
 		for i in range(0, 1):
-			location.spots.append(SpotBuilder.new().Function([
-					FunctionTag.HEALTHCARE,
-					FunctionTag.TRANSPORT,
-					FunctionTag.ENTERTAINMENT,
-					FunctionTag.EDUCATION,
-				][ProjectHammer.weighted_random_index(1, 1, 1, 1)])
-			.Build()) #TODO: modify weights by faction, race, etc
+			location.spots.append(LocationSpot.new().tags.add_chain([
+					Tag.RelationshipFunction, 
+					[
+						Tag.ConceptHealthcare,
+						Tag.ConceptTransport,
+						Tag.ConceptEntertainment,
+						Tag.ConceptEducation,
+					][ProjectHammer.weighted_random_index(1, 1, 1, 1)] #TODO: modify weights by faction, race, etc
+			]))
 
 	# RANDOM DEVELOPMENT 2
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 2:
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) == 2:
 		for i in range(0, 1):
-			location.spots.append(SpotBuilder.new().Function([
-				FunctionTag.SOCIAL,
-				FunctionTag.DEFENSE,
-				FunctionTag.COMMERCE,
-				FunctionTag.UTILITY,
-				][ProjectHammer.weighted_random_index(15, 10, 8, 10)])
-			.Build())
+
+			location.spots.append(LocationSpot.new().tags.add_chain([
+				Tag.RelationshipFunction, 
+				[
+					Tag.ConceptSocial,
+					Tag.ConceptDefense,
+					Tag.ConceptCommerce,
+					Tag.ConceptUtility,
+				][ProjectHammer.weighted_random_index(15, 10, 8, 10)]
+			]))
 
 	# RANDOM DEVELOPMENT 1
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 1:
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) == 1:
 		for i in range(0, 1):
-			location.spots.append([
-				SpotBuilder.new().Function(FunctionTag.SOCIAL).Build(),
-				SpotBuilder.new().Function(FunctionTag.PRODUCTION).Item(ItemDB.Item.values().pick_random()).Build(),
-				SpotBuilder.new().Function(FunctionTag.COMMERCE).Build(),
-				SpotBuilder.new().Function(FunctionTag.RECREATION).Build(),
-			][ProjectHammer.weighted_random_index(7, 12, 12, 7)])
+			var new_loc := LocationSpot.new()
+			location.spots.append(new_loc)
+			new_loc.tags.add_chain(
+				[
+					[Tag.RelationshipFunction, Tag.ConceptSocial],
+					[Tag.RelationshipFunction, Tag.ConceptProduction, Tag.Item + ItemDB.Item.values().pick_random()],
+					[Tag.RelationshipFunction, Tag.ConceptCommerce],
+					[Tag.RelationshipFunction, Tag.ConceptRecreation],
+				][ProjectHammer.weighted_random_index(7, 12, 12, 7)]
+			)
 
 	# PRODUCTION
-	elif count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.CARGO).Build()) == 1 \
-	or count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.COMMERCE).Build()) == 1 \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.PRODUCTION).Build()) == 0:
+	elif count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCargo])) == 1 \
+	or count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCommerce])) == 1 \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptProduction])) == 0:
 		location.spots.append(
-			SpotBuilder.new().Function(FunctionTag.PRODUCTION).Item(ItemDB.Item.values().pick_random()).Build(),
+			[Tag.RelationshipFunction, Tag.ConceptProduction, Tag.Item + ItemDB.Item.values().pick_random()],
 		)
 	
 	# BASIC HOUSING
-	elif location_has_kindred_spot(location, SpotBuilder.new().Function(FunctionTag.CARGO).Build()) \
-	and count_kindred_spots(location, SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build()) == 0:
-		location.spots.append([
-			SpotBuilder.new().Function(FunctionTag.RESIDENTIAL).Build(),
-			SpotBuilder.new().Function(FunctionTag.DEFENSE).Function(FunctionTag.RESIDENTIAL).Build(),
-		][ProjectHammer.weighted_random_index(90, 10)])
+	elif location_has_kindred_spot(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptCargo])) \
+	and count_kindred_spots(location, TagTree.chain([Tag.RelationshipFunction, Tag.ConceptResidential])) == 0:
+		var new_loc := LocationSpot.new()
+		location.spots.append(new_loc)
+		new_loc.tags.add_chain(
+			[
+				[Tag.RelationshipFunction, Tag.ConceptResidential],
+				[Tag.RelationshipFunction, Tag.ConceptDefense, Tag.ConceptResidential],
+			][ProjectHammer.weighted_random_index(90, 10)]
+		)
 
 	# BASIC
 	elif location.spots.is_empty():
-		location.spots.append([
-			SpotBuilder.new().Function(FunctionTag.CARGO).Build(),
-			SpotBuilder.new().Function(FunctionTag.PRODUCTION).Item(ItemDB.Item.FOOD).Build(),
-		][ProjectHammer.weighted_random_index(90, 10)])
+		var new_loc := LocationSpot.new()
+		location.spots.append(new_loc)
+		new_loc.tags.add_chain(
+			[
+				[Tag.RelationshipFunction, Tag.ConceptCargo],
+				[Tag.RelationshipFunction, Tag.ConceptProduction, Tag.Item + ItemDB.Item.FOOD],
+			][ProjectHammer.weighted_random_index(90, 10)]
+		)
 		
-	
 	return location
 
 func assign_spot_altitudes(location : SectorLocation) -> SectorLocation:
-	var altitude_values := AltitudeZoneTag.Values.values()
-	var avg_altitude : AltitudeZoneTag.Values = altitude_values[ProjectHammer.weighted_random_index(0, 0, 0, 1, 5, 7, 5, 3, 1, 0.25)]
+	var avg_altitude : int  = Tag.AltitudeZone + 1 +  ProjectHammer.weighted_random_index(0, 0, 0, 1, 5, 7, 5, 3, 1, 0.25)
 	
 	for spot : LocationSpot in location.spots:
 		var offset = [-2, -1, 0, 1, 2][ProjectHammer.weighted_random_index(1, 5, 7, 5, 1)]
-		var altitude : AltitudeZoneTag.Values = clampi(avg_altitude + offset, 0, altitude_values.size() - 1) as AltitudeZoneTag.Values
-		spot.tags.append(AltitudeZoneTag.new(altitude))
+		var altitude : int = clampi(avg_altitude + offset, Tag.AltitudeZone, Tag.get_tag_type_num_values(Tag.AltitudeZone) - 1)
+		spot.tags.add_tag(altitude)
 	
 	return location
 
@@ -271,44 +317,11 @@ func assign_spot_altitudes(location : SectorLocation) -> SectorLocation:
 # TODO: descriptions
 
 # note to asoing: you wanted to move this somewhere
-func location_has_kindred_spot(location : SectorLocation, match_spot : LocationSpot) -> bool:
-	return count_kindred_spots(location, match_spot) > 0
+func location_has_kindred_spot(location : SectorLocation, tag_tree : TagTree) -> bool:
+	return count_kindred_spots(location, tag_tree) > 0
 
-func count_kindred_spots(location : SectorLocation, match_spot : LocationSpot) -> int:
-	return location.spots.filter(Taggable.is_superset_of.bind(match_spot, "FunctionTag")).size()
+func count_kindred_spots(location : SectorLocation, tag_tree : TagTree) -> int:
+	return location.spots.filter(TagTree.actor_has.bind(tag_tree)).size()
 
 #endregion
 #endregion
-
-# temporarily here
-class SpotBuilder:
-	var spot := LocationSpot.new()
-	
-	func Function(value : FunctionTag.Values) -> SpotBuilder:
-		spot.tags.append(FunctionTag.new(value))
-		return self
-	
-	func Item(value : ItemDB.Item) -> SpotBuilder:
-		spot.tags.append(ItemTag.new(value))
-		return self
-	
-	func Build() -> LocationSpot:
-		return spot
-
-class LocationBuilder:
-	var location := SectorLocation.new()
-	
-	func CelestialObject(value : CelestialObjectTag.Values) -> LocationBuilder:
-		location.tags.append(CelestialObjectTag.new(value))
-		return self
-
-	func CelestialObjectSize(value : CelestialObjectSizeTag.Values) -> LocationBuilder:
-		location.tags.append(CelestialObjectSizeTag.new(value))
-		return self
-
-	func StarColor(value : StarColorTag.Values) -> LocationBuilder:
-		location.tags.append(StarColorTag.new(value))
-		return self
-	
-	func Build() -> SectorLocation:
-		return location

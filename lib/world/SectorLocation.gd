@@ -1,5 +1,5 @@
 class_name SectorLocation
-extends Taggable
+extends Actor
 
 @export var name : StringName
 @export var description : String

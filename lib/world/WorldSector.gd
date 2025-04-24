@@ -1,5 +1,5 @@
 class_name WorldSector
-extends Taggable
+extends Actor
 
 var name : String = ""
 var locations : Array[SectorLocation] = []

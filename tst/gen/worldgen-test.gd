@@ -14,12 +14,13 @@ func _ready():
 func print_locations(sector : WorldSector):
 	print("-".repeat(30))
 	for location in sector.locations:
-		print("%s-".repeat(location.tags.size())%location.tags)
+		print(location.tags)
 		print_sublocations(location)
 
 func print_sublocations(location : SectorLocation, tabs : int = 1):
 	for sublocation in location.sublocations:
-		print("\t".repeat(tabs) + "%s-".repeat(sublocation.tags.size())%sublocation.tags)
+		var tab_str = "\t".repeat(tabs)
+		print(tab_str + str(sublocation.tags).replace("\n", "\n" + tab_str))
 		print_sublocations(sublocation, tabs + 1)
 
 func print_spots(location : SectorLocation):
