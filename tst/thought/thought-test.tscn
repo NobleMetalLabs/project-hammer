@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wgl4x6knj2kf"]
+
+[ext_resource type="Script" path="res://tst/thought/thought_test.gd" id="1_0t3am"]
+
+[node name="Thought-test" type="Node"]
+script = ExtResource("1_0t3am")
