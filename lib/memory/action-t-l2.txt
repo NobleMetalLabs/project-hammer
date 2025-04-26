@@ -1,0 +1,68 @@
+EXPERIENCED
+	- forcefully?
+- REST
+- FOOD
+- CONVERSATION
+	- <perception>
+- INTERACTION
+	- <perception>
+- OBSERVATION
+	- <object>
+	- ENVIRONMENT
+		- result <action>
+- FEELING
+	- <emotion>
+	- <reason>?
+- THOUGHT
+	- <type>
+		-dream, idle, comment
+	- <tense>
+		-past(remember), present(mindfullness)?, future(anticipation/worry)
+	- <about>
+- CARE
+	- <type>
+		-console, gift, time, service, consideration?
+	- <action>????
+	- <by who>
+- SKILL**********************
+	- V
+- RELATIONSHIP
+	- growth
+		- <quality/trajectory>?
+- JUDGEMENT
+	- <by who>
+	- <about what>
+	- <quality>
+- SUCCESS
+	- general?
+	- social?
+	- vocational?
+
+- OBSTACLE
+	- ILLNESS
+		- subjected
+		- freed from
+		- succumbed to
+		- conquered
+	- DISABILITY
+	- INJURY
+	- CAPTIVITY
+	- SEPERATION?
+
+ACTION
+- PHYSICAL
+	- <target>
+	- <reason>?
+- PARTICIPATION
+	- <system>?
+- CONFLICT?
+	- demand?
+- INFLICT
+	-<action>
+
+POSSESSION
+- <type>
+	- item, mortality, status
+- <delta>
+	- gain, lost, gifted, stole?
+

@@ -5,6 +5,7 @@ var _tags : Dictionary = {} #[int, Dictionary[...]]
 
 var _curr_target : Dictionary = _tags
 var _last_target : Dictionary = _tags
+var _perm_target : Dictionary = _tags
 
 func _to_string() -> String:
 	return _dict_to_string(_tags)
@@ -31,7 +32,7 @@ func add_tag(tag_id : int) -> TagTree:
 	if _curr_target.has(tag_id): return
 	_curr_target[tag_id] = {}
 	_last_target = _curr_target[tag_id]
-	_curr_target = _tags
+	_curr_target = _perm_target
 	return self
 
 func add_fan(tags : PackedInt32Array) -> TagTree:
@@ -39,18 +40,27 @@ func add_fan(tags : PackedInt32Array) -> TagTree:
 	for tag in tags:
 		add_tag(tag)
 		_curr_target = target
-	_curr_target = _tags
+	_curr_target = _perm_target
 	return self
 
 func add_chain(tags : PackedInt32Array) -> TagTree:
 	for tag in tags:
 		add_tag(tag)
 		deep()
-	_curr_target = _tags
+	_curr_target = _perm_target
 	return self
 
 func deep() -> TagTree:
 	_curr_target = _last_target
+	return self
+
+func hold_deep() -> TagTree:
+	_perm_target = _last_target
+	deep()
+	return self
+
+func unhold() -> TagTree:
+	_perm_target = _tags
 	return self
 
 func has(tag_id : int) -> bool:
