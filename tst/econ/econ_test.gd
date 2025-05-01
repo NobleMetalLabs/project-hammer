@@ -1,17 +1,17 @@
 extends Node
 
 func _ready():
-	var influences_by_good : Dictionary = {}
+	var influences_by_good : Dictionary = {} # [ItemDB.Item, Array[MarketInfluence]]
 	for influencer in self.get_children():
 		if not influencer is MarketParticipant: continue
 		var influence : MarketInfluence = influencer.influence
 		var inf_arr : Array[MarketInfluence] = []
 		influences_by_good.get_or_add(influence.market, inf_arr).append(influence)
 
-	var demand_per_good : Dictionary = {}
-	var supply_per_good : Dictionary = {}
-	var demand_differential_per_good : Dictionary = {}
-	var price_multiplier_per_good : Dictionary = {}
+	var demand_per_good : Dictionary = {} # [ItemDB.Item, float]
+	var supply_per_good : Dictionary = {} # [ItemDB.Item, float]
+	var demand_differential_per_good : Dictionary = {} # [ItemDB.Item, float]
+	var price_multiplier_per_good : Dictionary = {} # [ItemDB.Item, float]
 	for good in influences_by_good.keys():
 		var influences : Array[MarketInfluence] = influences_by_good[good]
 		var supply : float = 0.0
