@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyy4kkl8ebdcb"]
+[gd_scene load_steps=13 format=3 uid="uid://dyy4kkl8ebdcb"]
 
 [ext_resource type="Script" path="res://tst/econ/econ_test.gd" id="1_q118t"]
 [ext_resource type="Script" path="res://lib/economy/MarketParticipant.gd" id="2_lheas"]
 [ext_resource type="Script" path="res://lib/economy/MarketInfluence.gd" id="3_wy6f5"]
 [ext_resource type="Script" path="res://lib/economy/Producer.gd" id="4_jmyxe"]
-[ext_resource type="Script" path="res://lib/economy/ProductionRecipe.gd" id="5_myej2"]
+[ext_resource type="Script" path="res://lib/economy/Reservoir.gd" id="5_cbyq6"]
+[ext_resource type="Script" path="res://lib/economy/Reserve.gd" id="6_d62lm"]
 
 [sub_resource type="Resource" id="Resource_extqa"]
 script = ExtResource("3_wy6f5")
@@ -36,10 +37,10 @@ influence_type = 1
 market = 0
 value = 1.0
 
-[sub_resource type="Resource" id="Resource_cb6je"]
-script = ExtResource("5_myej2")
-ingredients = {}
-products = {}
+[sub_resource type="Resource" id="Resource_n733n"]
+script = ExtResource("6_d62lm")
+type = 0
+quantity = 12
 
 [node name="Econ-test" type="Node"]
 script = ExtResource("1_q118t")
@@ -74,4 +75,7 @@ offset_bottom = 774.0
 
 [node name="Producer" type="Node" parent="."]
 script = ExtResource("4_jmyxe")
-recipe = SubResource("Resource_cb6je")
+
+[node name="Reservoir" type="Node" parent="."]
+script = ExtResource("5_cbyq6")
+reserve = SubResource("Resource_n733n")

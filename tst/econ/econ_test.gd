@@ -1,9 +1,13 @@
 extends Node
 
 func _ready():
+	pass
+
+func process_supply_demand() -> void:
 	var influences_by_good : Dictionary = {} # [ItemDB.Item, Array[MarketInfluence]]
-	for influencer in self.get_children():
-		if not influencer is MarketParticipant: continue
+	for child in self.get_children():
+		if not child is MarketParticipant: continue
+		var influencer : MarketParticipant = child as MarketParticipant
 		var influence : MarketInfluence = influencer.influence
 		var inf_arr : Array[MarketInfluence] = []
 		influences_by_good.get_or_add(influence.market, inf_arr).append(influence)
@@ -50,3 +54,10 @@ func _ready():
 	]
 	chart.baseline_index = 1
 	chart.update()
+
+func process_producers() -> void:
+	var producers : Array[Producer] = []
+	for child in self.get_children():
+		if not child is Producer: continue
+		var producer : Producer = child as Producer
+		var production_status : ProductionStatus = producer.production_status
