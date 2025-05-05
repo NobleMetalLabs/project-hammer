@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GoodConversion" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="GoodConversion" load_steps=2 format=3 uid="uid://digd6o5hd3ux"]
 
 [ext_resource type="Script" path="res://lib/economy/GoodConversion.gd" id="1_w6ryv"]
 

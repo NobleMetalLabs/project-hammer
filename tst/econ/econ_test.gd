@@ -1,10 +1,17 @@
 extends Node
 
 func _ready():
-	pass
+	process_economy()
 
-func process_supply_demand() -> void:
-	var influences_by_good : Dictionary = {} # [ItemDB.Item, Array[MarketInfluence]]
+func process_economy() -> void:
+	collect_influences()
+	process_supply()
+	process_producers()
+	process_demand()
+
+var influences_by_good : Dictionary = {} # [ItemDB.Item, Array[MarketInfluence]]
+func collect_influences() -> void:
+	influences_by_good.clear()
 	for child in self.get_children():
 		if not child is MarketParticipant: continue
 		var influencer : MarketParticipant = child as MarketParticipant
@@ -12,22 +19,29 @@ func process_supply_demand() -> void:
 		var inf_arr : Array[MarketInfluence] = []
 		influences_by_good.get_or_add(influence.market, inf_arr).append(influence)
 
-	var demand_per_good : Dictionary = {} # [ItemDB.Item, float]
-	var supply_per_good : Dictionary = {} # [ItemDB.Item, float]
-	var demand_differential_per_good : Dictionary = {} # [ItemDB.Item, float]
-	var price_multiplier_per_good : Dictionary = {} # [ItemDB.Item, float]
+var supply_per_good : Dictionary = {} # [ItemDB.Item, float]
+func process_supply() -> void:
 	for good in influences_by_good.keys():
 		var influences : Array[MarketInfluence] = influences_by_good[good]
 		var supply : float = 0.0
-		var demand : float = 0.0
 		for influence in influences:
 			if influence.influence_type == MarketInfluence.InfluenceType.SUPPLY:
 				supply += influence.value
-			elif influence.influence_type == MarketInfluence.InfluenceType.DEMAND:
+		supply_per_good[good] = supply
+
+var demand_per_good : Dictionary = {} # [ItemDB.Item, float]
+var demand_differential_per_good : Dictionary = {} # [ItemDB.Item, float]
+var price_multiplier_per_good : Dictionary = {} # [ItemDB.Item, float]
+func process_demand() -> void:
+	for good in influences_by_good.keys():
+		var influences : Array[MarketInfluence] = influences_by_good[good]
+		var demand : float = 0.0
+		for influence in influences:
+			if influence.influence_type == MarketInfluence.InfluenceType.DEMAND:
 				demand += influence.value
 
 		demand_per_good[good] = demand
-		supply_per_good[good] = supply
+		var supply : float = supply_per_good.get(good, 0.0)
 		var demand_differential : float = (demand - supply) / supply
 		demand_differential_per_good[good] = demand_differential
 		price_multiplier_per_good[good] = 1.0 + demand_differential
@@ -61,3 +75,25 @@ func process_producers() -> void:
 		if not child is Producer: continue
 		var producer : Producer = child as Producer
 		var production_status : ProductionStatus = producer.production_status
+
+		# how much can this producer produce(maximum_production)
+			# - market supply (supply)
+			# - ingredient reserve (reserves)
+
+		# how much does this producer want to produce (demand_products / conversion_products = production_goal)
+			# - (maximum_production)
+			# - product reserve (reserves)
+
+		# how much is this producer requiring (conversion_ingredients * current_production)
+			# - product_goals
+
+		# how much is this producer producing (current_production)
+			# - product_goals
+
+		# how much is this producer supplying (MarketInfleunce.Supply)
+			# - how much is this producer producing
+			# - product_reserve
+
+		# how much is this producer demanding (MarketInfluence.Demand)
+			# - how much is this producer requiring
+			# - product_reserve
