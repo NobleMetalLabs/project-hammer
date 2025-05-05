@@ -1,7 +1,7 @@
 class_name UICrewMenu
 extends Control
 
-#@onready var crew_roles_list : UICrewRolesList = $"%CREW-ROLES-LIST"
+@onready var crew_roles_list : UICrewRolesList = $"%CREW-ROLES-LIST"
 @onready var crew_list : UICrewList = $"%CREW-LIST"
 @onready var proc_crew_list : UICrewList = $"%PROC-CREW-LIST"
 
@@ -21,7 +21,8 @@ func _ready():
 			Crewmember.new()
 		)
 	
-	crew_list.member_selected.connect(selected_crewmember)
+	crew_list.member_selected.connect(on_crewmember_selection)
+	crew_roles_list.updated_roles.connect(updated_crewmember_roles)
 
 func move_member(member : Crewmember, crew_ornah : bool) -> void:
 	if crew_ornah:
@@ -32,7 +33,10 @@ func move_member(member : Crewmember, crew_ornah : bool) -> void:
 			crew_list.remove_member(member)
 
 @onready var chart : StackedBarChart = $"%STATS-CHART"
-func selected_crewmember(member : Crewmember) -> void:
+var selected_crewmember : Crewmember = null
+
+func on_crewmember_selection(member : Crewmember) -> void:
+	selected_crewmember = member
 	chart.colors = [Color(0,1,0)]
 	chart.values.clear()
 	
@@ -40,3 +44,8 @@ func selected_crewmember(member : Crewmember) -> void:
 		chart.values.push_back([skill_value])
 	
 	chart.update()
+	crew_roles_list.update_visual(member.roles)
+
+func updated_crewmember_roles(roles : Array[Crewmember.Role]) -> void:
+	if selected_crewmember == null: return
+	selected_crewmember.roles = roles

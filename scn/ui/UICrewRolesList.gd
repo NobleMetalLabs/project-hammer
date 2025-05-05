@@ -50,4 +50,4 @@ func emit() -> void:
 func update_visual(roles : Array[Crewmember.Role]):
 	for button_index in role_buttons.size():
 		role_buttons[button_index].set_pressed_no_signal(roles.has(button_index))
-		if roles.has(0): role_buttons[0].disabled = true
+		role_buttons[0].disabled = roles.has(0)

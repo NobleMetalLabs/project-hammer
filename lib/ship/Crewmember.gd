@@ -10,7 +10,7 @@ enum Role {
 	ARMS,
 }
 
-var roles : Array[Role] = []
+var roles : Array[Role] = [0]
 var character : Character = Character.new()
 
 const skill_weights = {
