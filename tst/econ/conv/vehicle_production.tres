@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="GoodConversion" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://lib/economy/GoodConversion.gd" id="1_bilc0"]
+
+[resource]
+script = ExtResource("1_bilc0")
+inputs = {
+20: 1,
+23: 2,
+26: 5,
+46: 3,
+48: 2
+}
+outputs = {
+60: 1
+}
