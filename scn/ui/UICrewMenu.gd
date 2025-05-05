@@ -20,6 +20,8 @@ func _ready():
 		proc_crew_list.add_member(
 			Crewmember.new()
 		)
+	
+	crew_list.member_selected.connect(selected_crewmember)
 
 func move_member(member : Crewmember, crew_ornah : bool) -> void:
 	if crew_ornah:
@@ -28,3 +30,13 @@ func move_member(member : Crewmember, crew_ornah : bool) -> void:
 	else:
 		if proc_crew_list.add_member(member):
 			crew_list.remove_member(member)
+
+@onready var chart : StackedBarChart = $"%STATS-CHART"
+func selected_crewmember(member : Crewmember) -> void:
+	chart.colors = [Color(0,1,0)]
+	chart.values.clear()
+	
+	for skill_value in member.character.skills._values.values():
+		chart.values.push_back([skill_value])
+	
+	chart.update()

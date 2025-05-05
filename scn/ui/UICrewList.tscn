@@ -51,6 +51,7 @@ flat = true
 
 [node name="__" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ITEM-ROW"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CHAR-NAME-LABEL" type="Label" parent="MarginContainer/VBoxContainer/ITEM-ROW/__"]
 layout_mode = 2

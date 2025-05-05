@@ -1,23 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://btrm7dp72j0g"]
+[gd_scene load_steps=6 format=3 uid="uid://btrm7dp72j0g"]
 
 [ext_resource type="Script" path="res://scn/ui/UICrewMenu.gd" id="1_6s6fo"]
+[ext_resource type="PackedScene" uid="uid://ybahi5r3q4ba" path="res://scn/ui/UICrewRolesList.tscn" id="2_jl0tt"]
 [ext_resource type="PackedScene" uid="uid://c2pwknbtd0ho4" path="res://scn/ui/UICrewList.tscn" id="3_dcrg6"]
-[ext_resource type="FontFile" uid="uid://ctfacr4mpo55p" path="res://ast/ui/font/Classica.ttf" id="4_31slu"]
+[ext_resource type="Script" path="res://src/charts/StackedBarChart.gd" id="4_3sbfq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgqx2"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_1marc"]
-font = ExtResource("4_31slu")
-font_size = 48
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_827qw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3w7i"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ug3qu"]
-font = ExtResource("4_31slu")
-font_size = 32
 
 [node name="UI-CREW-MENU" type="PanelContainer"]
 anchors_preset = 15
@@ -25,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rgqx2")
 script = ExtResource("1_6s6fo")
 
@@ -41,45 +31,9 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="CREW-ROLES-LIST" type="PanelContainer" parent="HBoxContainer/VBoxContainer/_"]
+[node name="CREW-ROLES-LIST" parent="HBoxContainer/VBoxContainer/_" instance=ExtResource("2_jl0tt")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/_/CREW-ROLES-LIST"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/_/CREW-ROLES-LIST/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 25
-
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/_/CREW-ROLES-LIST/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "ROLES"
-label_settings = SubResource("LabelSettings_1marc")
-horizontal_alignment = 1
-
-[node name="ITEM-ROW" type="PanelContainer" parent="HBoxContainer/VBoxContainer/_/CREW-ROLES-LIST/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_827qw")
-
-[node name="ROLE-CHECKBUTTON" type="CheckButton" parent="HBoxContainer/VBoxContainer/_/CREW-ROLES-LIST/MarginContainer/VBoxContainer/ITEM-ROW"]
-custom_minimum_size = Vector2(0, 42)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w3w7i")
-
-[node name="ROLE-NAME" type="Label" parent="HBoxContainer/VBoxContainer/_/CREW-ROLES-LIST/MarginContainer/VBoxContainer/ITEM-ROW"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "GENERAL"
-label_settings = SubResource("LabelSettings_ug3qu")
-vertical_alignment = 1
 
 [node name="CREW-LIST" parent="HBoxContainer/VBoxContainer/_" instance=ExtResource("3_dcrg6")]
 unique_name_in_owner = true
@@ -88,6 +42,11 @@ layout_mode = 2
 [node name="STATS-PANE" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="STATS-CHART" type="Control" parent="HBoxContainer/VBoxContainer/STATS-PANE"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("4_3sbfq")
 
 [node name="PROC-CREW-LIST" parent="HBoxContainer" instance=ExtResource("3_dcrg6")]
 unique_name_in_owner = true

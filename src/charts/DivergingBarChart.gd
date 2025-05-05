@@ -62,3 +62,5 @@ func update() -> void:
 
 		bar.set_sections(row_values)
 		bar.set_colors(row_colors)
+
+# TODO: not filling properly when values dont range from 0 to 1

@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://ybahi5r3q4ba"]
+
+[ext_resource type="Script" path="res://scn/ui/UICrewRolesList.gd" id="1_jh4lb"]
+[ext_resource type="FontFile" uid="uid://ctfacr4mpo55p" path="res://ast/ui/font/Classica.ttf" id="1_qdyx4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1marc"]
+font = ExtResource("1_qdyx4")
+font_size = 48
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_827qw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3w7i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ug3qu"]
+font = ExtResource("1_qdyx4")
+font_size = 32
+
+[node name="CREW-ROLES-LIST" type="PanelContainer"]
+offset_right = 665.0
+offset_bottom = 581.0
+size_flags_horizontal = 3
+script = ExtResource("1_jh4lb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "ROLES"
+label_settings = SubResource("LabelSettings_1marc")
+horizontal_alignment = 1
+
+[node name="GENERAL-ROLE-ROW" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_827qw")
+
+[node name="ROLE-CHECKBUTTON" type="CheckButton" parent="MarginContainer/VBoxContainer/GENERAL-ROLE-ROW"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w3w7i")
+
+[node name="ROLE-NAME" type="Label" parent="MarginContainer/VBoxContainer/GENERAL-ROLE-ROW"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "GENERAL"
+label_settings = SubResource("LabelSettings_ug3qu")
+vertical_alignment = 1
