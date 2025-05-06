@@ -1,80 +1,78 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyy4kkl8ebdcb"]
+[gd_scene load_steps=19 format=3 uid="uid://dyy4kkl8ebdcb"]
 
 [ext_resource type="Script" path="res://tst/econ/econ_test.gd" id="1_q118t"]
 [ext_resource type="Script" path="res://lib/economy/MarketParticipant.gd" id="2_lheas"]
 [ext_resource type="Script" path="res://lib/economy/MarketInfluence.gd" id="3_wy6f5"]
 [ext_resource type="Script" path="res://lib/economy/Producer.gd" id="4_jmyxe"]
-[ext_resource type="Resource" uid="uid://digd6o5hd3ux" path="res://tst/econ/conv/sand_crushing.tres" id="5_3qw7h"]
 [ext_resource type="Script" path="res://lib/economy/Reservoir.gd" id="5_cbyq6"]
 [ext_resource type="Script" path="res://lib/economy/Reserve.gd" id="6_d62lm"]
+[ext_resource type="Resource" path="res://tst/econ/conv/oil_refining.tres" id="6_i84lt"]
 [ext_resource type="Script" path="res://lib/economy/ProductionStatus.gd" id="7_y7w7u"]
 
-[sub_resource type="Resource" id="Resource_extqa"]
-script = ExtResource("3_wy6f5")
-influence_type = 2
-market = 12
-value = 20.0
+[sub_resource type="Resource" id="Resource_xhbjr"]
+script = ExtResource("6_d62lm")
+type = 12
+quantity = 100000
 
-[sub_resource type="Resource" id="Resource_3tb5x"]
-script = ExtResource("3_wy6f5")
-influence_type = 1
-market = 22
-value = 100.0
+[sub_resource type="Resource" id="Resource_28fgm"]
+script = ExtResource("6_d62lm")
+type = 10
+quantity = 100000
 
-[sub_resource type="Resource" id="Resource_355bq"]
-script = ExtResource("3_wy6f5")
-influence_type = 1
-market = 5
-value = 4.0
-
-[sub_resource type="Resource" id="Resource_7oqxk"]
-script = ExtResource("3_wy6f5")
-influence_type = 0
-market = 25
-value = 5.0
-
-[sub_resource type="Resource" id="Resource_oigao"]
-script = ExtResource("3_wy6f5")
-influence_type = 1
-market = 27
-value = 1.0
-
-[sub_resource type="Resource" id="Resource_fgbbw"]
+[sub_resource type="Resource" id="Resource_frqch"]
 script = ExtResource("7_y7w7u")
-conversion = ExtResource("5_3qw7h")
 reserves = Array[ExtResource("6_d62lm")]([])
 efficiency = 1.0
 production_goal = 0.0
 maximum_production = 0.0
 current_production = 0.0
 
-[sub_resource type="Resource" id="Resource_n733n"]
+[sub_resource type="Resource" id="Resource_jq5mj"]
+script = ExtResource("7_y7w7u")
+reserves = Array[ExtResource("6_d62lm")]([])
+efficiency = 1.0
+production_goal = 0.0
+maximum_production = 0.0
+current_production = 0.0
+
+[sub_resource type="Resource" id="Resource_wwidx"]
 script = ExtResource("6_d62lm")
-type = 0
-quantity = 12
+type = 12
+quantity = 0
+
+[sub_resource type="Resource" id="Resource_2gbec"]
+script = ExtResource("6_d62lm")
+type = 22
+quantity = 0
+
+[sub_resource type="Resource" id="Resource_qu0hj"]
+script = ExtResource("6_d62lm")
+type = 10
+quantity = 100000
+
+[sub_resource type="Resource" id="Resource_j44n5"]
+script = ExtResource("7_y7w7u")
+conversion = ExtResource("6_i84lt")
+reserves = Array[ExtResource("6_d62lm")]([SubResource("Resource_wwidx"), SubResource("Resource_2gbec"), SubResource("Resource_qu0hj")])
+efficiency = 1.0
+production_goal = 0.0
+maximum_production = 0.0
+current_production = 0.0
+
+[sub_resource type="Resource" id="Resource_dllsa"]
+script = ExtResource("3_wy6f5")
+influence_type = 1
+market = 12
+value = 5.0
+
+[sub_resource type="Resource" id="Resource_e74we"]
+script = ExtResource("3_wy6f5")
+influence_type = 1
+market = 22
+value = 10.0
 
 [node name="Econ-test" type="Node"]
 script = ExtResource("1_q118t")
-
-[node name="MarketParticipant" type="Node" parent="."]
-script = ExtResource("2_lheas")
-influence = SubResource("Resource_extqa")
-
-[node name="MarketParticipant3" type="Node" parent="."]
-script = ExtResource("2_lheas")
-influence = SubResource("Resource_3tb5x")
-
-[node name="MarketParticipant4" type="Node" parent="."]
-script = ExtResource("2_lheas")
-influence = SubResource("Resource_355bq")
-
-[node name="MarketParticipant5" type="Node" parent="."]
-script = ExtResource("2_lheas")
-influence = SubResource("Resource_7oqxk")
-
-[node name="MarketParticipant2" type="Node" parent="."]
-script = ExtResource("2_lheas")
-influence = SubResource("Resource_oigao")
 
 [node name="CHART-HOLDER" type="Control" parent="."]
 layout_mode = 3
@@ -84,10 +82,49 @@ offset_top = 227.0
 offset_right = 1438.0
 offset_bottom = 774.0
 
-[node name="Producer" type="Node" parent="."]
-script = ExtResource("4_jmyxe")
-production_status = SubResource("Resource_fgbbw")
+[node name="TerrestrialPlanet" type="Node" parent="."]
 
-[node name="Reservoir" type="Node" parent="."]
+[node name="OilReservoir" type="Node" parent="TerrestrialPlanet"]
 script = ExtResource("5_cbyq6")
-reserve = SubResource("Resource_n733n")
+reserve = SubResource("Resource_xhbjr")
+
+[node name="WaterReservoir" type="Node" parent="TerrestrialPlanet"]
+script = ExtResource("5_cbyq6")
+reserve = SubResource("Resource_28fgm")
+
+[node name="OilExtractor" type="Node" parent="."]
+
+[node name="Producer" type="Node" parent="OilExtractor"]
+script = ExtResource("4_jmyxe")
+production_status = SubResource("Resource_frqch")
+
+[node name="WaterExtractor" type="Node" parent="."]
+
+[node name="Producer" type="Node" parent="WaterExtractor"]
+script = ExtResource("4_jmyxe")
+production_status = SubResource("Resource_jq5mj")
+
+[node name="OilRefinery" type="Node" parent="."]
+
+[node name="Producer" type="Node" parent="OilRefinery"]
+script = ExtResource("4_jmyxe")
+production_status = SubResource("Resource_j44n5")
+
+[node name="MarketParticipant" type="Node" parent="OilRefinery"]
+script = ExtResource("2_lheas")
+influence = SubResource("Resource_dllsa")
+
+[node name="GovBuyer" type="Node" parent="."]
+
+[node name="MarketParticipant" type="Node" parent="GovBuyer"]
+script = ExtResource("2_lheas")
+influence = SubResource("Resource_e74we")
+
+[node name="DATA_HOLDER" type="TextEdit" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+editable = false
